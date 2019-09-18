@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hx.system.dao.RoleDao">
+	<sql id="SqlWhere">
+		<where>
+			<if test="organization != null and organization != ''"> and organization = #{organization} </if>
+			<if test="roleId != null and roleId != ''"> and role_id = #{roleId} </if>
+			<if test="roleName != null and roleName != ''"> and role_name like concat('%',#{roleName},'%') </if>
+			<if test="roleSign != null and roleSign != ''"> and role_sign = #{roleSign} </if>
+			<if test="remark != null and remark != ''"> and remark = #{remark} </if>
+			<if test="userIdCreate != null and userIdCreate != ''"> and user_id_create = #{userIdCreate} </if>
+			<if test="gmtCreate != null and gmtCreate != ''"> and gmt_create = #{gmtCreate} </if>
+			<if test="gmtModified != null and gmtModified != ''"> and gmt_modified = #{gmtModified} </if>
+		</where>
+	</sql>
+	<select id="get" resultType="com.hx.domain.RoleDO">
+		select
+		`role_id`,`organization`,`role_name`,`role_sign`,`permission`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
+		from sys_role where role_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.hx.domain.RoleDO">
+		select
+		`role_id`,`organization`,`role_name`,`role_sign`,`permission`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
+		from sys_role
+		<include refid="SqlWhere"></include>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by role_id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from sys_role
+		<include refid="SqlWhere"></include>
+	</select>
+	<select id="query" resultType="com.hx.domain.RoleDO">
+		select
+		`role_id`,`role_name`,`role_sign`,`permission`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
+		from sys_role
+		<include refid="SqlWhere"></include>
+	</select>
+	<select id="queryInit" resultType="com.hx.domain.RoleDO">
+		select
+		`role_id`,`role_name`,`role_sign`,`permission`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
+		from sys_role where role_sign in 
+		 <foreach collection="list" open="(" close=")" item="roleSign">
+			 #{roleSign}
+		 </foreach>
+		 and organization is null
+	</select>
+	<select id="queryNotAdmin" resultType="com.hx.domain.RoleDO">
+		select
+		`role_id`,`role_name`,`role_sign`,`permission`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
+		from sys_role where organization = #{organization}
+	</select>
+	<select id="queryByIds" resultType="com.hx.domain.RoleDO">
+		select
+		`role_id`,`role_name`,`role_sign`,`permission`,`remark`,`user_id_create`,`gmt_create`,`gmt_modified`
+		from sys_role where role_id in
+		<foreach item="roleId" collection="list" open="(" separator="," close=")">
+			#{roleId}
+		</foreach>
+	</select>
+    <select id="queryByUserIds" resultType="com.hx.vo.RoleVO">
+		SELECT DISTINCT
+			user_id,
+			role_sign,
+			role_name
+		FROM
+			sys_role sr
+		INNER JOIN sys_user_role sur ON sr.role_id = sur.role_id
+		WHERE
+			sur.user_id IN
+		<foreach item="userId" collection="list" open="(" separator="," close=")">
+			#{userId}
+		</foreach>
+	</select>
+
+    <insert id="save" parameterType="com.hx.domain.RoleDO"
+		useGeneratedKeys="true" keyProperty="roleId">
+		insert into sys_role
+		(
+		<if test="organization != null and organization != ''"> organization, </if>
+		`role_name`,
+		`role_sign`,
+		`permission`,
+		`remark`,
+		`user_id_create`,
+		`gmt_create`,
+		`gmt_modified`
+		)
+		values
+		(
+		<if test="organization != null and organization != ''">#{organization},</if>
+		#{roleName},
+		#{roleSign},
+		#{permission},
+		#{remark},
+		#{userIdCreate},
+		#{gmtCreate},
+		#{gmtModified}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.hx.domain.RoleDO">
+		update sys_role
+		<set>
+			<if test="organization != null">`organization` = #{organization}, </if>
+			<if test="roleName != null">`role_name` = #{roleName}, </if>
+			<if test="roleSign != null">`role_sign` = #{roleSign}, </if>
+			<if test="permission != null">`permission` = #{permission}, </if>
+			<if test="remark != null">`remark` = #{remark}, </if>
+			<if test="userIdCreate != null">`user_id_create` = #{userIdCreate}, </if>
+			<if test="gmtCreate != null">`gmt_create` = #{gmtCreate}, </if>
+			<if test="gmtModified != null">`gmt_modified` = #{gmtModified}</if>
+		</set>
+		where role_id = #{roleId}
+	</update>
+
+	<delete id="remove">
+		delete from sys_role where role_id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from sys_role where role_id in
+		<foreach item="roleId" collection="array" open="(" separator=","
+			close=")">
+			#{roleId}
+		</foreach>
+	</delete>
+
+</mapper>
