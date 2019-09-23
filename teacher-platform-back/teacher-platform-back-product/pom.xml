@@ -3,21 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>teacher-platform-face</artifactId>
+        <artifactId>teacher-platform-back</artifactId>
         <groupId>com.hx</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>teacher-platform-face-email</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-common</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+    <groupId>com.hx</groupId>
+    <artifactId>teacher-platform-back-product</artifactId>
 
 
 </project>
