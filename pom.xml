@@ -13,8 +13,6 @@
 
     <modules>
         <module>teacher-platform-face-common</module>
-        <module>teacher-platform-face-blog</module>
-        <module>teacher-platform-face-email</module>
         <module>teacher-platform-face-system</module>
         <module>teacher-platform-face-oa</module>
         <module>teacher-platform-face-web</module>
@@ -124,16 +122,21 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.4</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.mybatis</groupId>-->
+            <!--<artifactId>mybatis</artifactId>-->
+            <!--<version>3.4.4</version>-->
+        <!--</dependency>-->
 
+        <!--<dependency>-->
+            <!--<groupId>org.mybatis.spring.boot</groupId>-->
+            <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
+            <!--<version>1.1.1</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.1.1</version>
+            <version>2.1.0</version>
         </dependency>
         <!--druid -->
         <dependency>
