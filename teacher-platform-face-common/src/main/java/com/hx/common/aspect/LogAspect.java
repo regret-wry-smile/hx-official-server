@@ -8,8 +8,8 @@ import com.hx.common.utils.HttpContextUtils;
 import com.hx.common.utils.IPUtils;
 import com.hx.common.utils.JSONUtils;
 import com.hx.common.utils.UserAgentUtils;
+import com.hx.domain.HxUser;
 import com.hx.domain.LogDO;
-import com.hx.domain.UserDO;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -50,7 +50,7 @@ public class LogAspect {
     public Object around(ProceedingJoinPoint point) throws Throwable {
 
         String methodName = point.getSignature().getName();
-        UserDO userDO = null;
+        HxUser userDO = null;
         if (methodName.trim().equals("logout")){ //页面调用该方法时会退出当前登陆用户, 导致在sql更新日志时获取不到当前登陆人, 所以此处提前将当前登陆人取出来
             userDO = ShiroUtils.getUser();
         }
@@ -128,18 +128,18 @@ public class LogAspect {
         // 设置IP地址
         logDO.setIp(IPUtils.getIpAddr(request));
         // 用户名
-        UserDO currUser = ShiroUtils.getUser();
+        HxUser currUser = ShiroUtils.getUser();
         if (null == currUser) {
             if (null != logDO.getParams()) {
-                logDO.setUserId(-1L);
+                logDO.setUserId(-1);
                 logDO.setUsername(logDO.getParams());
             } else {
-                logDO.setUserId(-1L);
+                logDO.setUserId(-1);
                 logDO.setUsername("获取用户信息为空");
             }
         } else {
             logDO.setUserId(ShiroUtils.getUserId());
-            logDO.setUsername(ShiroUtils.getUser().getUsername());
+            logDO.setUsername(ShiroUtils.getUser().getUserName());
         }
         logDO.setTime((int) time);
         // 系统当前时间

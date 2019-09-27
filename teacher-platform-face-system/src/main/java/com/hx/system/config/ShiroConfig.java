@@ -84,9 +84,10 @@ public class ShiroConfig {
         //2、authc 必须认证（即登录）才能被访问
         //3、logout 登出过滤器
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
-        filterChainDefinitionMap.put("/login","anon");
-        filterChainDefinitionMap.put("/upload/**", "anon");
-        filterChainDefinitionMap.put("/files/**", "anon");
+        filterChainDefinitionMap.put("/user/**","anon");
+        filterChainDefinitionMap.put("/pro/**","anon");
+//        filterChainDefinitionMap.put("/upload/**", "anon");
+//        filterChainDefinitionMap.put("/files/**", "anon");
 //        filterChainDefinitionMap.put("/", "anon");
 //        filterChainDefinitionMap.put("/blog", "anon");
 //        filterChainDefinitionMap.put("/blog/open/**", "anon");

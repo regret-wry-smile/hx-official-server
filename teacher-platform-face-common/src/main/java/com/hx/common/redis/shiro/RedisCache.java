@@ -5,7 +5,7 @@ package com.hx.common.redis.shiro;
  * @version V1.0
  */
 
-import com.hx.domain.UserDO;
+import com.hx.domain.HxUser;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.subject.SimplePrincipalCollection;
@@ -198,8 +198,8 @@ public class RedisCache<K, V> implements Cache<K, V> {
         if (key instanceof SimplePrincipalCollection){
             SimplePrincipalCollection collection = (SimplePrincipalCollection) key;
             Object principal = collection.getPrimaryPrincipal();
-            if (principal instanceof UserDO){
-                return  ((UserDO) principal).getUserId().toString();
+            if (principal instanceof HxUser){
+                return  ((HxUser) principal).getId().toString();
             }
         }
         return null;

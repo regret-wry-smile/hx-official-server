@@ -1,6 +1,7 @@
 package com.hx.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.models.auth.In;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -13,7 +14,7 @@ public class LogDO implements Serializable {
 
 	private String organization;
 
-	private Long userId;
+	private Integer userId;
 
 	private String username;
 
@@ -53,11 +54,11 @@ public class LogDO implements Serializable {
 		this.id = id;
 	}
 
-	public Long getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Long userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 

@@ -2,8 +2,8 @@ package com.hx.common.service.impl;
 
 import com.hx.common.dao.LogDao;
 import com.hx.common.service.LogService;
+import com.hx.domain.HxUser;
 import com.hx.domain.LogDO;
-import com.hx.domain.UserDO;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 import org.apache.shiro.subject.Subject;
@@ -20,16 +20,16 @@ public class LogServiceImpl implements LogService {
 	@Async
 	@Override
 	public void save(LogDO logDO) {
-		 logMapper.save(logDO);
+//		 logMapper.save(logDO);
 	}
 
 	@Override
-	public void save(LogDO logDO, UserDO userDO) {
+	public void save(LogDO logDO, HxUser userDO) {
 		if (userDO != null){
 			ThreadContext.bind(new DefaultSecurityManager());
 			ThreadContext.bind(new Subject.Builder().principals(new SimplePrincipalCollection(userDO, "userDO")).buildSubject());
 		}
-		save(logDO);
+//		save(logDO);
 	}
 
 //	@Override
