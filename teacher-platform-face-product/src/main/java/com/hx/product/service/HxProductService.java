@@ -23,8 +23,8 @@ public class HxProductService {
         return productList;
     }
 
-    public List<HxProduct> selectAll() {
-        List<HxProduct> productList = hxProductMapper.findAllResult();
+    public List<HxProduct> selectAll(HxProduct hxProduct) {
+        List<HxProduct> productList = hxProductMapper.findAllResult(hxProduct);
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }

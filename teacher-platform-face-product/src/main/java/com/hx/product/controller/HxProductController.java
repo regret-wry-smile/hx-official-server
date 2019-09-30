@@ -28,8 +28,8 @@ public class HxProductController {
      * @return
      */
     @RequestMapping("/selectAll")
-    public R selectAll() {
-        return R.ok(hxProductService.selectAll());
+    public R selectAll(@RequestBody HxProduct hxProduct) {
+        return R.ok(hxProductService.selectAll(hxProduct));
     }
 
 }

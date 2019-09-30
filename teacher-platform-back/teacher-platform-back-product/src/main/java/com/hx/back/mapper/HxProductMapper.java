@@ -22,7 +22,7 @@ public interface HxProductMapper {
 
     List<HxProduct> findResultLimit(HxProduct hxProduct);
 
-    List<HxProduct> findAllResult();
+    List<HxProduct> findAllResult(HxProduct hxProduct);
 
     Integer findPageWithCount(HxProduct hxProduct);
 }

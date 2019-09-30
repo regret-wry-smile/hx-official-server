@@ -374,6 +374,7 @@
         select
         <include refid="Base_Column_List" />
         from  hx_product
+        <include refid="findPageWithWhere" />
     </select>
 
     <select id="findPageWithCount" parameterType="com.hx.back.entity.HxProduct" resultType="Integer">

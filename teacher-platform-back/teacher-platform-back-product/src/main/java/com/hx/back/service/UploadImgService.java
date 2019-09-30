@@ -2,6 +2,7 @@ package com.hx.back.service;
 
 import com.hx.back.entity.HxPictrue;
 import com.hx.common.config.BootdoConfig;
+import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class UploadImgService {
             String fileName =file.getOriginalFilename();
             //判断是否有文件且是否为图片文件
             if (!isImageFile(fileName)){
-                throw new BDException("请上传图片...");
+                throw new BDException("请上传图片类型...");
             }else if (fileName!=null && !"".equalsIgnoreCase(fileName.trim())){
                 fileName = System.currentTimeMillis() + getFileType(fileName);
                 String destFileName = "pictrue/" +  fileName;
@@ -36,7 +37,7 @@ public class UploadImgService {
                 //把图片复制到指定的位置
                 file.transferTo(destFile);
                 hxPictrue.setPicName(fileName);
-                hxPictrue.setPicAddr(destFileName);
+                hxPictrue.setPicAddr(Constant.REQUEST_FILE_PREFIX_LOCAL+"/"+destFileName);
 
             }
 
