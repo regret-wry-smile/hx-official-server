@@ -3,6 +3,8 @@ package com.hx.external.mapper;
 import com.hx.external.domain.External;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface ExternalMapper {
 
@@ -18,5 +20,5 @@ public interface ExternalMapper {
 
         External selectById(Integer id);
 
-
+        List<External> selectByType(String projectType);
 }

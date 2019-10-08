@@ -130,6 +130,13 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 
+	<select id="selectByType" resultType="com.hx.external.domain.External">
+		select
+		`interface_name`,`interface_address`
+		from sys_dict
+		where project_type = #{projectType,jdbcType=VARCHAR}
+	</select>
+
 
 	<sql id="findPageWithWhere">
 		<where> 1=1

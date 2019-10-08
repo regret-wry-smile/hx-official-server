@@ -16,6 +16,6 @@ public class TrialServiceImpl implements TrialService {
     @Override
     public int insterTrial(TrialUsers trialUsers){
 
-         return trialMapper.insertDynamic(trialUsers);
+        return trialMapper.insertDynamic(trialUsers);
     }
 }
