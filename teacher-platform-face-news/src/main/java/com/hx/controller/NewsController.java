@@ -36,9 +36,4 @@ public class NewsController {
         return R.ok();
     }
 
-    @RequestMapping("/query_by_page")
-    public List<News> queryNews(@RequestBody(required = false) Map<String, Object> params){
-        List<News> newsList = newsService.listPage(params);
-        return newsList;
-    }
 }
