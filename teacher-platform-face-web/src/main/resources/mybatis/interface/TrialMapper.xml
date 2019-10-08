@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.external.mapper.TrialMapper">
+
+	<resultMap id="BaseResultMap" type="com.hx.external.domain.TrialUsers">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="enterprise_name" jdbcType="VARCHAR" property="enterpriseName" />
+		<result column="project_name" jdbcType="VARCHAR" property="projectName" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="remakes" jdbcType="VARCHAR" property="remakes" />
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+  id, enterprise_name, project_name, name, email, phone, remakes
+</sql>
+
+
+	<delete id="delete" parameterType="java.lang.Integer">
+  delete from trial_users
+  where id = #{id,jdbcType=INTEGER}
+</delete>
+
+
+	<insert id="insert" parameterType="com.hx.external.mapper.TrialMapper">
+  insert into trial_users (id, enterprise_name, project_name,
+    name, email, phone,
+    remakes)
+  values (#{id,jdbcType=INTEGER}, #{enterpriseName,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
+    #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{remakes,jdbcType=VARCHAR})
+</insert>
+
+
+	<insert id="insertDynamic" parameterType="com.hx.external.mapper.TrialMapper">
+		insert into trial_users
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="enterpriseName != null">
+				enterprise_name,
+			</if>
+			<if test="projectName != null">
+				project_name,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="remakes != null">
+				remakes,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="enterpriseName != null">
+				#{enterpriseName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectName != null">
+				#{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="remakes != null">
+				#{remakes,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+
+	<update id="updateDynamic" parameterType="com.hx.external.mapper.TrialMapper">
+		update trial_users
+		<set>
+			<if test="enterpriseName != null">
+				enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+			</if>
+			<if test="projectName != null">
+				project_name = #{projectName,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="remakes != null">
+				remakes = #{remakes,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+	<update id="update" parameterType="com.hx.external.mapper.TrialMapper">
+  update trial_users
+  set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
+    project_name = #{projectName,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    email = #{email,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=VARCHAR},
+    remakes = #{remakes,jdbcType=VARCHAR}
+  where id = #{id,jdbcType=INTEGER}
+</update>
+
+
+	<select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  trial_users
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+
+	<sql id="findPageWithWhere">
+		<where> 1=1
+			<if test="id != null" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="enterpriseName != null and enterpriseName != ''" >
+				and enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectName != null and projectName != ''" >
+				and project_name = #{projectName,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name != ''" >
+				and name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="email != null and email != ''" >
+				and email = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="phone != null and phone != ''" >
+				and phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="remakes != null and remakes != ''" >
+				and remakes = #{remakes,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+
+</mapper>
