@@ -1,7 +1,11 @@
 package com.hx.external.mapper;
 
+import com.hx.domain.DictDO;
 import com.hx.external.domain.Module;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+@Mapper
 public interface ModuleMapper {
     int delete(Integer id);
 
@@ -15,6 +19,6 @@ public interface ModuleMapper {
 
     Module selectById(Integer id);
 
-    Module selectProjectType();
+    List<Module> listType();
 
 }

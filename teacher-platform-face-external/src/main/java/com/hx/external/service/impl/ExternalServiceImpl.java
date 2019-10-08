@@ -17,12 +17,15 @@ import java.nio.file.Paths;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ExternalServiceImpl implements ExternalService {
 
     @Autowired
-    private ExternalMapper interDao;
+    private ExternalMapper externalDao;
 
     @Autowired
     BootdoConfig bootConfig;
@@ -59,7 +62,7 @@ public class ExternalServiceImpl implements ExternalService {
 
     @Override
     public void InsertExternal(External external){
-        int i = interDao.insertDynamic(external);
+        int i = externalDao.insertDynamic(external);
         if (i != 1){
             throw new BDException("添加失败");
         }
@@ -81,5 +84,17 @@ public class ExternalServiceImpl implements ExternalService {
             return false;
         }
     }
+
+    @Override
+    public HashMap SelectExternal(List external){
+        HashMap<String,Object> type = new HashMap<>();
+        for (int i = 0; i <external.size() ; i++) {
+            String projectType = external.get(i).toString();
+            List<External> externals = externalDao.selectByType(projectType);
+            type.put(projectType,externals);
+        }
+        return type;
+    }
+
 
 }
