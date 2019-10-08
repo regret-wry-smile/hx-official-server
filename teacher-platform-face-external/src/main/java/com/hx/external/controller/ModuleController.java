@@ -12,14 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("Module")
+@RequestMapping("module")
 public class ModuleController {
 
     @Autowired
     private ModuleService moduleService;
+    @Autowired
     private ExternalService service;
 
-    @PostMapping("/SelectModule")
+    @PostMapping("/selectModule")
     public HashMap selectModule(){
         List<String> projectTypes = moduleService.listType();
         HashMap type = service.SelectExternal(projectTypes);
