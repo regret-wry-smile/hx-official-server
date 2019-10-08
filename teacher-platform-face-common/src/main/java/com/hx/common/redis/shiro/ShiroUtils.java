@@ -1,6 +1,6 @@
 package com.hx.common.redis.shiro;
 
-import com.hx.domain.UserDO;
+import com.hx.domain.HxUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -18,12 +18,12 @@ public class ShiroUtils {
     public static Subject getSubjct() {
         return SecurityUtils.getSubject();
     }
-    public static UserDO getUser() {
+    public static HxUser getUser() {
         Object object = getSubjct().getPrincipal();
-        return (UserDO)object;
+        return (HxUser)object;
     }
-    public static Long getUserId() {
-        return getUser().getUserId();
+    public static Integer getUserId() {
+        return getUser().getId();
     }
     public static void logout() {
         getSubjct().logout();

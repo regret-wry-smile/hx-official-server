@@ -12,5 +12,12 @@
     <groupId>com.hx</groupId>
     <artifactId>teacher-platform-back-product</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.hx</groupId>
+            <artifactId>teacher-platform-face-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 
 </project>

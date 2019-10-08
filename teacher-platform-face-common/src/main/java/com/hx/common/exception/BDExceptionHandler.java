@@ -3,9 +3,9 @@ package com.hx.common.exception;
 import com.hx.common.config.Constant;
 import com.hx.common.redis.shiro.ShiroUtils;
 import com.hx.common.service.LogService;
+import com.hx.domain.HxUser;
 import com.hx.domain.LogDO;
 import com.hx.domain.R;
-import com.hx.domain.UserDO;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authz.AuthorizationException;
 import org.slf4j.Logger;
@@ -79,10 +79,10 @@ public class BDExceptionHandler {
         logDO.setOperation(Constant.LOG_ERROR);
         logDO.setMethod(request.getRequestURL().toString());
         logDO.setParams(e.toString());
-        UserDO current = ShiroUtils.getUser();
+        HxUser current = ShiroUtils.getUser();
         if(null!=current){
-            logDO.setUserId(current.getUserId());
-            logDO.setUsername(current.getUsername());
+            logDO.setUserId(current.getId());
+            logDO.setUsername(current.getUserName());
         }
         logService.save(logDO);
         logger.error(e.getMessage(), e);
