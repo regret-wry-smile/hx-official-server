@@ -17,8 +17,10 @@
         <module>teacher-platform-face-oa</module>
         <module>teacher-platform-face-web</module>
         <module>teacher-platform-face-domain</module>
-        <module>teacher-platform-back</module>
         <module>teacher-platform-face-product</module>
+        <module>teacher-platform-face-external</module>
+        <module>teacher-platform-face-news</module>
+        <module>teacher-platform-back</module>
     </modules>
 
     <parent>

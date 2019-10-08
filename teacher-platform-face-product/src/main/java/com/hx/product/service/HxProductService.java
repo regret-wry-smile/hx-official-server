@@ -15,16 +15,16 @@ public class HxProductService {
     @Autowired
     private HxProductMapper hxProductMapper;
 
-    public List<HxProduct> selectResultLimit(HxProduct hxProduct){
-        List<HxProduct> productList = hxProductMapper.findResultLimit(hxProduct);
+    public List<HxProduct> selectAll(HxProduct hxProduct) {
+        List<HxProduct> productList = hxProductMapper.findAllResult(hxProduct);
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }
         return productList;
     }
 
-    public List<HxProduct> selectAll(HxProduct hxProduct) {
-        List<HxProduct> productList = hxProductMapper.findAllResult(hxProduct);
+    public List<HxProduct> selectResultLimit(HxProduct hxProduct){
+        List<HxProduct> productList = hxProductMapper.findResultLimit(hxProduct);
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }
