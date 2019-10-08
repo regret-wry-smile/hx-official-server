@@ -15,19 +15,17 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/backnews")
+@RequestMapping("/news")
 public class NewsController {
     @Autowired
     NewsService newsService;
 
     @RequestMapping("/query_by_page")
-    public List<News> queryNews(@RequestBody(required = false) Map<String, Object> params){
-        List<News> newsList = newsService.listPage(params);
-        return newsList;
+    public R queryNews(@RequestBody(required = false) Map<String, Object> params){
+        return R.ok(newsService.listPage(params));
     }
     @RequestMapping("/query")
     public R queryOneNews( @RequestBody News news){
-        newsService.listPage(BeanUtils.beanToMap(news));
-        return R.ok();
+        return R.ok(newsService.listPage(BeanUtils.beanToMap(news)));
     }
 }
