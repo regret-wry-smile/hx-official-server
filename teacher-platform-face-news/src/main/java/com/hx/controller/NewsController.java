@@ -14,26 +14,19 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/news")
+@RequestMapping("/backnews")
 public class NewsController {
     @Autowired
     NewsService newsService;
 
-    @RequestMapping("/add")
-    public R saveNews(@RequestBody News news){
-        newsService.saveNews(news);
-        return R.ok();
+    @RequestMapping("/query_by_page")
+    public List<News> queryNews(@RequestBody(required = false) Map<String, Object> params){
+        List<News> newsList = newsService.listPage(params);
+        return newsList;
     }
-
-    @RequestMapping("/delete")
-    public R deleteNews(@RequestBody Integer[]  ids){
-        newsService.deleteNews(Arrays.asList(ids));
-        return R.ok();
+    @RequestMapping("/query")
+    public List<News> queryOneNews(@RequestBody(required = false) Map<String, Object> params){
+        List<News> newsList = newsService.listPage(params);
+        return newsList;
     }
-    @RequestMapping("/update")
-    public R updateNews(@RequestBody News news){
-        newsService.updateNews(news);
-        return R.ok();
-    }
-
 }
