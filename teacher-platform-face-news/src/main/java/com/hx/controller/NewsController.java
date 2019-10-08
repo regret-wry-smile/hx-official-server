@@ -1,6 +1,7 @@
 package com.hx.controller;
 
 
+import com.hx.common.utils.BeanUtils;
 import com.hx.domain.R;
 import com.hx.pojo.News;
 import com.hx.service.impl.NewsService;
@@ -25,8 +26,8 @@ public class NewsController {
         return newsList;
     }
     @RequestMapping("/query")
-    public List<News> queryOneNews(@RequestBody(required = false) Map<String, Object> params){
-        List<News> newsList = newsService.listPage(params);
-        return newsList;
+    public R queryOneNews( @RequestBody News news){
+        newsService.listPage(BeanUtils.beanToMap(news));
+        return R.ok();
     }
 }
