@@ -7,7 +7,7 @@ import com.hx.external.service.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+/*@Service
 public class ModuleServiceImpl implements ModuleService {
 
     @Autowired
@@ -15,4 +15,4 @@ public class ModuleServiceImpl implements ModuleService {
     @Autowired
     BootdoConfig bootConfig;
 
-}
+}*/

@@ -2,7 +2,7 @@ server:
   session-timeout: 1800
   port: 8899
   servlet:
-    context-path: /teacher-platform-face
+    context-path: /hx-official-server
 spring:
   main:
     allow-bean-definition-overriding: true

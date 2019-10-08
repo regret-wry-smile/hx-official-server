@@ -59,6 +59,21 @@
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
+            <artifactId>teacher-platform-face-product</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hx</groupId>
+            <artifactId>teacher-platform-face-news</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hx</groupId>
+            <artifactId>teacher-platform-face-external</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.hx</groupId>
             <artifactId>teacher-platform-back-product</artifactId>
             <version>1.0.0</version>
         </dependency>
