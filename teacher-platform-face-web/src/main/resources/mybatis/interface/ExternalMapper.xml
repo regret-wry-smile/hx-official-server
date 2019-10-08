@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.external.mapper.ExternalMapper">
+
+	<resultMap id="BaseResultMap" type="com.hx.external.domain.External">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="project_type" jdbcType="VARCHAR" property="projectType" />
+		<result column="interface_name" jdbcType="VARCHAR" property="interfaceName" />
+		<result column="interface_address" jdbcType="VARCHAR" property="interfaceAddress" />
+		<result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+		<result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+		<result column="remake" jdbcType="VARCHAR" property="remake" />
+	</resultMap>
+
+
+	<sql id="Base_Column_List">
+  id, project_type, interface_name, interface_address, create_date, update_date, remake
+</sql>
+
+
+	<delete id="delete" parameterType="java.lang.Integer">
+  delete from ext_interface
+  where id = #{id,jdbcType=INTEGER}
+</delete>
+
+
+	<insert id="insert" parameterType="com.hx.external.mapper.ExternalMapper">
+  insert into ext_interface (id, project_type, interface_name,
+    interface_address, create_date, update_date,
+    remake)
+  values (#{id,jdbcType=INTEGER}, #{projectType,jdbcType=VARCHAR}, #{interfaceName,jdbcType=VARCHAR},
+    #{interfaceAddress,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP},
+    #{remake,jdbcType=VARCHAR})
+</insert>
+
+
+	<insert id="insertDynamic" parameterType="com.hx.external.mapper.ExternalMapper">
+		insert into ext_interface
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="projectType != null">
+				project_type,
+			</if>
+			<if test="interfaceName != null">
+				interface_name,
+			</if>
+			<if test="interfaceAddress != null">
+				interface_address,
+			</if>
+			<if test="createDate != null">
+				create_date,
+			</if>
+			<if test="updateDate != null">
+				update_date,
+			</if>
+			<if test="remake != null">
+				remake,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="projectType != null">
+				#{projectType,jdbcType=VARCHAR},
+			</if>
+			<if test="interfaceName != null">
+				#{interfaceName,jdbcType=VARCHAR},
+			</if>
+			<if test="interfaceAddress != null">
+				#{interfaceAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				#{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				#{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remake != null">
+				#{remake,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+
+
+	<update id="updateDynamic" parameterType="com.hx.external.mapper.ExternalMapper">
+		update ext_interface
+		<set>
+			<if test="projectType != null">
+				project_type = #{projectType,jdbcType=VARCHAR},
+			</if>
+			<if test="interfaceName != null">
+				interface_name = #{interfaceName,jdbcType=VARCHAR},
+			</if>
+			<if test="interfaceAddress != null">
+				interface_address = #{interfaceAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="createDate != null">
+				create_date = #{createDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateDate != null">
+				update_date = #{updateDate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="remake != null">
+				remake = #{remake,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+	<update id="update" parameterType="com.hx.external.mapper.ExternalMapper">
+  update ext_interface
+  set project_type = #{projectType,jdbcType=VARCHAR},
+    interface_name = #{interfaceName,jdbcType=VARCHAR},
+    interface_address = #{interfaceAddress,jdbcType=VARCHAR},
+    create_date = #{createDate,jdbcType=TIMESTAMP},
+    update_date = #{updateDate,jdbcType=TIMESTAMP},
+    remake = #{remake,jdbcType=VARCHAR}
+  where id = #{id,jdbcType=INTEGER}
+</update>
+
+
+	<select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  ext_interface
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+
+	<sql id="findPageWithWhere">
+		<where> 1=1
+			<if test="id != null" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="projectType != null and projectType != ''" >
+				and project_type = #{projectType,jdbcType=VARCHAR}
+			</if>
+			<if test="interfaceName != null and interfaceName != ''" >
+				and interface_name = #{interfaceName,jdbcType=VARCHAR}
+			</if>
+			<if test="interfaceAddress != null and interfaceAddress != ''" >
+				and interface_address = #{interfaceAddress,jdbcType=VARCHAR}
+			</if>
+			<if test="createDate != null" >
+				and create_date = #{createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="updateDate != null" >
+				and update_date = #{updateDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remake != null and remake != ''" >
+				and remake = #{remake,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</sql>
+
+
+</mapper>
