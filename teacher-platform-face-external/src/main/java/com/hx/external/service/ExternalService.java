@@ -3,6 +3,7 @@ package com.hx.external.service;
 
 
 import com.hx.external.domain.External;
+import com.hx.external.domain.Module;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -15,5 +16,5 @@ public interface ExternalService {
 
     void InsertExternal(External external);
 
-    HashMap SelectExternal(List external);
+    HashMap SelectExternal(List<Module> modules);
 }
