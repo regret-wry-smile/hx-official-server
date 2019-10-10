@@ -133,7 +133,7 @@
 	<select id="selectByType" resultType="com.hx.external.domain.External">
 		select
 		`interface_name`,`interface_address`
-		from sys_dict
+		from ext_interface
 		where project_type = #{projectType,jdbcType=VARCHAR}
 	</select>
 
