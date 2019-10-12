@@ -31,4 +31,13 @@ public class HxProductService {
         return productList;
     }
 
+    public HxProduct selectDetile(HxProduct hxProduct){
+        String str = hxProduct.getProId();
+        HxProduct productList = hxProductMapper.selectById(str);
+        if (productList == null) {
+            throw new BDException("查询失败");
+        }
+        return productList;
+    }
+
 }
