@@ -1,6 +1,7 @@
 package com.hx.external.controller;
 
 
+import com.hx.external.domain.Module;
 import com.hx.external.service.ExternalService;
 import com.hx.external.service.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class ModuleController {
 
     @PostMapping("/selectModule")
     public HashMap selectModule(){
-        List<String> projectTypes = moduleService.listType();
-        HashMap type = service.SelectExternal(projectTypes);
+        List<Module> modules = moduleService.listType();
+        HashMap type = service.SelectExternal(modules);
         return type;
     }
 

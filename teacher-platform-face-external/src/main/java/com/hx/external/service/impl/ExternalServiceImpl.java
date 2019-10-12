@@ -2,6 +2,7 @@ package com.hx.external.service.impl;
 
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.exception.BDException;
+import com.hx.external.domain.Module;
 import com.hx.external.mapper.ExternalMapper;
 import com.hx.external.domain.External;
 import com.hx.external.service.ExternalService;
@@ -86,12 +87,13 @@ public class ExternalServiceImpl implements ExternalService {
     }
 
     @Override
-    public HashMap SelectExternal(List external){
+    public HashMap SelectExternal(List<Module> modules ){
         HashMap<String,Object> type = new HashMap<>();
-        for (int i = 0; i <external.size() ; i++) {
-            String projectType = external.get(i).toString();
+        for (int i = 0; i <modules.size() ; i++) {
+            String projectType = modules.get(i).getProjectType();
+            String projectName = modules.get(i).getProjectName();
             List<External> externals = externalDao.selectByType(projectType);
-            type.put(projectType,externals);
+            type.put(projectName,externals);
         }
         return type;
     }
