@@ -14,13 +14,23 @@ public class HxProductController {
     private HxProductService hxProductService;
 
     /**
-     * 查询限制条数的产品或查询产品详情
+     * 查询限制条数的产品
      * @param hxProduct
      * @return
      */
     @RequestMapping("/selectResultLimit")
     public R selectResultLimit(@RequestBody HxProduct hxProduct){
         return R.ok(hxProductService.selectResultLimit(hxProduct));
+    }
+
+    /**
+     * 查询产品详情
+     * @param hxProduct
+     * @return
+     */
+    @RequestMapping("/selectDetile")
+    public R selectDetile(@RequestBody HxProduct hxProduct){
+        return R.ok(hxProductService.selectDetile(hxProduct));
     }
 
     /**

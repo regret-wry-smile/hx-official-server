@@ -18,7 +18,7 @@ public interface HxProductMapper {
 
     int update(HxProduct hxProduct);
 
-    HxProduct selectById(Integer id);
+    HxProduct selectById(String id);
 
     List<HxProduct> findResultLimit(HxProduct hxProduct);
 
