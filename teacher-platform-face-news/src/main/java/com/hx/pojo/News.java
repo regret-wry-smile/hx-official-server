@@ -23,6 +23,9 @@ public class News {
     private String updateUser;
 
     private Date updateTime;
+
+    private String picture;
+
     private List<Integer> ids;
 
     public Integer getId() {
@@ -103,5 +106,13 @@ public class News {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture == null ? null : picture.trim();
     }
 }

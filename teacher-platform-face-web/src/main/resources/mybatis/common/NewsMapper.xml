@@ -12,6 +12,7 @@
     <result column="create_user" property="createUser" jdbcType="VARCHAR" />
     <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="picture" property="picture" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -72,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, category, title, digest, detail, lable, create_time, create_user, update_user, 
-    update_time
+    id, category, title, digest, detail, lable, create_time, create_user, update_user,
+    update_time, picture
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hx.pojo.NewsExample" >
     select
@@ -90,7 +91,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from news
     where id = #{id,jdbcType=INTEGER}
@@ -105,23 +106,15 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <delete id="deleteByIds" parameterType="java.util.List" >
-    delete from news
-     <where> id in
-        <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
-          #{item}
-        </foreach>
-     </where>
-  </delete>
   <insert id="insert" parameterType="com.hx.pojo.News" >
-    insert into news (id, category, title, 
-      digest, detail, lable, 
-      create_time, create_user, update_user, 
-      update_time)
-    values (#{id,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{digest,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{lable,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+    insert into news (id, category, title,
+      digest, detail, lable,
+      create_time, create_user, update_user,
+      update_time, picture)
+    values (#{id,jdbcType=INTEGER}, #{category,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{digest,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{lable,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{picture,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.hx.pojo.News" >
     insert into news
@@ -156,6 +149,9 @@
       <if test="updateTime != null" >
         update_time,
       </if>
+      <if test="picture != null" >
+        picture,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -187,6 +183,9 @@
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -229,6 +228,9 @@
       <if test="record.updateTime != null" >
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.picture != null" >
+        picture = #{record.picture,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -237,15 +239,16 @@
   <update id="updateByExample" parameterType="map" >
     update news
     set id = #{record.id,jdbcType=INTEGER},
-      category = #{record.category,jdbcType=VARCHAR},
-      title = #{record.title,jdbcType=VARCHAR},
-      digest = #{record.digest,jdbcType=VARCHAR},
-      detail = #{record.detail,jdbcType=VARCHAR},
-      lable = #{record.lable,jdbcType=VARCHAR},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      create_user = #{record.createUser,jdbcType=VARCHAR},
-      update_user = #{record.updateUser,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
+    category = #{record.category,jdbcType=VARCHAR},
+    title = #{record.title,jdbcType=VARCHAR},
+    digest = #{record.digest,jdbcType=VARCHAR},
+    detail = #{record.detail,jdbcType=VARCHAR},
+    lable = #{record.lable,jdbcType=VARCHAR},
+    create_time = #{record.createTime,jdbcType=TIMESTAMP},
+    create_user = #{record.createUser,jdbcType=VARCHAR},
+    update_user = #{record.updateUser,jdbcType=VARCHAR},
+    update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+    picture = #{record.picture,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -280,6 +283,9 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="picture != null" >
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -293,12 +299,13 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       create_user = #{createUser,jdbcType=VARCHAR},
       update_user = #{updateUser,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      picture = #{picture,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
   <select id="listPage" resultType="com.hx.pojo.News">
-    select `id`,`category`,`title`,`digest`,`detail`,`lable`,`create_time`,`create_user`,`update_user`,`update_time` from
+    select `id`,`category`,`title`,`digest`,`detail`,`lable`,`create_time`,`create_user`,`update_user`,`update_time`,`picture` from
     news
     <where>
       <if test="id != null and id != ''"> and id = #{id} </if>
@@ -311,6 +318,7 @@
       <if test="createUser != null and createUser != ''"> and create_user = #{createUser} </if>
       <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
       <if test="updateUser != null and updateUser != ''"> and update_user = #{updateUser} </if>
+      <if test="picture != null and picture != ''"> and picture = #{picture} </if>
     </where>
     <choose>
       <when test="sort != null and sort.trim() != ''">
@@ -324,4 +332,13 @@
       limit #{offset}, #{limit}
     </if>
   </select>
+
+  <delete id="deleteByIds" parameterType="java.util.List" >
+    delete from news
+    <where> id in
+      <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
+        #{item}
+      </foreach>
+    </where>
+  </delete>
 </mapper>

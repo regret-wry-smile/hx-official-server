@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/news")
+@RequestMapping("/backnews")
 public class NewsBackController {
     @Autowired
     NewsService newsService;
 
     @RequestMapping("/add")
-    public R saveNews(@RequestBody News news){
+    public R saveNews(@RequestBody News news) throws ParseException {
         newsService.saveNews(news);
         return R.ok();
     }
@@ -30,8 +31,13 @@ public class NewsBackController {
         newsService.deleteNews(Arrays.asList(ids));
         return R.ok();
     }
+    @RequestMapping("/remove")
+    public R removeNews(@RequestBody News news){
+        newsService.removeNews(news.getId());
+        return R.ok();
+    }
     @RequestMapping("/update")
-    public R updateNews(@RequestBody News news){
+    public R updateNews(@RequestBody News news) throws ParseException {
         newsService.updateNews(news);
         return R.ok();
     }
