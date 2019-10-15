@@ -1,9 +1,11 @@
 package com.hx.back.mapper;
 
 import com.hx.back.entity.HxProduct;
+import com.hx.back.entity.HxProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface HxProductMapper {
@@ -18,11 +20,11 @@ public interface HxProductMapper {
 
     int update(HxProduct hxProduct);
 
-    HxProduct selectById(String id);
+    HxProductDTO selectById(String id);
 
-    List<HxProduct> findResultLimit(HxProduct hxProduct);
+    List<HxProduct> findResultByName(HxProduct hxProduct);
 
-    List<HxProduct> findAllResult(HxProduct hxProduct);
+    List<HxProduct> selectAllByPage(Map<String,Object> object);
 
     Integer findPageWithCount(HxProduct hxProduct);
 }

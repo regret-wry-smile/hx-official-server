@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.back.mapper.HxProTreeMapper">
+
+    <resultMap id="BaseResultMap" type="com.hx.back.entity.HxProTree">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="condition_id" jdbcType="INTEGER" property="conditionId" />
+        <result column="condition_name" jdbcType="VARCHAR" property="conditionName" />
+        <result column="code" jdbcType="INTEGER" property="code" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+  id, condition_id, condition_name, code, name
+</sql>
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+  delete from hx_pro_tree
+  where id = #{id,jdbcType=INTEGER}
+</delete>
+
+
+    <insert id="insert" parameterType="com.hx.back.entity.HxProTree">
+  insert into hx_pro_tree (id, condition_id, condition_name,
+    code, name)
+  values (#{id,jdbcType=INTEGER}, #{conditionId,jdbcType=INTEGER}, #{conditionName,jdbcType=VARCHAR},
+    #{code,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
+</insert>
+
+
+    <insert id="insertDynamic" parameterType="com.hx.back.entity.HxProTree">
+        insert into hx_pro_tree
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="conditionId != null">
+                condition_id,
+            </if>
+            <if test="conditionName != null">
+                condition_name,
+            </if>
+            <if test="code != null">
+                code,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="conditionId != null">
+                #{conditionId,jdbcType=INTEGER},
+            </if>
+            <if test="conditionName != null">
+                #{conditionName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                #{code,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateDynamic" parameterType="com.hx.back.entity.HxProTree">
+        update hx_pro_tree
+        <set>
+            <if test="conditionId != null">
+                condition_id = #{conditionId,jdbcType=INTEGER},
+            </if>
+            <if test="conditionName != null">
+                condition_name = #{conditionName,jdbcType=VARCHAR},
+            </if>
+            <if test="code != null">
+                code = #{code,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="update" parameterType="com.hx.back.entity.HxProTree">
+  update hx_pro_tree
+  set condition_id = #{conditionId,jdbcType=INTEGER},
+    condition_name = #{conditionName,jdbcType=VARCHAR},
+    code = #{code,jdbcType=INTEGER},
+    name = #{name,jdbcType=VARCHAR}
+  where id = #{id,jdbcType=INTEGER}
+</update>
+
+
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_pro_tree
+        <include refid="findPageWithWhere" />
+    </select>
+
+
+    <sql id="findPageWithWhere">
+        <where> 1=1
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="conditionId != null" >
+                and condition_id = #{conditionId,jdbcType=INTEGER}
+            </if>
+            <if test="conditionName != null and conditionName != ''" >
+                and condition_name = #{conditionName,jdbcType=VARCHAR}
+            </if>
+            <if test="code != null" >
+                and code = #{code,jdbcType=INTEGER}
+            </if>
+            <if test="name != null and name != ''" >
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="findWithResult" parameterType="com.hx.back.entity.HxProTree" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_pro_tree
+        <include refid="findPageWithWhere" />
+    </select>
+
+
+    <select id="getMaxCode" parameterType="com.hx.back.entity.HxProTree" resultType="Integer">
+        select MAX(`code`)
+        from hx_pro_tree
+        <include refid="findPageWithWhere" />
+    </select>
+
+</mapper>

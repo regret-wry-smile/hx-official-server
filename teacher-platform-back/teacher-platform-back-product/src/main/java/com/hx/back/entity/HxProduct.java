@@ -37,9 +37,9 @@ public class HxProduct {
     private String proName;
 
     /**
-     * 产品类型名称
+     * 产品名称类型(2,按行业)
      */
-    private String proTypeName;
+    private Integer proType;
 
     /**
      * 产品官网链接
@@ -47,9 +47,9 @@ public class HxProduct {
     private String proLink;
 
     /**
-     * 使用产品名称
+     * 使用产品类型(1,按产品)
      */
-    private String proUseName;
+    private Integer proUseType;
 
     /**
      * 使用产品链接
@@ -162,12 +162,12 @@ public class HxProduct {
         this.proName = proName;
     }
 
-    public String getProTypeName() {
-        return proTypeName;
+    public Integer getProType() {
+        return proType;
     }
 
-    public void setProTypeName(String proTypeName) {
-        this.proTypeName = proTypeName;
+    public void setProType(Integer proType) {
+        this.proType = proType;
     }
 
     public String getProLink() {
@@ -178,12 +178,12 @@ public class HxProduct {
         this.proLink = proLink;
     }
 
-    public String getProUseName() {
-        return proUseName;
+    public Integer getProUseType() {
+        return proUseType;
     }
 
-    public void setProUseName(String proUseName) {
-        this.proUseName = proUseName;
+    public void setProUseType(Integer proUseType) {
+        this.proUseType = proUseType;
     }
 
     public String getProUseLink() {
