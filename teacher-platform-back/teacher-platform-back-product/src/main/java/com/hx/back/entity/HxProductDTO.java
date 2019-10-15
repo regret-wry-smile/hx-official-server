@@ -14,7 +14,7 @@ public class HxProductDTO extends HxProduct{
     /**
      * 产品数据
      */
-    private Object proData;
+    private Object data;
     /**
      * 按产品分类名称
      */
@@ -33,12 +33,12 @@ public class HxProductDTO extends HxProduct{
         this.countNum = countNum;
     }
 
-    public Object getProData() {
-        return proData;
+    public Object getData() {
+        return data;
     }
 
-    public void setProData(Object proData) {
-        this.proData = proData;
+    public void setData(Object data) {
+        this.data = data;
     }
 
     public String getProWithName() {

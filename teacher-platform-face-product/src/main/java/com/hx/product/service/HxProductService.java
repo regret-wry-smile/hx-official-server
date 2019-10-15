@@ -28,7 +28,7 @@ public class HxProductService {
             throw new BDException("查询失败");
         }
         int num = hxProductMapper.findPageWithCount(null);
-        hxProductDTO.setProData(productList);
+        hxProductDTO.setData(productList);
         hxProductDTO.setCountNum(num);
         return hxProductDTO;
     }
@@ -50,7 +50,7 @@ public class HxProductService {
             hxProduct.setProType((Integer) object.get("protype"));
         }
         int num = hxProductMapper.findPageWithCount(hxProduct);
-        hxProductDTO.setProData(productList);
+        hxProductDTO.setData(productList);
         hxProductDTO.setCountNum(num);
         return hxProductDTO;
     }
