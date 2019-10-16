@@ -39,7 +39,6 @@
   where id = #{id,jdbcType=INTEGER}
 </delete>
 
-
     <insert id="insert" parameterType="com.hx.back.entity.HxProduct">
   insert into hx_product (id, pro_id, pro_title,
     pro_intro, pro_img, pro_logo_addr,
