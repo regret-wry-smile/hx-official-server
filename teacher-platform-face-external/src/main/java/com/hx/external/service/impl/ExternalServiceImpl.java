@@ -1,7 +1,9 @@
 package com.hx.external.service.impl;
 
 import com.hx.common.config.BootdoConfig;
+import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
+import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
 import com.hx.external.mapper.ExternalMapper;
 import com.hx.external.domain.External;
@@ -17,10 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ExternalServiceImpl implements ExternalService {
@@ -40,7 +39,7 @@ public class ExternalServiceImpl implements ExternalService {
             }
             byte[] bytes = file.getBytes();
             String address = bootConfig.getUploadPath()+"External/";
-            String fileAddress = "External/"+file.getOriginalFilename();
+            String fileAddress = "/External/"+file.getOriginalFilename();
             if (createDir(address)) {
                 Path path = Paths.get(bootConfig.getUploadPath()+fileAddress);
                 Files.write(path, bytes);
@@ -87,15 +86,23 @@ public class ExternalServiceImpl implements ExternalService {
     }
 
     @Override
-    public HashMap SelectExternal(List<Module> modules ){
-        HashMap<String,Object> type = new HashMap<>();
+    public List<Item> SelectExternal(List<Module> modules ){
+        List<Item> itemList = new ArrayList<>();
         for (int i = 0; i <modules.size() ; i++) {
+            Item item = new Item();
             String projectType = modules.get(i).getProjectType();
             String projectName = modules.get(i).getProjectName();
+            item.setTitle(projectName);
             List<External> externals = externalDao.selectByType(projectType);
-            type.put(projectName,externals);
+            for (int j = 0; j <externals.size() ; j++) {
+                External external = externals.get(j);
+                String interfaceAddress  = bootConfig.getPath()+Constant.REQUEST_FILE_PREFIX_LOCAL+ external.getInterfaceAddress();
+                externals.get(j).setInterfaceAddress(interfaceAddress);
+            }
+            item.setList(externals);
+            itemList.add(item);
         }
-        return type;
+        return itemList;
     }
 
 

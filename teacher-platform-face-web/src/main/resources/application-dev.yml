@@ -1,5 +1,6 @@
 bootdo:
   uploadPath: d:/hx-platform/uploaded_files/
+  path: http://localhost:8899${server.servlet.context-path}
 logging:
   level:
     root: info

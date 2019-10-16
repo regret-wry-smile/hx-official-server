@@ -16,5 +16,5 @@ public interface ExternalService {
 
     void InsertExternal(External external);
 
-    HashMap SelectExternal(List<Module> modules);
+    List SelectExternal(List<Module> modules);
 }
