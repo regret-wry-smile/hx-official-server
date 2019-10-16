@@ -1,6 +1,7 @@
 package com.hx.back.service;
 
 import com.hx.back.entity.HxProduct;
+import com.hx.back.entity.HxProductDTO;
 import com.hx.back.mapper.HxProductMapper;
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.exception.BDException;
@@ -58,13 +59,15 @@ public class BackProductService {
         if (hxProduct.getProLogoAddr() != null)
             delFile(bootConfig.getUploadPath()+hxProduct.getProLogoAddr());
 
-        //删除详情相关图片
-        /*if (hxProduct.getProDetilImg() != null){
-            String[] strings = hxProduct.getProDetilImg().split("#");
-            for (String str : strings){
-                delFile(bootConfig.getUploadPath()+str);
+    }
+
+    public void batchDeleteProduct(HxProductDTO hxProductDTO){
+        for (int i : hxProductDTO.getIds()){
+            int count = hxProductMapper.delete(i);
+            if (count != 1){
+                throw new BDException("删除失败");
             }
-        }*/
+        }
 
     }
 

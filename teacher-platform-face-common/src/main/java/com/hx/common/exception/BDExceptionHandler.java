@@ -58,7 +58,7 @@ public class BDExceptionHandler {
 //            return R.error(403," 账号密码不正确或您权限不足");
 //        }
 //        return new ModelAndView("error/403");
-        return R.error(R.NOT_LOGIN_CODE,e.getMessage());
+        return R.error(R.ERROR_CODE,e.getMessage());
     }
 
     @ExceptionHandler(AuthorizationException.class)

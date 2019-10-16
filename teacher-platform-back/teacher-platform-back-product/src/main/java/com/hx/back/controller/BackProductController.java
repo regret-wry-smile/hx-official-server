@@ -1,6 +1,7 @@
 package com.hx.back.controller;
 
 import com.hx.back.entity.HxProduct;
+import com.hx.back.entity.HxProductDTO;
 import com.hx.back.service.BackProductService;
 import com.hx.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,17 @@ public class BackProductController {
     @PostMapping("/deleteProduct")
     public R deleteProduct(@RequestBody HxProduct hxProduct){
         backProductService.deleteProduct(hxProduct);
+        return R.ok();
+    }
+
+    /**
+     * 删除产品案例
+     * @param hxProductDTO
+     * @return
+     */
+    @PostMapping("/batchDeleteProduct")
+    public R batchDeleteProduct(@RequestBody HxProductDTO hxProductDTO){
+        backProductService.batchDeleteProduct(hxProductDTO);
         return R.ok();
     }
 
