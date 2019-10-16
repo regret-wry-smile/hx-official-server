@@ -25,7 +25,14 @@ public class NewsService {
         String s = sf.format(new Date());
         Date date = sf.parse(s);
         news.setCreateTime(date);
-        news.setCreateUser(user.getUserName());
+        if(news.getCategory().equals("0")){
+            news.setCategory("行业新闻");
+        }else if(news.getCategory().equals("1")){
+            news.setCategory("公司新闻");
+        }else{
+            news.setCategory("公司通知");
+        }
+//        news.setCreateUser(user.getUserName());
         newsMapper.insert(news);
     }
 
