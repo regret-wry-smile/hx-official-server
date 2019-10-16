@@ -10,9 +10,9 @@
         <result column="pro_img" jdbcType="VARCHAR" property="proImg" />
         <result column="pro_logo_addr" jdbcType="VARCHAR" property="proLogoAddr" />
         <result column="pro_name" jdbcType="VARCHAR" property="proName" />
-        <result column="pro_type_name" jdbcType="VARCHAR" property="proTypeName" />
+        <result column="pro_type" jdbcType="INTEGER" property="proType" />
         <result column="pro_link" jdbcType="VARCHAR" property="proLink" />
-        <result column="pro_use_name" jdbcType="VARCHAR" property="proUseName" />
+        <result column="pro_use_type" jdbcType="INTEGER" property="proUseType" />
         <result column="pro_use_link" jdbcType="VARCHAR" property="proUseLink" />
         <result column="pro_detil_info" jdbcType="VARCHAR" property="proDetilInfo" />
         <result column="pro_detil_img" jdbcType="VARCHAR" property="proDetilImg" />
@@ -28,33 +28,32 @@
 
 
     <sql id="Base_Column_List">
-  id, pro_id, pro_title, pro_intro, pro_img, pro_logo_addr, pro_name, pro_type_name, 
-  pro_link, pro_use_name, pro_use_link, pro_detil_info, pro_detil_img, create_user, 
-  create_time, update_user, update_time, remark, extend_1, extend_2, extend_3
+  id, pro_id, pro_title, pro_intro, pro_img, pro_logo_addr, pro_name, pro_type, pro_link,
+  pro_use_type, pro_use_link, pro_detil_info, pro_detil_img, create_user, create_time,
+  update_user, update_time, remark, extend_1, extend_2, extend_3
 </sql>
 
 
-    <delete id="delete" >
+    <delete id="delete" parameterType="java.lang.Integer">
   delete from hx_product
-  where pro_id = #{proId,jdbcType=VARCHAR}
+  where id = #{id,jdbcType=INTEGER}
 </delete>
 
-
     <insert id="insert" parameterType="com.hx.back.entity.HxProduct">
-  insert into hx_product (id, pro_id, pro_title, 
-    pro_intro, pro_img, pro_logo_addr, 
-    pro_name, pro_type_name, pro_link, 
-    pro_use_name, pro_use_link, pro_detil_info, 
-    pro_detil_img, create_user, create_time, 
-    update_user, update_time, remark, 
+  insert into hx_product (id, pro_id, pro_title,
+    pro_intro, pro_img, pro_logo_addr,
+    pro_name, pro_type, pro_link,
+    pro_use_type, pro_use_link, pro_detil_info,
+    pro_detil_img, create_user, create_time,
+    update_user, update_time, remark,
     extend_1, extend_2, extend_3
     )
-  values (#{id,jdbcType=INTEGER}, #{proId,jdbcType=VARCHAR}, #{proTitle,jdbcType=VARCHAR}, 
-    #{proIntro,jdbcType=VARCHAR}, #{proImg,jdbcType=VARCHAR}, #{proLogoAddr,jdbcType=VARCHAR}, 
-    #{proName,jdbcType=VARCHAR}, #{proTypeName,jdbcType=VARCHAR}, #{proLink,jdbcType=VARCHAR}, 
-    #{proUseName,jdbcType=VARCHAR}, #{proUseLink,jdbcType=VARCHAR}, #{proDetilInfo,jdbcType=VARCHAR}, 
-    #{proDetilImg,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-    #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+  values (#{id,jdbcType=INTEGER}, #{proId,jdbcType=VARCHAR}, #{proTitle,jdbcType=VARCHAR},
+    #{proIntro,jdbcType=VARCHAR}, #{proImg,jdbcType=VARCHAR}, #{proLogoAddr,jdbcType=VARCHAR},
+    #{proName,jdbcType=VARCHAR}, #{proType,jdbcType=INTEGER}, #{proLink,jdbcType=VARCHAR},
+    #{proUseType,jdbcType=INTEGER}, #{proUseLink,jdbcType=VARCHAR}, #{proDetilInfo,jdbcType=VARCHAR},
+    #{proDetilImg,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},
+    #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
     #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}
     )
 </insert>
@@ -84,14 +83,14 @@
             <if test="proName != null">
                 pro_name,
             </if>
-            <if test="proTypeName != null">
-                pro_type_name,
+            <if test="proType != null">
+                pro_type,
             </if>
             <if test="proLink != null">
                 pro_link,
             </if>
-            <if test="proUseName != null">
-                pro_use_name,
+            <if test="proUseType != null">
+                pro_use_type,
             </if>
             <if test="proUseLink != null">
                 pro_use_link,
@@ -149,14 +148,14 @@
             <if test="proName != null">
                 #{proName,jdbcType=VARCHAR},
             </if>
-            <if test="proTypeName != null">
-                #{proTypeName,jdbcType=VARCHAR},
+            <if test="proType != null">
+                #{proType,jdbcType=INTEGER},
             </if>
             <if test="proLink != null">
                 #{proLink,jdbcType=VARCHAR},
             </if>
-            <if test="proUseName != null">
-                #{proUseName,jdbcType=VARCHAR},
+            <if test="proUseType != null">
+                #{proUseType,jdbcType=INTEGER},
             </if>
             <if test="proUseLink != null">
                 #{proUseLink,jdbcType=VARCHAR},
@@ -198,6 +197,9 @@
     <update id="updateDynamic" parameterType="com.hx.back.entity.HxProduct">
         update hx_product
         <set>
+            <if test="proId != null">
+                pro_id = #{proId,jdbcType=VARCHAR},
+            </if>
             <if test="proTitle != null">
                 pro_title = #{proTitle,jdbcType=VARCHAR},
             </if>
@@ -213,14 +215,14 @@
             <if test="proName != null">
                 pro_name = #{proName,jdbcType=VARCHAR},
             </if>
-            <if test="proTypeName != null">
-                pro_type_name = #{proTypeName,jdbcType=VARCHAR},
+            <if test="proType != null">
+                pro_type = #{proType,jdbcType=INTEGER},
             </if>
             <if test="proLink != null">
                 pro_link = #{proLink,jdbcType=VARCHAR},
             </if>
-            <if test="proUseName != null">
-                pro_use_name = #{proUseName,jdbcType=VARCHAR},
+            <if test="proUseType != null">
+                pro_use_type = #{proUseType,jdbcType=INTEGER},
             </if>
             <if test="proUseLink != null">
                 pro_use_link = #{proUseLink,jdbcType=VARCHAR},
@@ -256,20 +258,21 @@
                 extend_3 = #{extend3,jdbcType=VARCHAR},
             </if>
         </set>
-        where pro_id = #{proId,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
     </update>
 
 
     <update id="update" parameterType="com.hx.back.entity.HxProduct">
   update hx_product
-  set pro_title = #{proTitle,jdbcType=VARCHAR},
+  set pro_id = #{proId,jdbcType=VARCHAR},
+    pro_title = #{proTitle,jdbcType=VARCHAR},
     pro_intro = #{proIntro,jdbcType=VARCHAR},
     pro_img = #{proImg,jdbcType=VARCHAR},
     pro_logo_addr = #{proLogoAddr,jdbcType=VARCHAR},
     pro_name = #{proName,jdbcType=VARCHAR},
-    pro_type_name = #{proTypeName,jdbcType=VARCHAR},
+    pro_type = #{proType,jdbcType=INTEGER},
     pro_link = #{proLink,jdbcType=VARCHAR},
-    pro_use_name = #{proUseName,jdbcType=VARCHAR},
+    pro_use_type = #{proUseType,jdbcType=INTEGER},
     pro_use_link = #{proUseLink,jdbcType=VARCHAR},
     pro_detil_info = #{proDetilInfo,jdbcType=VARCHAR},
     pro_detil_img = #{proDetilImg,jdbcType=VARCHAR},
@@ -281,11 +284,12 @@
     extend_1 = #{extend1,jdbcType=VARCHAR},
     extend_2 = #{extend2,jdbcType=VARCHAR},
     extend_3 = #{extend3,jdbcType=VARCHAR}
-  where pro_id = {proId,jdbcType=VARCHAR}
+  where id = #{id,jdbcType=INTEGER}
 </update>
 
 
-    <select id="selectById" resultMap="BaseResultMap">
+
+    <select id="selectById" resultType="com.hx.back.entity.HxProductDTO">
         select
         <include refid="Base_Column_List" />
         from  hx_product
@@ -302,7 +306,7 @@
                 and pro_id = #{proId,jdbcType=VARCHAR}
             </if>
             <if test="proTitle != null and proTitle != ''" >
-                and pro_title = #{proTitle,jdbcType=VARCHAR}
+                and pro_title like concat('%',#{proTitle,jdbcType=VARCHAR},'%')
             </if>
             <if test="proIntro != null and proIntro != ''" >
                 and pro_intro = #{proIntro,jdbcType=VARCHAR}
@@ -316,14 +320,14 @@
             <if test="proName != null and proName != ''" >
                 and pro_name = #{proName,jdbcType=VARCHAR}
             </if>
-            <if test="proTypeName != null and proTypeName != ''" >
-                and pro_type_name = #{proTypeName,jdbcType=VARCHAR}
+            <if test="proType != null" >
+                and pro_type = #{proType}
             </if>
             <if test="proLink != null and proLink != ''" >
                 and pro_link = #{proLink,jdbcType=VARCHAR}
             </if>
-            <if test="proUseName != null and proUseName != ''" >
-                and pro_use_name = #{proUseName,jdbcType=VARCHAR}
+            <if test="proUseType != null" >
+                and pro_use_type = #{proUseType}
             </if>
             <if test="proUseLink != null and proUseLink != ''" >
                 and pro_use_link = #{proUseLink,jdbcType=VARCHAR}
@@ -362,22 +366,33 @@
     </sql>
 
 
-    <select id="findResultLimit" parameterType="com.hx.back.entity.HxProduct" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from  hx_product
-        <include refid="findPageWithWhere" />
-        limit 9
-    </select>
-
-    <select id="findAllResult"  resultMap="BaseResultMap">
+    <select id="findResultByName" parameterType="com.hx.back.entity.HxProduct" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from  hx_product
         <include refid="findPageWithWhere" />
     </select>
 
-    <select id="findPageWithCount" parameterType="com.hx.back.entity.HxProduct" resultType="Integer">
+    <select id="selectAllByPage"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_product
+        where 1=1
+        <if test="proTitle != null and proTitle != ''" >
+            and pro_title like concat('%',#{proTitle,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="proType != null" >
+            and pro_type = #{proType}
+        </if>
+        <if test="proUseType != null" >
+            and pro_use_type = #{proUseType}
+        </if>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="findPageWithCount" resultType="Integer">
         select count(1)
         from hx_product
         <include refid="findPageWithWhere" />
