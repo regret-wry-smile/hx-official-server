@@ -2,6 +2,8 @@ package com.hx.product.controller;
 
 import com.hx.back.entity.HxProTree;
 import com.hx.back.entity.HxProduct;
+import com.hx.back.entity.HxProductDTO;
+import com.hx.common.exception.BDException;
 import com.hx.domain.R;
 import com.hx.product.service.HxProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,8 @@ public class HxProductController {
      * @return
      */
     @RequestMapping("/selectProByCondition")
-    public R selectResultLimit(@RequestBody Map<String,Object> object){
-        return R.ok(hxProductService.selectProByCondition(object));
+    public R selectResultLimit(@RequestBody HxProductDTO hxProductDTO){
+        return hxProductService.selectProByCondition(hxProductDTO);
     }
 
     /**
@@ -40,8 +42,8 @@ public class HxProductController {
      * @return
      */
     @RequestMapping("/selectAllByPage")
-    public R selectAllByPage(@RequestBody Map<String,Object> object) {
-        return R.ok(hxProductService.selectAllByPage(object));
+    public R selectAllByPage(@RequestBody HxProductDTO hxProductDTO) {
+        return hxProductService.selectAllByPage(hxProductDTO);
     }
 
     /**
@@ -51,6 +53,15 @@ public class HxProductController {
     @RequestMapping("/selectProTree")
     public R selectProTree(@RequestBody HxProTree hxProTree) {
         return R.ok(hxProductService.selectProTree(hxProTree));
+    }
+
+    /**
+     * 分页查询产品数据结构
+     * @return
+     */
+    @RequestMapping("/selectProTreeByPage")
+    public R selectProTreeByPage(@RequestBody HxProTree hxProTree) {
+        return hxProductService.selectProTreeByPage(hxProTree);
     }
 
 }

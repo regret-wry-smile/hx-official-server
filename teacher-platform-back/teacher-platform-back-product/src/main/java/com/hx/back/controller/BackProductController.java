@@ -49,12 +49,12 @@ public class BackProductController {
 
     /**
      * 删除产品案例
-     * @param hxProductDTO
+     * @param ids
      * @return
      */
     @PostMapping("/batchDeleteProduct")
-    public R batchDeleteProduct(@RequestBody HxProductDTO hxProductDTO){
-        backProductService.batchDeleteProduct(hxProductDTO);
+    public R batchDeleteProduct(@RequestBody int[] ids){
+        backProductService.batchDeleteProduct(ids);
         return R.ok();
     }
 

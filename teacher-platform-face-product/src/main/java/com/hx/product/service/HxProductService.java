@@ -7,6 +7,7 @@ import com.hx.back.mapper.HxProTreeMapper;
 import com.hx.back.mapper.HxProductMapper;
 import com.hx.common.exception.BDException;
 import com.hx.common.utils.ListUtils;
+import com.hx.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,38 +22,22 @@ public class HxProductService {
     @Autowired
     private HxProTreeMapper HxProTreeMapper;
 
-    public HxProductDTO selectAllByPage(Map<String,Object> object) {
-        HxProductDTO hxProductDTO = new HxProductDTO();
-        List<HxProduct> productList = hxProductMapper.selectAllByPage(object);
+    public R selectAllByPage(HxProductDTO hxProductDTO) {
+        List<HxProduct> productList = hxProductMapper.selectAllByPage(hxProductDTO);
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }
-        int num = hxProductMapper.findPageWithCount(null);
-        hxProductDTO.setData(productList);
-        hxProductDTO.setCountNum(num);
-        return hxProductDTO;
+        Integer i  = hxProductMapper.findAllCount();
+        return R.ok(productList,i);
     }
 
-    public HxProductDTO selectProByCondition(Map<String,Object> object){
-        HxProductDTO hxProductDTO = new HxProductDTO();
-        List<HxProduct> productList = hxProductMapper.selectAllByPage(object);
+    public R selectProByCondition(HxProductDTO hxProductDTO){
+        List<HxProduct> productList = hxProductMapper.selectAllByPage(hxProductDTO);
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }
-        HxProduct hxProduct = new HxProduct();
-        if (object.get("proTitle") != null){
-            hxProduct.setProTitle(object.get("proTitle").toString());
-        }
-        if (object.get("proUserType") != null){
-            hxProduct.setProUseType((Integer) object.get("proUserType"));
-        }
-        if (object.get("protype") != null){
-            hxProduct.setProType((Integer) object.get("protype"));
-        }
-        int num = hxProductMapper.findPageWithCount(hxProduct);
-        hxProductDTO.setData(productList);
-        hxProductDTO.setCountNum(num);
-        return hxProductDTO;
+        Integer i  = hxProductMapper.findPageWithCount(hxProductDTO);
+        return R.ok(productList,i);
     }
 
     public HxProduct selectDetile(HxProduct hxProduct){
@@ -90,6 +75,15 @@ public class HxProductService {
             throw new BDException("查询失败");
         }
        return hxProTreeList;
+    }
+
+    public R selectProTreeByPage(HxProTree hxProTree){
+        List<HxProTree> hxProTreeList = HxProTreeMapper.findWithResultByPage(hxProTree);
+        if (ListUtils.isEmpty(hxProTreeList)) {
+            throw new BDException("查询失败");
+        }
+        int i = HxProTreeMapper.findCount(hxProTree);
+       return R.ok(hxProTreeList,i);
     }
 
 

@@ -128,16 +128,32 @@
     </sql>
 
 
-    <select id="findWithResult" parameterType="com.hx.back.entity.HxProTree" resultMap="BaseResultMap">
+    <select id="findWithResult" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from  hx_pro_tree
         <include refid="findPageWithWhere" />
     </select>
 
+    <select id="findWithResultByPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_pro_tree
+        <include refid="findPageWithWhere" />
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
 
-    <select id="getMaxCode" parameterType="com.hx.back.entity.HxProTree" resultType="Integer">
+
+    <select id="getMaxCode" resultType="Integer">
         select MAX(`code`)
+        from hx_pro_tree
+        <include refid="findPageWithWhere" />
+    </select>
+
+    <select id="findCount" resultType="Integer">
+        select count(1)
         from hx_pro_tree
         <include refid="findPageWithWhere" />
     </select>

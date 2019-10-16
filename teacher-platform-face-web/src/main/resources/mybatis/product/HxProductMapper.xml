@@ -33,11 +33,18 @@
   update_user, update_time, remark, extend_1, extend_2, extend_3
 </sql>
 
-
     <delete id="delete" parameterType="java.lang.Integer">
-  delete from hx_product
-  where id = #{id,jdbcType=INTEGER}
-</delete>
+        delete from hx_product
+        where id = #{id}
+    </delete>
+
+    <delete id="bantchDelete" parameterType="java.lang.Integer">
+      delete from hx_product
+      where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
 
     <insert id="insert" parameterType="com.hx.back.entity.HxProduct">
   insert into hx_product (id, pro_id, pro_title,
@@ -396,6 +403,11 @@
         select count(1)
         from hx_product
         <include refid="findPageWithWhere" />
+    </select>
+
+    <select id="findAllCount" resultType="Integer">
+        select count(1)
+        from hx_product
     </select>
 
 </mapper>
