@@ -22,5 +22,9 @@ public interface HxProTreeMapper {
 
     List<HxProTree> findWithResult(HxProTree hxProTreeDTO);
 
+    List<HxProTree> findWithResultByPage(HxProTree hxProTreeDTO);
+
     Integer getMaxCode(HxProTree hxProTreeDTO);
+
+    Integer findCount(HxProTree hxProTreeDTO);
 }

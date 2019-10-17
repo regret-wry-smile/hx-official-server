@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 public class BootdoConfig {
 	//上传路径
 	private String uploadPath;
+	//下载路径
+	private String path;
 
 	public String getUploadPath() {
 		return uploadPath;
@@ -15,5 +17,13 @@ public class BootdoConfig {
 
 	public void setUploadPath(String uploadPath) {
 		this.uploadPath = uploadPath;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

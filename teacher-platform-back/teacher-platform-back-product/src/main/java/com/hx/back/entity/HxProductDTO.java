@@ -13,13 +13,13 @@ public class HxProductDTO extends HxProduct{
     private int[] ids;
 
     /**
-     * 产品总数
+     * 页码
      */
-    private Integer countNum;
+    private Integer offset;
     /**
-     * 产品数据
+     * 条数
      */
-    private Object data;
+    private Integer limit;
     /**
      * 按产品分类名称
      */
@@ -38,21 +38,6 @@ public class HxProductDTO extends HxProduct{
         this.ids = ids;
     }
 
-    public Integer getCountNum() {
-        return countNum;
-    }
-
-    public void setCountNum(Integer countNum) {
-        this.countNum = countNum;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
 
     public String getProWithName() {
         return proWithName;

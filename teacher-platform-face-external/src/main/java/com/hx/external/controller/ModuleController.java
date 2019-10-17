@@ -1,6 +1,8 @@
 package com.hx.external.controller;
 
 
+import com.hx.domain.R;
+import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
 import com.hx.external.service.ExternalService;
 import com.hx.external.service.ModuleService;
@@ -22,10 +24,10 @@ public class ModuleController {
     private ExternalService service;
 
     @PostMapping("/selectModule")
-    public HashMap selectModule(){
+    public R selectModule(){
         List<Module> modules = moduleService.listType();
-        HashMap type = service.SelectExternal(modules);
-        return type;
+        List<Item> itemList = service.SelectExternal(modules);
+        return R.ok(itemList);
     }
 
 }

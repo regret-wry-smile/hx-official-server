@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BackProductService {
@@ -52,21 +53,20 @@ public class BackProductService {
         if (i != 1){
             throw new BDException("删除失败");
         }
-        //删除主图片
-        if (hxProduct.getProImg() != null)
-            delFile(bootConfig.getUploadPath()+hxProduct.getProImg());
-        //删除产品logo图片
-        if (hxProduct.getProLogoAddr() != null)
-            delFile(bootConfig.getUploadPath()+hxProduct.getProLogoAddr());
 
     }
 
-    public void batchDeleteProduct(HxProductDTO hxProductDTO){
-        for (int i : hxProductDTO.getIds()){
-            int count = hxProductMapper.delete(i);
-            if (count != 1){
-                throw new BDException("删除失败");
-            }
+    public void batchDeleteProduct(int[] ids){
+        List<HxProduct> hxProducts = hxProductMapper.selectAllByPage(null);
+        int[] arrys = new int[ids.length];
+        for (int i=0;i<ids.length;i++){
+            //for (int j = 0;j<hxProducts.size();j++){
+            arrys[i] = hxProducts.get(ids[i]).getId();
+            //}
+        }
+        int count = hxProductMapper.bantchDelete(arrys);
+        if (count != 1){
+            throw new BDException("删除失败");
         }
 
     }
