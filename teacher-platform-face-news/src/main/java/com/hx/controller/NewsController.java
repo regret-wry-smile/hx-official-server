@@ -22,7 +22,9 @@ public class NewsController {
 
     @RequestMapping("/query_by_page")
     public R queryNews(@RequestBody(required = false) Map<String, Object> params){
-        return R.ok(newsService.listPage(params));
+        News news = new News();
+        Integer count = newsService.selectCount(params);
+        return R.ok(newsService.listPage(params),count);
     }
     @RequestMapping("/query")
     public R queryOneNews( @RequestBody News news){

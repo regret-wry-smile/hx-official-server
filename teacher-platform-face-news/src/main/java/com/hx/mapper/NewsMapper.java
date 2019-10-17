@@ -35,4 +35,6 @@ public interface NewsMapper {
     int updateByPrimaryKey(News record);
 
     List<News> listPage(Map<String, Object> map);
+
+    Integer selectCount(Map<String, Object> map);
 }
