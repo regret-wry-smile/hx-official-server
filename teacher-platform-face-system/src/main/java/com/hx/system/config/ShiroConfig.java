@@ -86,24 +86,14 @@ public class ShiroConfig {
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/user/**","anon");
         filterChainDefinitionMap.put("/pro/**","anon");
+        filterChainDefinitionMap.put("/uploadImg","anon");
         filterChainDefinitionMap.put("/files/**","anon");
         filterChainDefinitionMap.put("/backnews/**","anon");
         filterChainDefinitionMap.put("/module/**","anon");
         filterChainDefinitionMap.put("/trial/**","anon");
         filterChainDefinitionMap.put("/upload/**","anon");
         filterChainDefinitionMap.put("/news/**","anon");
-//        filterChainDefinitionMap.put("/upload/**", "anon");
-//        filterChainDefinitionMap.put("/files/**", "anon");
-//        filterChainDefinitionMap.put("/", "anon");
-//        filterChainDefinitionMap.put("/blog", "anon");
-//        filterChainDefinitionMap.put("/blog/open/**", "anon");
-        filterChainDefinitionMap.put("/common/versionManage/get_latest_version", "anon");
-        filterChainDefinitionMap.put("/common/versionManage/get_new_version", "anon");
-        filterChainDefinitionMap.put("/common/versionManage/fileUpload", "anon");
-        filterChainDefinitionMap.put("/druid/**", "anon");
-//        filterChainDefinitionMap.put("/common/dict/getSubject", "anon");
-//        filterChainDefinitionMap.put("/common/log/save", "anon");
-//        filterChainDefinitionMap.put("/sys/user/initCurrentUserPermissions", "anon");
+
         filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         //自定义过滤器

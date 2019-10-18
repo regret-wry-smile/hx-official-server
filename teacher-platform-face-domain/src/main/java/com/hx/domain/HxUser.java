@@ -21,6 +21,11 @@ public class HxUser implements Serializable {
     private String userPass;
 
     /**
+     * 用户权限
+     */
+    private Integer userPower;
+
+    /**
      * 备注
      */
     private String remark;
@@ -29,6 +34,25 @@ public class HxUser implements Serializable {
      * 拓展字段
      */
     private String extend;
+
+    /**
+     * 旧密码
+     */
+    private String oldPass;
+
+    /**
+     * 名称
+     */
+    private String name;
+
+    /**
+     * 页码
+     */
+    private Integer offset;
+    /**
+     * 条数
+     */
+    private Integer limit;
 
     public Integer getId() {
         return id;
@@ -62,6 +86,14 @@ public class HxUser implements Serializable {
         this.userPass = userPass;
     }
 
+    public Integer getUserPower() {
+        return userPower;
+    }
+
+    public void setUserPower(Integer userPower) {
+        this.userPower = userPower;
+    }
+
     public String getRemark() {
         return remark;
     }
@@ -76,5 +108,37 @@ public class HxUser implements Serializable {
 
     public void setExtend(String extend) {
         this.extend = extend;
+    }
+
+    public String getOldPass() {
+        return oldPass;
+    }
+
+    public void setOldPass(String oldPass) {
+        this.oldPass = oldPass;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Integer offset) {
+        this.offset = offset;
+    }
+
+    public Integer getLimit() {
+        return limit;
+    }
+
+    public void setLimit(Integer limit) {
+        this.limit = limit;
     }
 }

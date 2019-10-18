@@ -7,13 +7,14 @@
         <result column="user_id" jdbcType="VARCHAR" property="userId" />
         <result column="user_name" jdbcType="VARCHAR" property="userName" />
         <result column="user_pass" jdbcType="VARCHAR" property="userPass" />
+        <result column="user_power" jdbcType="INTEGER" property="userPower" />
         <result column="remark" jdbcType="VARCHAR" property="remark" />
         <result column="extend" jdbcType="VARCHAR" property="extend" />
     </resultMap>
 
 
     <sql id="Base_Column_List">
-  id, user_id, user_name, user_pass, remark, extend
+  id, user_id, user_name, user_pass,user_power, remark, extend
 </sql>
 
 
@@ -25,10 +26,10 @@
 
     <insert id="insert" parameterType="com.hx.domain.HxUser">
   insert into hx_user (id, user_id, user_name,
-    user_pass, remark, extend
+    user_pass, user_power, remark, extend
     )
   values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
-    #{userPass,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{extend,jdbcType=VARCHAR}
+    #{userPass,jdbcType=VARCHAR},#{userPower}, #{remark,jdbcType=VARCHAR}, #{extend,jdbcType=VARCHAR}
     )
 </insert>
 
@@ -47,6 +48,9 @@
             </if>
             <if test="userPass != null">
                 user_pass,
+            </if>
+            <if test="userPower != null">
+                user_power,
             </if>
             <if test="remark != null">
                 remark,
@@ -67,6 +71,9 @@
             </if>
             <if test="userPass != null">
                 #{userPass,jdbcType=VARCHAR},
+            </if>
+            <if test="userPower != null">
+                user_power = #{userPower},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},
@@ -90,6 +97,9 @@
             <if test="userPass != null">
                 user_pass = #{userPass,jdbcType=VARCHAR},
             </if>
+            <if test="userPower != null">
+                user_power = #{userPower},
+            </if>
             <if test="remark != null">
                 remark = #{remark,jdbcType=VARCHAR},
             </if>
@@ -106,6 +116,7 @@
   set user_id = #{userId,jdbcType=VARCHAR},
     user_name = #{userName,jdbcType=VARCHAR},
     user_pass = #{userPass,jdbcType=VARCHAR},
+    user_power = #{userPass,jdbcType=VARCHAR},
     remark = #{remark,jdbcType=VARCHAR},
     extend = #{extend,jdbcType=VARCHAR}
   where id = #{id,jdbcType=INTEGER}
@@ -134,6 +145,9 @@
             <if test="userPass != null and userPass != ''" >
                 and user_pass = #{userPass,jdbcType=VARCHAR}
             </if>
+            <if test="userPower != null">
+                user_power = #{userPower},
+            </if>
             <if test="remark != null and remark != ''" >
                 and remark = #{remark,jdbcType=VARCHAR}
             </if>
@@ -144,10 +158,17 @@
     </sql>
 
 
-    <select id="findWithResult" resultMap="BaseResultMap">
+    <select id="findWithResultBypage" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
         from  hx_user
+        where 1=1
+        <if test="userName != null and userName != ''" >
+            and user_name like concat('%',#{userName,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
     </select>
 
 

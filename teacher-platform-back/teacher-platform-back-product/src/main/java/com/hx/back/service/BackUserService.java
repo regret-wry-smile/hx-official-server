@@ -1,10 +1,12 @@
 package com.hx.back.service;
 
+import com.hx.common.utils.ListUtils;
 import com.hx.common.utils.UUID;
 import com.hx.domain.HxUser;
 import com.hx.back.mapper.HxUserMapper;
 import com.hx.common.exception.BDException;
 import com.hx.common.utils.StringUtils;
+import com.hx.domain.R;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
+import java.util.List;
 
 @Service
 public class BackUserService {
@@ -58,6 +61,37 @@ public class BackUserService {
         int i = hxUserMapper.insertDynamic(user);
         if (i != 1){
             throw new BDException("注册失败");
+        }
+    }
+
+    public void updateUser(HxUser user){
+        HxUser hxUser = new HxUser();
+        hxUser.setUserName(user.getUserName());
+        HxUser hxUser1 = hxUserMapper.selectByUser(hxUser);
+        if (!hxUser1.getUserPass().equals(encryptToMD5(user.getOldPass()))){
+            throw new BDException("密码错误");
+        }
+        user.setUserPass(encryptToMD5(user.getUserPass()));
+        int i = hxUserMapper.updateDynamic(user);
+        if (i != 1) {
+            throw new BDException("修改失败");
+        }
+    }
+
+    public R findUserByPage(HxUser user){
+
+        List<HxUser> hxUser = hxUserMapper.findWithResultBypage(user);
+        if (ListUtils.isEmpty(hxUser)) {
+            throw new BDException("查询失败");
+        }
+        int i = hxUserMapper.findWithCount(user);
+        return R.ok(hxUser,i);
+    }
+
+    public void deleteUser(HxUser user){
+        int i = hxUserMapper.delete(user.getId());
+        if (i != 1){
+            throw new BDException("删除失败");
         }
     }
 

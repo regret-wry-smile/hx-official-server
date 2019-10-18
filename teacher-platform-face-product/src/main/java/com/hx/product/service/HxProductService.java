@@ -23,7 +23,18 @@ public class HxProductService {
     private HxProTreeMapper HxProTreeMapper;
 
     public R selectAllByPage(HxProductDTO hxProductDTO) {
-        List<HxProduct> productList = hxProductMapper.selectAllByPage(hxProductDTO);
+        List<HxProductDTO> productList = hxProductMapper.selectAllByPage(hxProductDTO);
+        List<HxProTree> hxProTrees = HxProTreeMapper.findWithResult(null);
+        for (HxProductDTO hxProductDTO1 : productList){
+            for (HxProTree hxProTree : hxProTrees){
+                if (hxProTree.getConditionId() == 1 && hxProductDTO1.getProUseType() == hxProTree.getCode()){
+                    hxProductDTO1.setBusWithName(hxProTree.getName());
+                }
+                if (hxProTree.getConditionId() == 2 && hxProductDTO1.getProType() == hxProTree.getCode()){
+                    hxProductDTO1.setProWithName(hxProTree.getName());
+                }
+            }
+        }
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }
@@ -32,7 +43,7 @@ public class HxProductService {
     }
 
     public R selectProByCondition(HxProductDTO hxProductDTO){
-        List<HxProduct> productList = hxProductMapper.selectAllByPage(hxProductDTO);
+        List<HxProductDTO> productList = hxProductMapper.selectAllByPage(hxProductDTO);
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }
