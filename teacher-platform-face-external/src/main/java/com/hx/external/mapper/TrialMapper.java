@@ -3,10 +3,16 @@ package com.hx.external.mapper;
 import com.hx.external.domain.TrialUsers;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface TrialMapper {
 
         int delete(Integer id);
+
+        int deleteTrial(TrialUsers trialUsers);
+
+        int deleteByIds(int[] ids);
 
         int insert(TrialUsers trialUsers);
 
@@ -18,5 +24,6 @@ public interface TrialMapper {
 
         TrialUsers selectById(Integer id);
 
+        List<TrialUsers> selectByTrial(TrialUsers trialUsers);
 
 }
