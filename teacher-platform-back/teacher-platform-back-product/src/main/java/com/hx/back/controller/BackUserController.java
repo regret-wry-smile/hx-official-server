@@ -70,5 +70,16 @@ public class BackUserController {
         return R.ok();
     }
 
+    /**
+     * 批量删除用户
+     * @param ids
+     * @return
+     */
+    @PostMapping("/batchDeleteUser")
+    public R batchDeleteUser(@RequestBody int[] ids){
+        backUserService.batchDeleteUser(ids);
+        return R.ok();
+    }
+
 
 }

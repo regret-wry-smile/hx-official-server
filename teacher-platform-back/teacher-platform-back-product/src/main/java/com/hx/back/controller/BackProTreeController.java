@@ -4,6 +4,7 @@ import com.hx.back.entity.HxProTree;
 import com.hx.back.service.BackProTreeService;
 import com.hx.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,6 +46,17 @@ public class BackProTreeController {
     @RequestMapping("/deleteProTree")
     public R deleteProTree(@RequestBody HxProTree hxProTree){
         backProTreeService.deleteProTree(hxProTree);
+        return R.ok();
+    }
+
+    /**
+     * 批量删除产品数据字典
+     * @param ids
+     * @return
+     */
+    @PostMapping("/batchDeleteProTree")
+    public R batchDeleteProTree(@RequestBody int[] ids){
+        backProTreeService.batchDeleteProTree(ids);
         return R.ok();
     }
 

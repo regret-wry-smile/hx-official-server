@@ -37,7 +37,7 @@ public class UploadImgService {
                 //把图片复制到指定的位置
                 file.transferTo(destFile);
                 hxPictrue.setPicName(fileName);
-                hxPictrue.setPicAddr(Constant.REQUEST_FILE_PREFIX_LOCAL+"/"+destFileName);
+                hxPictrue.setPicAddr(destFileName);
 
             }
 

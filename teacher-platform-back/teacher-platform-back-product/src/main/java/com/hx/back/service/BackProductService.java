@@ -57,16 +57,10 @@ public class BackProductService {
     }
 
     public void batchDeleteProduct(int[] ids){
-        List<HxProductDTO> hxProducts = hxProductMapper.selectAllByPage(null);
-        int[] arrys = new int[ids.length];
-        for (int i=0;i<ids.length;i++){
-            arrys[i] = hxProducts.get(ids[i]).getId();
-        }
-        int count = hxProductMapper.bantchDelete(arrys);
-        if (count != 1){
+        int count = hxProductMapper.bantchDelete(ids);
+        if (count < 1){
             throw new BDException("删除失败");
         }
-
     }
 
     /**

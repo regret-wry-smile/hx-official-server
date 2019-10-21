@@ -17,9 +17,17 @@
 
 
     <delete id="delete" parameterType="java.lang.Integer">
-  delete from hx_pro_tree
-  where id = #{id,jdbcType=INTEGER}
-</delete>
+      delete from hx_pro_tree
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="bantchDelete" parameterType="java.lang.Integer">
+        delete from hx_pro_tree
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
 
 
     <insert id="insert" parameterType="com.hx.back.entity.HxProTree">
