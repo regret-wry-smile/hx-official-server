@@ -9,32 +9,46 @@
 		<result column="name" jdbcType="VARCHAR" property="name" />
 		<result column="email" jdbcType="VARCHAR" property="email" />
 		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="date" jdbcType="TIMESTAMP" property="date" />
 		<result column="remakes" jdbcType="VARCHAR" property="remakes" />
 	</resultMap>
 
 
 	<sql id="Base_Column_List">
-  id, enterprise_name, project_name, name, email, phone, remakes
+  id, enterprise_name, project_name, name, email, phone, date, remakes
 </sql>
 
 
+	<delete id="deleteTrial" parameterType="com.hx.external.domain.TrialUsers">
+	    delete from trial_users
+		<include refid="findPageWithWhere" />
+	</delete>
+
 	<delete id="delete" parameterType="java.lang.Integer">
-  delete from trial_users
-  where id = #{id,jdbcType=INTEGER}
-</delete>
+	  delete from trial_users
+	  where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByIds" parameterType="java.lang.Integer">
+	  delete from trial_users
+		where id in
+		<foreach collection="array"  item="item" open="(" separator="," close=")"  >
+			#{item}
+		</foreach>
+	</delete>
 
 
-	<insert id="insert" parameterType="com.hx.external.mapper.TrialMapper">
+	<insert id="insert" parameterType="com.hx.external.domain.TrialUsers">
   insert into trial_users (id, enterprise_name, project_name,
     name, email, phone,
-    remakes)
+    date, remakes)
   values (#{id,jdbcType=INTEGER}, #{enterpriseName,jdbcType=VARCHAR}, #{projectName,jdbcType=VARCHAR},
     #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
-    #{remakes,jdbcType=VARCHAR})
+    #{date,jdbcType=TIMESTAMP}, #{remakes,jdbcType=VARCHAR})
 </insert>
 
 
-	<insert id="insertDynamic" parameterType="com.hx.external.mapper.TrialMapper">
+	<insert id="insertDynamic" parameterType="com.hx.external.domain.TrialUsers">
 		insert into trial_users
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -54,6 +68,9 @@
 			</if>
 			<if test="phone != null">
 				phone,
+			</if>
+			<if test="date != null">
+				date,
 			</if>
 			<if test="remakes != null">
 				remakes,
@@ -78,6 +95,9 @@
 			<if test="phone != null">
 				#{phone,jdbcType=VARCHAR},
 			</if>
+			<if test="date != null">
+				#{date,jdbcType=TIMESTAMP},
+			</if>
 			<if test="remakes != null">
 				#{remakes,jdbcType=VARCHAR},
 			</if>
@@ -85,7 +105,7 @@
 	</insert>
 
 
-	<update id="updateDynamic" parameterType="com.hx.external.mapper.TrialMapper">
+	<update id="updateDynamic" parameterType="com.hx.external.domain.TrialUsers">
 		update trial_users
 		<set>
 			<if test="enterpriseName != null">
@@ -103,6 +123,9 @@
 			<if test="phone != null">
 				phone = #{phone,jdbcType=VARCHAR},
 			</if>
+			<if test="date != null">
+				date = #{date,jdbcType=TIMESTAMP},
+			</if>
 			<if test="remakes != null">
 				remakes = #{remakes,jdbcType=VARCHAR},
 			</if>
@@ -111,13 +134,14 @@
 	</update>
 
 
-	<update id="update" parameterType="com.hx.external.mapper.TrialMapper">
+	<update id="update" parameterType="com.hx.external.domain.TrialUsers">
   update trial_users
   set enterprise_name = #{enterpriseName,jdbcType=VARCHAR},
     project_name = #{projectName,jdbcType=VARCHAR},
     name = #{name,jdbcType=VARCHAR},
     email = #{email,jdbcType=VARCHAR},
     phone = #{phone,jdbcType=VARCHAR},
+    date = #{date,jdbcType=TIMESTAMP},
     remakes = #{remakes,jdbcType=VARCHAR}
   where id = #{id,jdbcType=INTEGER}
 </update>
@@ -128,6 +152,13 @@
 		<include refid="Base_Column_List" />
 		from  trial_users
 		where id = #{id,jdbcType=INTEGER}
+	</select>
+
+	<select id="selectByTrial" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from  trial_users
+		<include refid="findPageWithWhere" />
 	</select>
 
 
@@ -150,6 +181,9 @@
 			</if>
 			<if test="phone != null and phone != ''" >
 				and phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="date != null" >
+				and date = #{date,jdbcType=TIMESTAMP}
 			</if>
 			<if test="remakes != null and remakes != ''" >
 				and remakes = #{remakes,jdbcType=VARCHAR}

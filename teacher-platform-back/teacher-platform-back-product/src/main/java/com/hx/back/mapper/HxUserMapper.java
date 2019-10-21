@@ -23,4 +23,6 @@ public interface HxUserMapper {
     List<HxUser> findWithResultBypage(HxUser hxUser);
 
     Integer findWithCount(HxUser hxUser);
+
+    int bantchDelete(int[] array);
 }

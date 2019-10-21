@@ -48,4 +48,10 @@ public class BackProTreeService {
         }
     }
 
+    public void batchDeleteProTree(int[] ids) {
+        int count = hxProTreeMapper.bantchDelete(ids);
+        if (count < 1){
+            throw new BDException("删除失败");
+        }
+    }
 }

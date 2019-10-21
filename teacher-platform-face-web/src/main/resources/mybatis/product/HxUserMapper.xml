@@ -19,9 +19,17 @@
 
 
     <delete id="delete" parameterType="java.lang.Integer">
-  delete from hx_user
-  where id = #{id,jdbcType=INTEGER}
-</delete>
+      delete from hx_user
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="bantchDelete" parameterType="java.lang.Integer">
+        delete from hx_user
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
 
 
     <insert id="insert" parameterType="com.hx.domain.HxUser">
@@ -73,7 +81,7 @@
                 #{userPass,jdbcType=VARCHAR},
             </if>
             <if test="userPower != null">
-                user_power = #{userPower},
+                #{userPower,jdbcType=INTEGER},
             </if>
             <if test="remark != null">
                 #{remark,jdbcType=VARCHAR},

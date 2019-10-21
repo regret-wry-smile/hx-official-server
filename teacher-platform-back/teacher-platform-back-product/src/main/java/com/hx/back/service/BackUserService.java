@@ -126,5 +126,11 @@ public class BackUserService {
     }
 
 
+    public void batchDeleteUser(int[] ids) {
+        int count = hxUserMapper.bantchDelete(ids);
+        if (count < 1){
+            throw new BDException("删除失败");
+        }
+    }
 }
 

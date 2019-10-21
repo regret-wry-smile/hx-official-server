@@ -48,7 +48,7 @@ public class BackProductController {
     }
 
     /**
-     * 删除产品案例
+     * 批量删除产品案例
      * @param ids
      * @return
      */

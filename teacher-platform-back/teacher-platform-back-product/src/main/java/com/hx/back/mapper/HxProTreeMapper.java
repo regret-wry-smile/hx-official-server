@@ -27,4 +27,6 @@ public interface HxProTreeMapper {
     Integer getMaxCode(HxProTree hxProTreeDTO);
 
     Integer findCount(HxProTree hxProTreeDTO);
+
+    int bantchDelete(int[] array);
 }
