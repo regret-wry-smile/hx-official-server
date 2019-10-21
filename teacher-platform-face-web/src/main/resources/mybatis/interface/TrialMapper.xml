@@ -161,6 +161,22 @@
 		<include refid="findPageWithWhere" />
 	</select>
 
+	<select id="count" resultType="int">
+		select count(*)
+		from trial_users
+		<include refid="findPageWithWhere"></include>
+	</select>
+
+	<select id="list" resultType="com.hx.external.domain.TrialUsersDTO">
+		select
+		<include refid="Base_Column_List"></include>
+		from trial_users
+		<include refid="findPageWithWhere"></include>
+		order by `date`
+		<if test="offset != null and limit != null">
+			limit  #{offset}, #{limit}
+		</if>
+	</select>
 
 	<sql id="findPageWithWhere">
 		<where> 1=1

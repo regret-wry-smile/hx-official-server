@@ -1,12 +1,16 @@
 package com.hx.external.domain;
 
 public class Module {
+
         private Integer id;
 
+        //项目名称
         private String projectName;
 
+        //项目类型
         private String projectType;
 
+        //备注
         private String remakes;
 
         public Integer getId() {

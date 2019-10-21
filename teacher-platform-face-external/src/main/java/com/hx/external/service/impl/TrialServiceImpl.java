@@ -2,6 +2,7 @@ package com.hx.external.service.impl;
 
 import com.hx.common.exception.BDException;
 import com.hx.common.utils.ListUtils;
+import com.hx.external.domain.TrialUsersDTO;
 import com.hx.external.mapper.TrialMapper;
 import com.hx.external.domain.TrialUsers;
 import com.hx.external.service.TrialService;
@@ -41,6 +42,21 @@ public class TrialServiceImpl implements TrialService {
             throw new BDException("查询失败");
         }
         return trialUsersList;
+    }
+
+    @Override
+    public List<TrialUsersDTO> selectByPage(TrialUsersDTO trialUsersDTO){
+        List<TrialUsersDTO> trialUsersList = trialMapper.list(trialUsersDTO);
+        if (ListUtils.isEmpty(trialUsersList)) {
+            throw new BDException("查询失败");
+        }
+        return trialUsersList;
+    }
+
+    @Override
+    public int count(TrialUsersDTO trialUsersDTO){
+        int i = trialMapper.count(trialUsersDTO);
+        return i;
     }
 
     @Override
