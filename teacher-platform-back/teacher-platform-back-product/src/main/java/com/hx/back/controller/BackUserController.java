@@ -38,5 +38,37 @@ public class BackUserController {
         return R.ok();
     }
 
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    @PostMapping("/updateUser")
+    public R updateUser(@RequestBody HxUser user){
+        backUserService.updateUser(user);
+        return R.ok();
+    }
+
+    /**
+     * 分页查询用户
+     * @param user
+     * @return
+     */
+    @PostMapping("/findUserByPage")
+    public R findUserByPage(@RequestBody HxUser user){
+        return backUserService.findUserByPage(user);
+    }
+
+    /**
+     * 删除用户
+     * @param user
+     * @return
+     */
+    @PostMapping("/deleteUser")
+    public R deleteUser(@RequestBody HxUser user){
+        backUserService.deleteUser(user);
+        return R.ok();
+    }
+
 
 }
