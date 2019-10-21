@@ -25,7 +25,7 @@ public interface HxProductMapper {
 
     List<HxProduct> findResultByName(HxProduct hxProduct);
 
-    List<HxProduct> selectAllByPage(HxProductDTO hxProductDTO);
+    List<HxProductDTO> selectAllByPage(HxProductDTO hxProductDTO);
 
     Integer findPageWithCount(HxProduct hxProduct);
 

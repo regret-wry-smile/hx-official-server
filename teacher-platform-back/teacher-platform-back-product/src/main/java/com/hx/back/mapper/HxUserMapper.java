@@ -20,7 +20,7 @@ public interface HxUserMapper {
 
     HxUser selectByUser(HxUser hxUser);
 
-    List<HxUser> findWithResult();
+    List<HxUser> findWithResultBypage(HxUser hxUser);
 
     Integer findWithCount(HxUser hxUser);
 }

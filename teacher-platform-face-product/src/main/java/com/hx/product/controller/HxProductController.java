@@ -50,8 +50,8 @@ public class HxProductController {
      * 查询产品数据结构
      * @return
      */
-    @RequestMapping("/selectProTree")
-    public R selectProTree(@RequestBody HxProTree hxProTree) {
+    @RequestMapping("/selectProList")
+    public R selectProList(@RequestBody HxProTree hxProTree) {
         return R.ok(hxProductService.selectProTree(hxProTree));
     }
 
