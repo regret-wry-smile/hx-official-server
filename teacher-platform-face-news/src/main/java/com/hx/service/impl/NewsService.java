@@ -32,7 +32,7 @@ public class NewsService {
         }else{
             news.setCategory("公司通知");
         }
-//        news.setCreateUser(user.getUserName());
+        news.setCreateUser(user.getUserName());
         newsMapper.insert(news);
     }
 
@@ -45,7 +45,7 @@ public class NewsService {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String s = sf.format(new Date());
         Date date = sf.parse(s);
-        news.setCreateTime(date);
+        news.setUpdateTime(date);
 
         if(news.getCategory().equals(0)){
             news.setCategory("行业新闻");
@@ -54,11 +54,25 @@ public class NewsService {
         }else{
             news.setCategory("公司通知");
         }
-//        news.setCreateUser(user.getUserName());
+        news.setUpdateUser(user.getUserName());
         newsMapper.updateByPrimaryKey(news);
     }
 
     public List<News> listPage(Map<String, Object> map){
+        if(map.containsKey("category")){
+            String category = map.get("category").toString();
+            if(category.equals("0")){
+                map.put("category","行业新闻");
+            }else if(category.equals("1")){
+                map.put("category","公司新闻");
+            }else if(category.equals("2")){
+                map.put("category","公司活动");
+            }else {
+                map.put("category",null);
+            }
+            return newsMapper.listPage(map);
+        }
+
         return newsMapper.listPage(map);
     }
 

@@ -311,8 +311,8 @@
       <if test="id != null and id != ''"> and id = #{id} </if>
       <if test="category != null and category != ''"> and category = #{category} </if>
       <if test="title != null and title != ''"> and title like concat('%',#{title,jdbcType=VARCHAR},'%') </if>
-      <if test="digest != null and digest != ''"> and digest = #{digest} like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
-      <if test="lable != null and lable != ''"> and lable = #{lable} like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
+      <if test="digest != null and digest != ''"> and digest like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
+      <if test="lable != null and lable != ''"> and lable like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
     </where>
     <choose>
       <when test="sort != null and sort.trim() != ''">
@@ -342,8 +342,8 @@
       <if test="id != null and id != ''"> and id = #{id} </if>
       <if test="category != null and category != ''"> and category = #{category} </if>
       <if test="title != null and title != ''"> and title like concat('%',#{title,jdbcType=VARCHAR},'%') </if>
-      <if test="digest != null and digest != ''"> and digest = #{digest} like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
-      <if test="lable != null and lable != ''"> and lable = #{lable} like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
+      <if test="digest != null and digest != ''"> and digest like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
+      <if test="lable != null and lable != ''"> and lable like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
     </where>
   </select>
 </mapper>

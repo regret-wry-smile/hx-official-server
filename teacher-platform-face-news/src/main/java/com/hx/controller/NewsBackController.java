@@ -26,7 +26,12 @@ public class NewsBackController {
         return R.ok();
     }
 
-    @RequestMapping("/delete")
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/batchremove")
     public R deleteNews(@RequestBody Integer[]  ids){
         newsService.deleteNews(Arrays.asList(ids));
         return R.ok();
