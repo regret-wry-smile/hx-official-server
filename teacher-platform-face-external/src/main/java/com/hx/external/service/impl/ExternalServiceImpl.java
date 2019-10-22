@@ -4,6 +4,7 @@ import com.hx.common.config.BootdoConfig;
 import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
 import com.hx.common.utils.ListUtils;
+import com.hx.common.utils.StringUtils;
 import com.hx.external.domain.ExternalDTO;
 import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
@@ -11,6 +12,7 @@ import com.hx.external.mapper.ExternalMapper;
 import com.hx.external.domain.External;
 import com.hx.external.mapper.ModuleMapper;
 import com.hx.external.service.ExternalService;
+import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,14 +53,9 @@ public class ExternalServiceImpl implements ExternalService {
             }else {
                 throw new BDException("文件路径创建失败");
             }
-            Date date = new Date();
-            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
-            String dateString = dateFormat.format(date);
-            ParsePosition pos = new ParsePosition(0);
-            Date date1 = dateFormat.parse(dateString,pos);
+
             external.setInterfaceName(file.getOriginalFilename());
             external.setInterfaceAddress(fileAddress);
-            external.setCreateDate(date1);
             return external;
         } catch (IOException e) {
             throw new BDException("服务器异常，请联系管理员");
@@ -67,6 +64,15 @@ public class ExternalServiceImpl implements ExternalService {
 
     @Override
     public void InsertExternal(External external){
+        if (StringUtils.isEmpty(external.getProjectType())){
+            throw new BDException("项目名称未选");
+        }
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+        String dateString = dateFormat.format(date);
+        ParsePosition pos = new ParsePosition(0);
+        Date date1 = dateFormat.parse(dateString,pos);
+        external.setCreateDate(date1);
         int i = externalMapper.insertDynamic(external);
         if (i != 1){
             throw new BDException("添加失败");
