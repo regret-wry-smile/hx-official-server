@@ -22,11 +22,11 @@
 
 
     <insert id="insert" parameterType="com.hx.external.domain.Module">
-  insert into int_module (id, project_name, project_type,
-    remakes)
-  values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectType,jdbcType=VARCHAR},
-    #{remakes,jdbcType=VARCHAR})
-</insert>
+      insert into int_module (id, project_name, project_type,
+        remakes)
+      values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectType,jdbcType=VARCHAR},
+        #{remakes,jdbcType=VARCHAR})
+    </insert>
 
 
     <insert id="insertDynamic" parameterType="com.hx.external.domain.Module">
@@ -107,6 +107,8 @@
         from int_module
         <include refid="findPageWithWhere"></include>
     </select>
+
+
 
 
 

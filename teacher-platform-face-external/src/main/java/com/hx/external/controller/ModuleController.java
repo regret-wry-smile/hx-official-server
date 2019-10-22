@@ -33,6 +33,12 @@ public class ModuleController {
         return R.ok(itemList);
     }
 
+    @RequestMapping("selectModules")
+    public R selectModules(){
+        List<Module> modules = moduleService.listType();
+        return R.ok(modules);
+    }
+
     @RequestMapping("/selectByPage")
     public  R selectByPage(@RequestBody ExternalDTO externalDTO){
         List<ExternalDTO> externalDTOS = externalService.selectByPage(externalDTO);
@@ -48,7 +54,7 @@ public class ModuleController {
 
     @RequestMapping("/deleteModules")
     public R deleteModules(@RequestBody int[] ids){
-
+        externalService.deleteModules(ids);
         return R.ok();
     }
 
