@@ -26,4 +26,6 @@ public interface ExternalService {
     void deleteModule(External external);
 
     void deleteModules(int[] ids);
+
+    void updateModule(External external);
 }

@@ -13,6 +13,7 @@ import com.hx.external.mapper.ModuleMapper;
 import com.hx.external.service.ExternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -140,6 +141,14 @@ public class ExternalServiceImpl implements ExternalService {
         int j = externalMapper.deleteByIds(ids);
         if (j < 1){
             throw new BDException("删除失败");
+        }
+    }
+
+    @Override
+    public void updateModule(External external){
+        int i = externalMapper.update(external);
+        if (i !=1 ){
+            throw new BDException("编辑失败");
         }
     }
 

@@ -18,8 +18,7 @@ public class UploadController {
     @PostMapping("/uploadFile")
     public R singleFileUpload(@RequestParam("file") MultipartFile file) {
         External external = externalService.UploadExternal(file);
-        externalService.InsertExternal(external);
-        return R.ok();
+        return R.ok(external);
     }
 
 }

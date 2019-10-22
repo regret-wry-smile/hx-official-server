@@ -58,4 +58,16 @@ public class ModuleController {
         return R.ok();
     }
 
+    @RequestMapping("/insertModule")
+    public R insertModule(@RequestBody External external){
+        externalService.InsertExternal(external);
+        return R.ok();
+    }
+
+    @RequestMapping("/updateModule")
+    public R updateModule(@RequestBody External external){
+        externalService.updateModule(external);
+        return R.ok();
+    }
+
 }
