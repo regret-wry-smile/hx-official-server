@@ -1,6 +1,7 @@
 package com.hx.external.mapper;
 
 import com.hx.external.domain.External;
+import com.hx.external.domain.ExternalDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface ExternalMapper {
         External selectById(Integer id);
 
         List<External> selectByType(String projectType);
+
+        List<ExternalDTO> list(ExternalDTO externalDTO);
+
+        int count(ExternalDTO externalDTO);
 }

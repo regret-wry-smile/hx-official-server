@@ -3,10 +3,13 @@ package com.hx.external.service.impl;
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
+import com.hx.common.utils.ListUtils;
+import com.hx.external.domain.ExternalDTO;
 import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
 import com.hx.external.mapper.ExternalMapper;
 import com.hx.external.domain.External;
+import com.hx.external.mapper.ModuleMapper;
 import com.hx.external.service.ExternalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +28,9 @@ import java.util.*;
 public class ExternalServiceImpl implements ExternalService {
 
     @Autowired
-    private ExternalMapper externalDao;
-
+    private ExternalMapper externalMapper;
+    @Autowired
+    private ModuleMapper moduleMapper;
     @Autowired
     BootdoConfig bootConfig;
 
@@ -62,7 +66,7 @@ public class ExternalServiceImpl implements ExternalService {
 
     @Override
     public void InsertExternal(External external){
-        int i = externalDao.insertDynamic(external);
+        int i = externalMapper.insertDynamic(external);
         if (i != 1){
             throw new BDException("添加失败");
         }
@@ -93,7 +97,7 @@ public class ExternalServiceImpl implements ExternalService {
             String projectType = modules.get(i).getProjectType();
             String projectName = modules.get(i).getProjectName();
             item.setTitle(projectName);
-            List<External> externals = externalDao.selectByType(projectType);
+            List<External> externals = externalMapper.selectByType(projectType);
             for (int j = 0; j <externals.size() ; j++) {
                 External external = externals.get(j);
                 String interfaceAddress  = bootConfig.getPath()+Constant.REQUEST_FILE_PREFIX_LOCAL+ external.getInterfaceAddress();
@@ -103,6 +107,24 @@ public class ExternalServiceImpl implements ExternalService {
             itemList.add(item);
         }
         return itemList;
+    }
+
+    @Override
+    public List<ExternalDTO> selectByPage(ExternalDTO externalDTO){
+        List<ExternalDTO> externalDTOS = externalMapper.list(externalDTO);
+        for (int i=0;i<externalDTOS.size();i++){
+            Module module = new Module();
+            module.setProjectType(externalDTOS.get(i).getProjectType());
+            Module module1 = moduleMapper.selectByModule(module);
+            externalDTOS.get(i).setProjectName(module1.getProjectName());
+        }
+        return externalDTOS;
+    }
+
+    @Override
+    public int count(ExternalDTO externalDTO){
+        int i = externalMapper.count(externalDTO);
+        return i;
     }
 
 

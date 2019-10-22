@@ -137,6 +137,23 @@
 		where project_type = #{projectType,jdbcType=VARCHAR}
 	</select>
 
+	<select id="list" resultType="com.hx.external.domain.ExternalDTO">
+		select
+		<include refid="Base_Column_List"></include>
+		from ext_interface
+		<include refid="findPageWithWhere"></include>
+		order by `create_date`
+		<if test="offset != null and limit != null">
+			limit  #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*)
+		from ext_interface
+		<include refid="findPageWithWhere"></include>
+	</select>
+
 
 	<sql id="findPageWithWhere">
 		<where> 1=1
