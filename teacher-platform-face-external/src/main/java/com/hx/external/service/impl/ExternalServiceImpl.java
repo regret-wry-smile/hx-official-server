@@ -127,5 +127,20 @@ public class ExternalServiceImpl implements ExternalService {
         return i;
     }
 
+    @Override
+    public void deleteModule(External external){
+        int i = externalMapper.deleteExt(external);
+        if (i < 1){
+            throw new BDException("删除失败");
+        }
+    }
+
+    @Override
+    public void deleteModules(int[] ids){
+        int j = externalMapper.deleteByIds(ids);
+        if (j < 1){
+            throw new BDException("删除失败");
+        }
+    }
 
 }

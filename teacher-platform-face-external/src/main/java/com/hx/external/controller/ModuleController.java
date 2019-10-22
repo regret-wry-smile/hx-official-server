@@ -2,6 +2,7 @@ package com.hx.external.controller;
 
 
 import com.hx.domain.R;
+import com.hx.external.domain.External;
 import com.hx.external.domain.ExternalDTO;
 import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
@@ -37,6 +38,18 @@ public class ModuleController {
         List<ExternalDTO> externalDTOS = externalService.selectByPage(externalDTO);
         int i = externalService.count(externalDTO);
         return R.ok(externalDTOS,i);
+    }
+
+    @RequestMapping("/deleteModule")
+    public R deleteModule(@RequestBody External external){
+        externalService.deleteModule(external);
+        return R.ok();
+    }
+
+    @RequestMapping("/deleteModules")
+    public R deleteModules(@RequestBody int[] ids){
+
+        return R.ok();
     }
 
 }

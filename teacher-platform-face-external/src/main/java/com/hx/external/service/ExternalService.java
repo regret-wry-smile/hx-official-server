@@ -22,4 +22,8 @@ public interface ExternalService {
     List<ExternalDTO> selectByPage(ExternalDTO externalDTO);
 
     int count(ExternalDTO externalDTO);
+
+    void deleteModule(External external);
+
+    void deleteModules(int[] ids);
 }

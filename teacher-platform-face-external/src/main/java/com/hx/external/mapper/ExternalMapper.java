@@ -11,6 +11,10 @@ public interface ExternalMapper {
 
         int delete(Integer id);
 
+        int deleteExt(External external);
+
+        int deleteByIds(int[] ids);
+
         int insert(External external);
 
         int insertDynamic(External external);

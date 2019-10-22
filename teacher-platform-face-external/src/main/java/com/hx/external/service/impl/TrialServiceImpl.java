@@ -70,7 +70,7 @@ public class TrialServiceImpl implements TrialService {
     @Override
     public void deleteTrials(int[] ids){
         int j = trialMapper.deleteByIds(ids);
-        if (j != 1){
+        if (j < 1){
             throw new BDException("删除失败");
         }
     }

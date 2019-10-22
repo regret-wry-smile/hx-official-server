@@ -19,9 +19,22 @@
 
 
 	<delete id="delete" parameterType="java.lang.Integer">
-  delete from ext_interface
-  where id = #{id,jdbcType=INTEGER}
-</delete>
+	  delete from ext_interface
+	  where id = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteExt" parameterType="com.hx.external.mapper.ExternalMapper">
+	    delete from ext_interface
+		<include refid="findPageWithWhere"></include>
+	</delete>
+
+	<delete id="deleteByIds" parameterType="java.lang.Integer">
+		delete from ext_interface
+		where id in
+		<foreach collection="array"  item="item" open="(" separator="," close=")"  >
+			#{item}
+		</foreach>
+	</delete>
 
 
 	<insert id="insert" parameterType="com.hx.external.mapper.ExternalMapper">
