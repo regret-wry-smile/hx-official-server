@@ -89,8 +89,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/uploadImg","anon");
         filterChainDefinitionMap.put("/files/**","anon");
         filterChainDefinitionMap.put("/news/**","anon");
-        filterChainDefinitionMap.put("/module/**","anon");
-        filterChainDefinitionMap.put("/trial/**","anon");
+        filterChainDefinitionMap.put("/module/selectModule","anon");
+        filterChainDefinitionMap.put("/trial/insertTrial","anon");
         filterChainDefinitionMap.put("/upload/**","anon");
         filterChainDefinitionMap.put("/news/**","anon");
 
