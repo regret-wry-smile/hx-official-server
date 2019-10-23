@@ -27,6 +27,6 @@ public class NewsController {
     }
     @RequestMapping("/query")
     public R queryOneNews( @RequestBody News news){
-        return R.ok(newsService.listPage(BeanUtils.beanToMap(news)));
+        return R.ok(newsService.queryOneNews(news));
     }
 }

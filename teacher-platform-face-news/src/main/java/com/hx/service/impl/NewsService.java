@@ -32,8 +32,16 @@ public class NewsService {
         }else{
             news.setCategory("公司通知");
         }
+
+        String lable = news.getLable();
+        //lable.replace("，",",");
+        //int on1 = lable.indexOf("，");
+        if(lable.contains("，")){
+            String lable2 = lable.replace("，",",");
+            news.setLable(lable2);
+        }
         news.setCreateUser(user.getUserName());
-        newsMapper.insert(news);
+        newsMapper.insertSelective(news);
     }
 
     public void deleteNews(List<Integer> ids) {
@@ -82,5 +90,9 @@ public class NewsService {
 
     public Integer selectCount(Map<String, Object> map){
         return newsMapper.selectCount(map);
+    }
+
+    public News queryOneNews(News news) {
+        return newsMapper.selectByPrimaryKey(news.getId());
     }
 }
