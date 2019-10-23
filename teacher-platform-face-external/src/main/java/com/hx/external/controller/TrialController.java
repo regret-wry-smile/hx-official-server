@@ -37,14 +37,14 @@ public class TrialController {
     }
 
 
-    @PostMapping("/deleterial")
+    @PostMapping("/deleteTrial")
     public R deleteTrial(@RequestBody TrialUsers trialUsers){
         trialService.deleteTrial(trialUsers);
         return R.ok();
     }
 
-    @PostMapping("/deleterials")
-    public R deleteTrial(@RequestBody int[] ids){
+    @PostMapping("/deleteTrials")
+    public R deleteTrials(@RequestBody int[] ids){
         trialService.deleteTrials(ids);
         return R.ok();
     }

@@ -15,7 +15,7 @@ public interface ExternalService {
 
     External UploadExternal(MultipartFile file);
 
-    void InsertExternal(External external);
+    void insertExternal(External external);
 
     List SelectExternal(List<Module> modules);
 
@@ -23,9 +23,9 @@ public interface ExternalService {
 
     int count(ExternalDTO externalDTO);
 
-    void deleteModule(External external);
+    void deleteExternal(External external);
 
-    void deleteModules(int[] ids);
+    void deleteExternals(int[] ids);
 
-    void updateModule(External external);
+    void updateExternal(External external);
 }

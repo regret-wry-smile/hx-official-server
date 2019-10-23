@@ -63,7 +63,7 @@ public class ExternalServiceImpl implements ExternalService {
     }
 
     @Override
-    public void InsertExternal(External external){
+    public void insertExternal(External external){
         if (StringUtils.isEmpty(external.getProjectType())){
             throw new BDException("项目名称未选");
         }
@@ -135,7 +135,7 @@ public class ExternalServiceImpl implements ExternalService {
     }
 
     @Override
-    public void deleteModule(External external){
+    public void deleteExternal(External external){
         int i = externalMapper.deleteExt(external);
         if (i < 1){
             throw new BDException("删除失败");
@@ -143,7 +143,7 @@ public class ExternalServiceImpl implements ExternalService {
     }
 
     @Override
-    public void deleteModules(int[] ids){
+    public void deleteExternals(int[] ids){
         int j = externalMapper.deleteByIds(ids);
         if (j < 1){
             throw new BDException("删除失败");
@@ -151,7 +151,7 @@ public class ExternalServiceImpl implements ExternalService {
     }
 
     @Override
-    public void updateModule(External external){
+    public void updateExternal(External external){
         int i = externalMapper.update(external);
         if (i !=1 ){
             throw new BDException("编辑失败");
