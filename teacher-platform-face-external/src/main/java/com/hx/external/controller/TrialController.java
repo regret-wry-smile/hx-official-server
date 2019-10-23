@@ -2,6 +2,7 @@ package com.hx.external.controller;
 
 import com.hx.domain.R;
 import com.hx.external.domain.TrialUsers;
+import com.hx.external.domain.TrialUsersDTO;
 import com.hx.external.service.TrialService;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +29,22 @@ public class TrialController {
         return R.ok(trialUsersList);
     }
 
-    @PostMapping("/deleterial")
+    @RequestMapping("/selectByPage")
+    public R selectByPage(@RequestBody TrialUsersDTO trialUsersDTO){
+        List<TrialUsersDTO> trialUsersList = trialService.selectByPage(trialUsersDTO);
+        int i = trialService.count(trialUsersDTO);
+        return R.ok(trialUsersList,i);
+    }
+
+
+    @PostMapping("/deleteTrial")
     public R deleteTrial(@RequestBody TrialUsers trialUsers){
         trialService.deleteTrial(trialUsers);
         return R.ok();
     }
 
-    @PostMapping("/deleterials")
-    public R deleteTrial(@RequestBody int[] ids){
+    @PostMapping("/deleteTrials")
+    public R deleteTrials(@RequestBody int[] ids){
         trialService.deleteTrials(ids);
         return R.ok();
     }

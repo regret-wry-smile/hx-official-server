@@ -161,6 +161,47 @@
 		<include refid="findPageWithWhere" />
 	</select>
 
+	<select id="count" resultType="int">
+		select count(*)
+		from trial_users
+		<include refid="findPageWithWhere"></include>
+	</select>
+
+	<select id="list" resultType="com.hx.external.domain.TrialUsersDTO">
+		select
+		<include refid="Base_Column_List"></include>
+		from trial_users
+		<where> 1=1
+			<if test="id != null" >
+				and id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="enterpriseName != null and enterpriseName != ''" >
+				and enterprise_name = #{enterpriseName,jdbcType=VARCHAR}
+			</if>
+			<if test="projectName != null and projectName != ''" >
+				and project_name = #{projectName,jdbcType=VARCHAR}
+			</if>
+			<if test="name != null and name != ''" >
+				and name like '%#{name,jdbcType=VARCHAR}%'
+			</if>
+			<if test="email != null and email != ''" >
+				and email = #{email,jdbcType=VARCHAR}
+			</if>
+			<if test="phone != null and phone != ''" >
+				and phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="date != null" >
+				and date = #{date,jdbcType=TIMESTAMP}
+			</if>
+			<if test="remakes != null and remakes != ''" >
+				and remakes = #{remakes,jdbcType=VARCHAR}
+			</if>
+		</where>
+		order by `date`
+		<if test="offset != null and limit != null">
+			limit  #{offset}, #{limit}
+		</if>
+	</select>
 
 	<sql id="findPageWithWhere">
 		<where> 1=1

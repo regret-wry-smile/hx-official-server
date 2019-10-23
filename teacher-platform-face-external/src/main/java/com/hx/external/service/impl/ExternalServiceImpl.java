@@ -3,13 +3,19 @@ package com.hx.external.service.impl;
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
+import com.hx.common.utils.ListUtils;
+import com.hx.common.utils.StringUtils;
+import com.hx.external.domain.ExternalDTO;
 import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
 import com.hx.external.mapper.ExternalMapper;
 import com.hx.external.domain.External;
+import com.hx.external.mapper.ModuleMapper;
 import com.hx.external.service.ExternalService;
+import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -25,8 +31,9 @@ import java.util.*;
 public class ExternalServiceImpl implements ExternalService {
 
     @Autowired
-    private ExternalMapper externalDao;
-
+    private ExternalMapper externalMapper;
+    @Autowired
+    private ModuleMapper moduleMapper;
     @Autowired
     BootdoConfig bootConfig;
 
@@ -46,14 +53,9 @@ public class ExternalServiceImpl implements ExternalService {
             }else {
                 throw new BDException("文件路径创建失败");
             }
-            Date date = new Date();
-            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
-            String dateString = dateFormat.format(date);
-            ParsePosition pos = new ParsePosition(0);
-            Date date1 = dateFormat.parse(dateString,pos);
+
             external.setInterfaceName(file.getOriginalFilename());
             external.setInterfaceAddress(fileAddress);
-            external.setCreateDate(date1);
             return external;
         } catch (IOException e) {
             throw new BDException("服务器异常，请联系管理员");
@@ -61,8 +63,17 @@ public class ExternalServiceImpl implements ExternalService {
     }
 
     @Override
-    public void InsertExternal(External external){
-        int i = externalDao.insertDynamic(external);
+    public void insertExternal(External external){
+        if (StringUtils.isEmpty(external.getProjectType())){
+            throw new BDException("项目名称未选");
+        }
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+        String dateString = dateFormat.format(date);
+        ParsePosition pos = new ParsePosition(0);
+        Date date1 = dateFormat.parse(dateString,pos);
+        external.setCreateDate(date1);
+        int i = externalMapper.insertDynamic(external);
         if (i != 1){
             throw new BDException("添加失败");
         }
@@ -93,7 +104,7 @@ public class ExternalServiceImpl implements ExternalService {
             String projectType = modules.get(i).getProjectType();
             String projectName = modules.get(i).getProjectName();
             item.setTitle(projectName);
-            List<External> externals = externalDao.selectByType(projectType);
+            List<External> externals = externalMapper.selectByType(projectType);
             for (int j = 0; j <externals.size() ; j++) {
                 External external = externals.get(j);
                 String interfaceAddress  = bootConfig.getPath()+Constant.REQUEST_FILE_PREFIX_LOCAL+ external.getInterfaceAddress();
@@ -105,5 +116,46 @@ public class ExternalServiceImpl implements ExternalService {
         return itemList;
     }
 
+    @Override
+    public List<ExternalDTO> selectByPage(ExternalDTO externalDTO){
+        List<ExternalDTO> externalDTOS = externalMapper.list(externalDTO);
+        for (int i=0;i<externalDTOS.size();i++){
+            Module module = new Module();
+            module.setProjectType(externalDTOS.get(i).getProjectType());
+            Module module1 = moduleMapper.selectByModule(module);
+            externalDTOS.get(i).setProjectName(module1.getProjectName());
+        }
+        return externalDTOS;
+    }
+
+    @Override
+    public int count(ExternalDTO externalDTO){
+        int i = externalMapper.count(externalDTO);
+        return i;
+    }
+
+    @Override
+    public void deleteExternal(External external){
+        int i = externalMapper.deleteExt(external);
+        if (i < 1){
+            throw new BDException("删除失败");
+        }
+    }
+
+    @Override
+    public void deleteExternals(int[] ids){
+        int j = externalMapper.deleteByIds(ids);
+        if (j < 1){
+            throw new BDException("删除失败");
+        }
+    }
+
+    @Override
+    public void updateExternal(External external){
+        int i = externalMapper.update(external);
+        if (i !=1 ){
+            throw new BDException("编辑失败");
+        }
+    }
 
 }

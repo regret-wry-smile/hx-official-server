@@ -11,22 +11,35 @@
 
 
     <sql id="Base_Column_List">
-  id, project_name, project_type, remakes
-</sql>
+      id, project_name, project_type, remakes
+    </sql>
 
 
     <delete id="delete" parameterType="java.lang.Integer">
-  delete from int_module
-  where id = #{id,jdbcType=INTEGER}
-</delete>
+      delete from int_module
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteModule" parameterType="com.hx.external.domain.Module">
+        delete from int_module
+        <include refid="findPageWithWhere" />
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Integer">
+        delete from int_module
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
 
 
     <insert id="insert" parameterType="com.hx.external.domain.Module">
-  insert into int_module (id, project_name, project_type,
-    remakes)
-  values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectType,jdbcType=VARCHAR},
-    #{remakes,jdbcType=VARCHAR})
-</insert>
+      insert into int_module (id, project_name, project_type,
+        remakes)
+      values (#{id,jdbcType=INTEGER}, #{projectName,jdbcType=VARCHAR}, #{projectType,jdbcType=VARCHAR},
+        #{remakes,jdbcType=VARCHAR})
+    </insert>
 
 
     <insert id="insertDynamic" parameterType="com.hx.external.domain.Module">
@@ -100,6 +113,31 @@
         select  distinct project_name,project_type
         from  int_module
     </select>
+
+    <select id="selectByModule" resultType="com.hx.external.domain.Module">
+        select
+        <include refid="Base_Column_List"></include>
+        from int_module
+        <include refid="findPageWithWhere"></include>
+    </select>
+
+    <select id="list" resultType="com.hx.external.domain.ModuleDTO">
+        select
+        <include refid="Base_Column_List"></include>
+        from int_module
+        <include refid="findPageWithWhere"></include>
+        order by `id`
+        <if test="offset != null and limit != null">
+            limit  #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from int_module
+        <include refid="findPageWithWhere"></include>
+    </select>
+
 
 
     <sql id="findPageWithWhere">
