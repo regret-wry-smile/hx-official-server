@@ -1,7 +1,6 @@
 package com.hx.back.service;
 
 import com.hx.back.entity.HxProduct;
-import com.hx.back.entity.HxProductDTO;
 import com.hx.back.mapper.HxProductMapper;
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.exception.BDException;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class BackProductService {
@@ -65,11 +63,11 @@ public class BackProductService {
 
     /**
      * 文件删除
-     * @param filename
+     * @param fileUrl
      * @return
      */
-    static boolean delFile(String filename) {
-        File file = new File(filename);
+    static boolean delFile(String fileUrl) {
+        File file = new File(fileUrl);
         if (!file.exists()) {
             return false;
         }

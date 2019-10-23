@@ -1,5 +1,5 @@
 bootdo:
-  uploadPath: d:/hx-platform/uploaded_files/
+  uploadPath: http://113.57.172.27:8888/
   path: http://localhost:8899${server.servlet.context-path}
 logging:
   level:
@@ -61,15 +61,17 @@ spring:
 #  client:
 #    serviceUrl:
 #      defaultZone: http://127.0.0.1:8761/eureka/
-#fdfs:
-#  server: 192.168.10.125
-#  so-timeout: 1501
-#  connect-timeout: 601
-#  thumb-image:             #缩略图生成参数
-#    width: 200
-#    height: 200
-#  tracker-list:            #TrackerList参数,支持多个
-#    - ${fdfs.server}:22122
+fdfs:
+  server: 113.57.172.27
+  storage: ${fdfs.server}
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image:             #缩略图生成参数
+    width: 200
+    height: 200
+  tracker-list:            #TrackerList参数,支持多个
+  - ${fdfs.server}:22122
+  http-addr: ${fdfs.server}:8888 # http访问的端口和地址
 #cas:
 #  server-url-prefix: http://127.0.0.1:9080/cas
 #  server-login-url: http://127.0.0.1:9090/cas/login

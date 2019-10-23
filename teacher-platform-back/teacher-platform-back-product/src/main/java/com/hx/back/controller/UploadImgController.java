@@ -15,7 +15,7 @@ public class UploadImgController {
     private UploadImgService uploadImgService;
 
     @RequestMapping("/uploadImg")
-    public R uplaodImg(@RequestParam("imgFile") MultipartFile imgFile) {
+    public R uplaodImg(@RequestParam("imgFile") MultipartFile imgFile) throws Exception {
         return R.ok(uploadImgService.uplaodImg(imgFile));
     }
 }
