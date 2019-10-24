@@ -1,6 +1,9 @@
 package com.hx.service.impl;
 
+import com.hx.common.exception.BDException;
+import com.hx.common.fastdfs.FastfdsClient;
 import com.hx.common.redis.shiro.ShiroUtils;
+import com.hx.common.utils.StringUtils;
 import com.hx.domain.HxUser;
 import com.hx.mapper.NewsMapper;
 import com.hx.pojo.News;
@@ -17,6 +20,8 @@ import java.util.Map;
 public class NewsService {
     @Autowired
     NewsMapper newsMapper;
+    @Autowired
+    FastfdsClient fastfdsClient;
 
     public void saveNews(News news) throws ParseException {
 
@@ -32,19 +37,24 @@ public class NewsService {
         }else{
             news.setCategory("公司通知");
         }
-
-        String lable = news.getLable();
-        //lable.replace("，",",");
-        //int on1 = lable.indexOf("，");
-        if(lable.contains("，")){
-            String lable2 = lable.replace("，",",");
-            news.setLable(lable2);
+        if(!StringUtils.isEmpty(news.getLable())){
+            String lable = news.getLable();
+            if(lable.contains("，")){
+                String lable2 = lable.replace('，',',');
+                news.setLable(lable2);
+            }
         }
         news.setCreateUser(user.getUserName());
         newsMapper.insertSelective(news);
     }
 
     public void deleteNews(List<Integer> ids) {
+        for (Integer id : ids) {
+            News news = newsMapper.selectByPrimaryKey(id);
+            if(!StringUtils.isEmpty(news.getPicture())){
+                fastfdsClient.deleteFile(news.getPicture());
+            }
+        }
         newsMapper.deleteByIds(ids);
     }
 
@@ -61,6 +71,13 @@ public class NewsService {
             news.setCategory("公司新闻");
         }else{
             news.setCategory("公司通知");
+        }
+        if(!StringUtils.isEmpty(news.getLable())){
+            String lable = news.getLable();
+            if(lable.contains("，")){
+                String lable2 = lable.replace('，',',');
+                news.setLable(lable2);
+            }
         }
         news.setUpdateUser(user.getUserName());
         newsMapper.updateByPrimaryKey(news);
@@ -85,6 +102,10 @@ public class NewsService {
     }
 
     public void removeNews(Integer id) {
+        News news = newsMapper.selectByPrimaryKey(id);
+        if(!StringUtils.isEmpty(news.getPicture())){
+            fastfdsClient.deleteFile(news.getPicture());
+        }
         newsMapper.deleteByPrimaryKey(id);
     }
 
