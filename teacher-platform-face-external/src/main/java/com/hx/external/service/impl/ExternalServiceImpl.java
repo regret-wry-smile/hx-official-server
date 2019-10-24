@@ -42,7 +42,9 @@ public class ExternalServiceImpl implements ExternalService {
                 throw new BDException("文件为空");
             }
             StorePath storePath = fastfdsClient.upload(file);
-            external.setInterfaceName(file.getOriginalFilename());
+            String interfaceName = file.getOriginalFilename();
+            String string = interfaceName.substring(0,interfaceName.lastIndexOf("."));
+            external.setInterfaceName(string);
             external.setInterfaceAddress(storePath.getFullPath());
             return external;
         } catch (Exception e) {
