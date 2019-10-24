@@ -6,6 +6,7 @@ import com.hx.common.config.BootdoConfig;
 import com.hx.common.exception.BDException;
 import com.hx.common.fastdfs.FastfdsClient;
 import com.hx.common.redis.shiro.ShiroUtils;
+import com.hx.common.utils.StringUtils;
 import com.hx.common.utils.UUID;
 import com.hx.domain.HxUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,13 +81,13 @@ public class BackProductService {
      * @return
      */
     public void delFileByObject(HxProduct hxProduct){
-        if (hxProduct.getProImg() != null){
+        if (!StringUtils.isEmpty(hxProduct.getProImg())){
             fastfdsClient.deleteFile(hxProduct.getProImg());
         }
-        if (hxProduct.getProLogoAddr() != null){
+        if (!StringUtils.isEmpty(hxProduct.getProLogoAddr())){
             fastfdsClient.deleteFile(hxProduct.getProLogoAddr());
         }
-        /*if (hxProduct.getProDetilImg() == null){
+        /*if (!StringUtils.isEmpty(hxProduct.getProDetilImg())){
             String[] str = hxProduct.getProDetilImg().split("#");
             for (String s : str){
                  fastfdsClient.deleteFiledelFile(s);

@@ -26,6 +26,24 @@ public class HxProductService {
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");
         }
+        for (HxProductDTO hxPro : productList){
+            HxProTree hxProTree = new HxProTree();
+            //查询产品
+            if (hxPro.getProUseType() != null){
+                hxProTree.setCode(hxPro.getProUseType());
+                hxProTree.setConditionId(1);
+                HxProTree proName = HxProTreeMapper.selectByCondition(hxProTree);
+                hxPro.setProWithName(proName.getName());
+            }
+
+            //查询行业
+            if (hxPro.getProType() != null){
+                hxProTree.setCode(hxPro.getProType());
+                hxProTree.setConditionId(2);
+                HxProTree busName = HxProTreeMapper.selectByCondition(hxProTree);
+                hxPro.setBusWithName(busName.getName());
+            }
+        }
         Integer i  = hxProductMapper.findPageWithCount(hxProductDTO);
         return R.ok(productList,i);
     }
@@ -38,7 +56,7 @@ public class HxProductService {
         //查询产品
         if (productDetile.getProUseType() != null){
             hxProTree.setCode(productDetile.getProUseType());
-            hxProTree.setConditionId(2);
+            hxProTree.setConditionId(1);
             HxProTree proName = HxProTreeMapper.selectByCondition(hxProTree);
             productDetile.setProWithName(proName.getName());
         }
@@ -46,7 +64,7 @@ public class HxProductService {
         //查询行业
         if (productDetile.getProType() != null){
             hxProTree.setCode(productDetile.getProType());
-            hxProTree.setConditionId(1);
+            hxProTree.setConditionId(2);
             HxProTree busName = HxProTreeMapper.selectByCondition(hxProTree);
             productDetile.setBusWithName(busName.getName());
         }
