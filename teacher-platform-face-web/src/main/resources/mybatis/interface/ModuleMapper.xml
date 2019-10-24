@@ -130,7 +130,7 @@
     </select>
 
     <select id="listType" parameterType="com.hx.external.domain.Module" resultMap="BaseResultMap">
-        select distinct `project_type`
+        select distinct `project_name`,`project_type`
         from  int_module
     </select>
 
