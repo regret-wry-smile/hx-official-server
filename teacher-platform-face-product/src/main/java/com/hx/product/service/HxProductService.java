@@ -33,8 +33,7 @@ public class HxProductService {
     public HxProduct selectDetile(HxProduct hxProduct){
 
         HxProTree hxProTree = new HxProTree();
-        String str = hxProduct.getProId();
-        HxProductDTO productDetile = hxProductMapper.selectById(str);
+        HxProductDTO productDetile = hxProductMapper.selectById(hxProduct);
 
         //查询产品
         if (productDetile.getProUseType() != null){

@@ -4,6 +4,7 @@ import com.hx.back.entity.HxProduct;
 import com.hx.back.mapper.HxProductMapper;
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.exception.BDException;
+import com.hx.common.fastdfs.FastfdsClient;
 import com.hx.common.redis.shiro.ShiroUtils;
 import com.hx.common.utils.UUID;
 import com.hx.domain.HxUser;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class BackProductService {
@@ -21,6 +23,8 @@ public class BackProductService {
     private HxProductMapper hxProductMapper;
     @Autowired
     private BootdoConfig bootConfig;
+    @Autowired
+    private FastfdsClient fastfdsClient;
 
     public void insertProduct(HxProduct hxProduct){
         HxUser user = ShiroUtils.getUser();
@@ -46,6 +50,9 @@ public class BackProductService {
     }
 
     public void deleteProduct(HxProduct hxProduct){
+        //文件删除
+        HxProduct hxPro = hxProductMapper.selectById(hxProduct);
+        delFileByObject(hxPro);
 
         int i = hxProductMapper.delete(hxProduct.getId());
         if (i != 1){
@@ -55,30 +62,37 @@ public class BackProductService {
     }
 
     public void batchDeleteProduct(int[] ids){
+        List<HxProduct> hxProducts = hxProductMapper.selectByIds(ids);
+        for (HxProduct hxProduct : hxProducts){
+            delFileByObject(hxProduct);
+        }
+
         int count = hxProductMapper.bantchDelete(ids);
         if (count < 1){
             throw new BDException("删除失败");
         }
+
     }
 
     /**
-     * 文件删除
-     * @param fileUrl
+     * 根据对象删除产品中的文件
+     * @param hxProduct
      * @return
      */
-    static boolean delFile(String fileUrl) {
-        File file = new File(fileUrl);
-        if (!file.exists()) {
-            return false;
+    public void delFileByObject(HxProduct hxProduct){
+        if (hxProduct.getProImg() != null){
+            fastfdsClient.deleteFile(hxProduct.getProImg());
         }
-
-        if (file.isDirectory()) {
-            File[] files = file.listFiles();
-            for (File f : files) {
-                delFile(f.getName());
+        if (hxProduct.getProLogoAddr() != null){
+            fastfdsClient.deleteFile(hxProduct.getProLogoAddr());
+        }
+        /*if (hxProduct.getProDetilImg() == null){
+            String[] str = hxProduct.getProDetilImg().split("#");
+            for (String s : str){
+                 fastfdsClient.deleteFiledelFile(s);
             }
-        }
-        return file.delete();
+        }*/
+
     }
 
 

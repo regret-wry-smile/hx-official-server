@@ -300,7 +300,13 @@
         select
         <include refid="Base_Column_List" />
         from  hx_product
-        where pro_id = #{proId,jdbcType=VARCHAR}
+        where 1=1
+        <if test="id != null" >
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="proId != null and proId != ''" >
+            and pro_id = #{proId,jdbcType=VARCHAR}
+        </if>
     </select>
 
 
@@ -372,6 +378,15 @@
         </where>
     </sql>
 
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from hx_product
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </select>
 
     <select id="findResultByName" parameterType="com.hx.back.entity.HxProduct" resultMap="BaseResultMap">
         select

@@ -13,6 +13,8 @@ public interface HxProductMapper {
 
     int bantchDelete(int[] array);
 
+    List<HxProduct> selectByIds(int[] array);
+
     int insert(HxProduct hxProduct);
 
     int insertDynamic(HxProduct hxProduct);
@@ -21,7 +23,7 @@ public interface HxProductMapper {
 
     int update(HxProduct hxProduct);
 
-    HxProductDTO selectById(String id);
+    HxProductDTO selectById(HxProduct hxProduct);
 
     List<HxProduct> findResultByName(HxProduct hxProduct);
 
