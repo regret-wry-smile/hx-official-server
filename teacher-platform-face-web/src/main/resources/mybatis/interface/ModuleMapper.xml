@@ -109,8 +109,28 @@
     </select>
 
 
+    <select id="selectModule" parameterType="com.hx.external.domain.Module" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  int_module
+        <where> 1=1
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="projectName != null and projectName != ''" >
+                and project_name LIKE concat(concat('%',#{projectName}),'%')
+            </if>
+            <if test="projectType != null and projectType != ''" >
+                and project_type = #{projectType,jdbcType=VARCHAR}
+            </if>
+            <if test="remakes != null and remakes != ''" >
+                and remakes = #{remakes,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
     <select id="listType" parameterType="com.hx.external.domain.Module" resultMap="BaseResultMap">
-        select  distinct project_name,project_type
+        select distinct `project_type`
         from  int_module
     </select>
 

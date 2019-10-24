@@ -1,9 +1,10 @@
 package com.hx.external.service.impl;
 
+import com.github.tobato.fastdfs.domain.fdfs.StorePath;
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
-import com.hx.common.utils.ListUtils;
+import com.hx.common.fastdfs.FastfdsClient;
 import com.hx.common.utils.StringUtils;
 import com.hx.external.domain.ExternalDTO;
 import com.hx.external.domain.Item;
@@ -12,17 +13,11 @@ import com.hx.external.mapper.ExternalMapper;
 import com.hx.external.domain.External;
 import com.hx.external.mapper.ModuleMapper;
 import com.hx.external.service.ExternalService;
-import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.nio.file.Files;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -35,6 +30,8 @@ public class ExternalServiceImpl implements ExternalService {
     @Autowired
     private ModuleMapper moduleMapper;
     @Autowired
+    private FastfdsClient fastfdsClient;
+    @Autowired
     BootdoConfig bootConfig;
 
     @Override
@@ -44,20 +41,11 @@ public class ExternalServiceImpl implements ExternalService {
             if (file.isEmpty()) {
                 throw new BDException("文件为空");
             }
-            byte[] bytes = file.getBytes();
-            String address = bootConfig.getUploadPath()+"External/";
-            String fileAddress = "/External/"+file.getOriginalFilename();
-            if (createDir(address)) {
-                Path path = Paths.get(bootConfig.getUploadPath()+fileAddress);
-                Files.write(path, bytes);
-            }else {
-                throw new BDException("文件路径创建失败");
-            }
-
+            StorePath storePath = fastfdsClient.upload(file);
             external.setInterfaceName(file.getOriginalFilename());
-            external.setInterfaceAddress(fileAddress);
+            external.setInterfaceAddress(storePath.getFullPath());
             return external;
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new BDException("服务器异常，请联系管理员");
         }
     }
@@ -136,6 +124,8 @@ public class ExternalServiceImpl implements ExternalService {
 
     @Override
     public void deleteExternal(External external){
+        External externals = externalMapper.selectById(external.getId());
+        fastfdsClient.deleteFile(externals.getInterfaceAddress());
         int i = externalMapper.deleteExt(external);
         if (i < 1){
             throw new BDException("删除失败");
@@ -144,9 +134,14 @@ public class ExternalServiceImpl implements ExternalService {
 
     @Override
     public void deleteExternals(int[] ids){
-        int j = externalMapper.deleteByIds(ids);
-        if (j < 1){
-            throw new BDException("删除失败");
+        for (int i = 0; i <ids.length ; i++) {
+            int j = ids[i];
+            External external = externalMapper.selectById(j);
+            fastfdsClient.deleteFile(external.getInterfaceAddress());
+            externalMapper.delete(j);
+            if (j < 1){
+                throw new BDException("删除失败");
+            }
         }
     }
 

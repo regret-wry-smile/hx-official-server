@@ -25,15 +25,15 @@ public class ModuleController {
 
     //官网展示所有API文档信息
     @PostMapping("/selectModule")
-    public R selectModule(){
-        List<Module> modules = moduleService.listType();
+    public R selectModule(Item item){
+        List<Module> modules = moduleService.selectModule(item);
         List<Item> itemList = externalService.SelectExternal(modules);
         return R.ok(itemList);
     }
 
     //后台展示所有项目
-    @RequestMapping("selectModules")
-    public R selectModules(){
+    @RequestMapping("/listType")
+    public R listType(){
         List<Module> modules = moduleService.listType();
         return R.ok(modules);
     }

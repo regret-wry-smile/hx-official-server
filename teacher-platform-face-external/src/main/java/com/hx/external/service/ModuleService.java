@@ -1,5 +1,6 @@
 package com.hx.external.service;
 
+import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
 import com.hx.external.domain.ModuleDTO;
 
@@ -8,6 +9,8 @@ import java.util.List;
 public interface ModuleService {
 
     List<Module> listType();
+
+    List<Module> selectModule(Item item);
 
     List<ModuleDTO> selectByPage(ModuleDTO moduleDTO);
 
