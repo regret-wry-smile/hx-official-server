@@ -3,6 +3,7 @@ package com.hx.external.service.impl;
 import com.hx.common.config.BootdoConfig;
 import com.hx.common.exception.BDException;
 import com.hx.common.utils.ListUtils;
+import com.hx.external.domain.Item;
 import com.hx.external.domain.Module;
 import com.hx.external.domain.ModuleDTO;
 import com.hx.external.mapper.ModuleMapper;
@@ -20,6 +21,14 @@ public class ModuleServiceImpl implements ModuleService {
     ModuleMapper moduleMapper;
     @Autowired
     BootdoConfig bootConfig;
+
+    @Override
+    public List<Module> selectModule(Item item){
+        Module module = new Module();
+        module.setProjectName(item.getTitle());
+        List<Module> modules = moduleMapper.selectModule(module);
+        return modules;
+    }
 
     @Override
     public List<Module> listType(){

@@ -7,9 +7,7 @@ import com.hx.external.domain.ExternalDTO;
 import com.hx.external.domain.Module;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface ExternalService {
 

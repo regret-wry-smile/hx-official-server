@@ -24,6 +24,8 @@ public interface ModuleMapper {
 
     Module selectById(Integer id);
 
+    List<Module> selectModule(Module module);
+
     List<Module> listType();
 
     Module selectByModule(Module module);
