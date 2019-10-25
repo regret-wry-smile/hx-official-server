@@ -54,6 +54,12 @@ public class BackProCenterService {
         if (!StringUtils.isEmpty(hxPro.getProImg())){
             fastfdsClient.deleteFile(hxPro.getProImg());
         }
+        if (!StringUtils.isEmpty(hxPro.getProDetilImgs())){
+            String[] imgs = hxPro.getProDetilImgs().split("#");
+            for (String img : imgs){
+                fastfdsClient.deleteFile(img);
+            }
+        }
         int i = hxProCenterMapper.delete(hxProCenter.getId());
         if (i != 1){
             throw new BDException("删除产品失败");
@@ -65,6 +71,12 @@ public class BackProCenterService {
         for (HxProCenter hxProCenter : hxProCenters){
             if (!StringUtils.isEmpty(hxProCenter.getProImg())){
                 fastfdsClient.deleteFile(hxProCenter.getProImg());
+            }
+            if (!StringUtils.isEmpty(hxProCenter.getProDetilImgs())){
+                String[] imgs = hxProCenter.getProDetilImgs().split("#");
+                for (String img : imgs){
+                    fastfdsClient.deleteFile(img);
+                }
             }
         }
         int i = hxProCenterMapper.deletes(ids);
