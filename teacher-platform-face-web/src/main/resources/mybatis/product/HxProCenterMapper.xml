@@ -11,6 +11,7 @@
         <result column="hard_soft_intro" jdbcType="VARCHAR" property="hardSoftIntro" />
         <result column="pro_name" jdbcType="VARCHAR" property="proName" />
         <result column="pro_detil" jdbcType="VARCHAR" property="proDetil" />
+        <result column="pro_detil_imgs" jdbcType="VARCHAR" property="proDetilImgs" />
         <result column="clink_num" jdbcType="VARCHAR" property="clinkNum" />
         <result column="hard_soft_name" jdbcType="VARCHAR" property="hardSoftName" />
         <result column="create_user" jdbcType="VARCHAR" property="createUser" />
@@ -24,9 +25,9 @@
 
 
     <sql id="Base_Column_List">
-  id, pro_center_id, hard_soft_type, hard_soft_class, hard_soft_intro, pro_img, pro_name, pro_detil,clink_num,
-  create_user, create_time, update_user, update_time, remark, extend_1, extend_2
-</sql>
+      id, pro_center_id, hard_soft_type, hard_soft_class, hard_soft_intro, pro_img, pro_name, pro_detil,pro_detil_imgs,clink_num,
+      create_user, create_time, update_user, update_time, remark, extend_1, extend_2
+    </sql>
 
 
     <delete id="delete" parameterType="java.lang.Integer">
@@ -68,6 +69,9 @@
             </if>
             <if test="proDetil != null">
                 pro_detil,
+            </if>
+            <if test="proDetilImgs != null">
+                pro_detil_imgs,
             </if>
             <if test="clinkNum != null">
                 clink_num,
@@ -118,6 +122,9 @@
             </if>
             <if test="proDetil != null">
                 #{proDetil,jdbcType=VARCHAR},
+            </if>
+            <if test="proDetilImgs != null">
+                #{proDetilImgs,jdbcType=VARCHAR},
             </if>
             <if test="clinkNum != null">
                 #{clinkNum,jdbcType=VARCHAR},
@@ -170,6 +177,9 @@
             </if>
             <if test="proDetil != null">
                 pro_detil = #{proDetil,jdbcType=VARCHAR},
+            </if>
+            <if test="proDetilImgs != null">
+                pro_detil_imgs = #{proDetilImgs,jdbcType=VARCHAR},
             </if>
             <if test="clinkNum != null">
                 clink_num = #{clinkNum,jdbcType=VARCHAR},

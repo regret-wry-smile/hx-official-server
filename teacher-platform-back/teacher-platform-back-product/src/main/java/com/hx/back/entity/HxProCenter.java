@@ -42,6 +42,11 @@ public class HxProCenter {
     private String proDetil;
 
     /**
+     * 产品页面图片地址
+     */
+    private String proDetilImgs;
+
+    /**
      * 点点击量
      */
     private String clinkNum;
@@ -143,6 +148,14 @@ public class HxProCenter {
 
     public void setProDetil(String proDetil) {
         this.proDetil = proDetil;
+    }
+
+    public String getProDetilImgs() {
+        return proDetilImgs;
+    }
+
+    public void setProDetilImgs(String proDetilImgs) {
+        this.proDetilImgs = proDetilImgs;
     }
 
     public String getClinkNum() {

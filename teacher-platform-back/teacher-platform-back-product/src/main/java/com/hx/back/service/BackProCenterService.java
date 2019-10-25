@@ -4,10 +4,15 @@ import com.hx.back.entity.HxProCenter;
 import com.hx.back.mapper.HxProCenterMapper;
 import com.hx.common.exception.BDException;
 import com.hx.common.fastdfs.FastfdsClient;
+import com.hx.common.redis.shiro.ShiroUtils;
 import com.hx.common.utils.StringUtils;
+import com.hx.common.utils.UUID;
+import com.hx.domain.HxUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +24,12 @@ public class BackProCenterService {
     private FastfdsClient fastfdsClient;
 
     public void addProCenter(HxProCenter hxProCenter) {
+        HxUser user = ShiroUtils.getUser();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        hxProCenter.setCreateTime(sf.format(new Date()));
+        hxProCenter.setProCenterId(UUID.get32UUID());
+        hxProCenter.setCreateUser(user.getUserName());
+
         int i = hxProCenterMapper.insertDynamic(hxProCenter);
         if (i != 1){
             throw new BDException("添加产品失败");
@@ -27,6 +38,11 @@ public class BackProCenterService {
 
 
     public void updateProCenter(HxProCenter hxProCenter) {
+        HxUser user = ShiroUtils.getUser();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        hxProCenter.setUpdateTime(sf.format(new Date()));
+        hxProCenter.setUpdateUser(user.getUserName());
+
         int i = hxProCenterMapper.updateDynamic(hxProCenter);
         if (i != 1){
             throw new BDException("修改产品失败");
