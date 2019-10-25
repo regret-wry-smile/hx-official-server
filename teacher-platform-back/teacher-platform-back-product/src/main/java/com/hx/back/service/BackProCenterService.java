@@ -15,7 +15,7 @@ public class BackProCenterService {
     public void addProCenter(HxProCenter hxProCenter) {
         int i = hxProCenterMapper.insertDynamic(hxProCenter);
         if (i != 1){
-            throw new BDException("添加失败");
+            throw new BDException("添加产品失败");
         }
     }
 
@@ -23,21 +23,21 @@ public class BackProCenterService {
     public void updateProCenter(HxProCenter hxProCenter) {
         int i = hxProCenterMapper.updateDynamic(hxProCenter);
         if (i != 1){
-            throw new BDException("修改失败");
+            throw new BDException("修改产品失败");
         }
     }
 
     public void deleteProCenter(Integer id) {
         int i = hxProCenterMapper.delete(id);
         if (i != 1){
-            throw new BDException("删除失败");
+            throw new BDException("删除产品失败");
         }
     }
 
     public void deleteProCenters(int[] ids) {
         int i = hxProCenterMapper.deletes(ids);
         if (i < 1){
-            throw new BDException("删除失败");
+            throw new BDException("删除产品失败");
         }
     }
 }

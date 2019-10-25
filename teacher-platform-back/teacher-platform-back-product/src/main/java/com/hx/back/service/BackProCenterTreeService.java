@@ -1,7 +1,6 @@
 package com.hx.back.service;
 
 import com.hx.back.entity.HxProCenterTree;
-import com.hx.back.entity.HxProTree;
 import com.hx.back.mapper.HxProCenterTreeMapper;
 import com.hx.common.exception.BDException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class BackProCenterTreeService {
 
         int i = hxProCenterTreeMapper.insertDynamic(hxProCenterTree);
         if (i != 1){
-            throw new BDException("添加失败");
+            throw new BDException("添加产品分类失败");
         }
     }
 
@@ -36,21 +35,21 @@ public class BackProCenterTreeService {
     public void updateProCenterTree(HxProCenterTree hxProCenterTree) {
         int i = hxProCenterTreeMapper.updateDynamic(hxProCenterTree);
         if (i != 1){
-            throw new BDException("修改失败");
+            throw new BDException("修改产品分类失败");
         }
     }
 
     public void deleteProCenterTree(int id) {
         int i = hxProCenterTreeMapper.delete(id);
         if (i != 1){
-            throw new BDException("删除失败");
+            throw new BDException("删除产品分类失败");
         }
     }
 
     public void deleteProCenterTrees(int[] ids) {
         int i = hxProCenterTreeMapper.deletes(ids);
         if (i != 1){
-            throw new BDException("删除失败");
+            throw new BDException("删除产品分类失败");
         }
     }
 }
