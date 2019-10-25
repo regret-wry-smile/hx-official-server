@@ -23,8 +23,6 @@ public class BackProductService {
     @Autowired
     private HxProductMapper hxProductMapper;
     @Autowired
-    private BootdoConfig bootConfig;
-    @Autowired
     private FastfdsClient fastfdsClient;
 
     public void insertProduct(HxProduct hxProduct){

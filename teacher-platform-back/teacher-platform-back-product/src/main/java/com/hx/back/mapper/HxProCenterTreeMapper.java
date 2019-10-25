@@ -10,7 +10,7 @@ public interface HxProCenterTreeMapper {
 
     int delete(Integer id);
 
-    int deletes(int[] ids);
+    int deletes(int[] array);
 
     int insert(HxProCenterTree hxProCenterTree);
 

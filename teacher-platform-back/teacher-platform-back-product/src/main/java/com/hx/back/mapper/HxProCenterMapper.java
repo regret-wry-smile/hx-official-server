@@ -17,9 +17,12 @@ public interface HxProCenterMapper {
 
     int updateDynamic(HxProCenter hxProCenter);
 
-    HxProCenter selectById(String id);
+    HxProCenter selectById(HxProCenter hxProCenter);
+
+    List<HxProCenter> selectByIds(int[] array);
 
     List<HxProCenterDTO> findPageWithResult(HxProCenterDTO hxProCenterDTO);
 
     Integer findPageWithCount(HxProCenterDTO hxProCenterDTO);
+
 }

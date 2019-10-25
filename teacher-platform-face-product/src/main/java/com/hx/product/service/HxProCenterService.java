@@ -40,7 +40,7 @@ public class HxProCenterService {
     }
 
     public HxProCenter findProDetil(HxProCenter hxProCenter) {
-        HxProCenter hxProDetil = hxProCenterMapper.selectById(hxProCenter.getProCenterId());
+        HxProCenter hxProDetil = hxProCenterMapper.selectById(hxProCenter);
         if (hxProDetil == null){
             throw new BDException("查询产品失败");
         }

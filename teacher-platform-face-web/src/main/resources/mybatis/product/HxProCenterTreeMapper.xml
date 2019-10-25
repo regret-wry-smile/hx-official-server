@@ -24,7 +24,7 @@
     <delete id="deletes" parameterType="java.lang.Integer">
       delete from hx_pro_center_tree
         where id in
-        <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
             #{item}
         </foreach>
     </delete>
