@@ -25,8 +25,10 @@ public class HxProCenterService {
         return R.ok(hxProCenterDTOS,count);
     }
 
-    public List<HxProCenterTree> findProCenterTree(HxProCenterTree hxProCenterTree) {
-        return hxProCenterTreeMapper.findPageWithResult(hxProCenterTree);
+    public R findProCenterTree(HxProCenterTree hxProCenterTree) {
+        List<HxProCenterTree> hxProCenterTrees = hxProCenterTreeMapper.findPageWithResult(hxProCenterTree);
+        int count = hxProCenterTreeMapper.findPageWithCount(hxProCenterTree);
+        return R.ok(hxProCenterTrees,count);
     }
 
     public HxProCenter findProDetil(HxProCenter hxProCenter) {

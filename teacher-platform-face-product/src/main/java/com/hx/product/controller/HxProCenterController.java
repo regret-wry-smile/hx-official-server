@@ -3,7 +3,6 @@ package com.hx.product.controller;
 import com.hx.back.entity.HxProCenter;
 import com.hx.back.entity.HxProCenterDTO;
 import com.hx.back.entity.HxProCenterTree;
-import com.hx.back.entity.HxProductDTO;
 import com.hx.domain.R;
 import com.hx.product.service.HxProCenterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +34,7 @@ public class HxProCenterController {
      */
     @RequestMapping("/findProCenterTree")
     public R findProCenterTree(@RequestBody HxProCenterTree hxProCenterTree){
-        return R.ok(hxProCenterService.findProCenterTree(hxProCenterTree));
+        return hxProCenterService.findProCenterTree(hxProCenterTree);
     }
 
     /**
