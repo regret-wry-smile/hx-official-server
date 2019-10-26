@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.back.mapper.HxProCenterTreeMapper">
+
+    <resultMap id="BaseResultMap" type="com.hx.back.entity.HxProCenterTree">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="hard_soft_type" jdbcType="INTEGER" property="hardSoftType" />
+        <result column="hard_soft_code" jdbcType="INTEGER" property="hardSoftCode" />
+        <result column="hard_soft_name" jdbcType="VARCHAR" property="hardSoftName" />
+        <result column="extend" jdbcType="VARCHAR" property="extend" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+      id, hard_soft_type, hard_soft_code, hard_soft_name, extend
+    </sql>
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+      delete from hx_pro_center_tree
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deletes" parameterType="java.lang.Integer">
+      delete from hx_pro_center_tree
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.hx.back.entity.HxProCenterTree">
+      insert into hx_pro_center_tree (id, hard_soft_type, hard_soft_code,
+        hard_soft_name, extend)
+      values (#{id,jdbcType=INTEGER}, #{hardSoftType,jdbcType=INTEGER}, #{hardSoftCode,jdbcType=INTEGER},
+        #{hardSoftName,jdbcType=VARCHAR}, #{extend,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="insertDynamic" parameterType="com.hx.back.entity.HxProCenterTree">
+        insert into hx_pro_center_tree
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="hardSoftType != null">
+                hard_soft_type,
+            </if>
+            <if test="hardSoftCode != null">
+                hard_soft_code,
+            </if>
+            <if test="hardSoftName != null">
+                hard_soft_name,
+            </if>
+            <if test="extend != null">
+                extend,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftType != null">
+                #{hardSoftType,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftCode != null">
+                #{hardSoftCode,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftName != null">
+                #{hardSoftName,jdbcType=VARCHAR},
+            </if>
+            <if test="extend != null">
+                #{extend,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateDynamic" parameterType="com.hx.back.entity.HxProCenterTree">
+        update hx_pro_center_tree
+        <set>
+            <if test="hardSoftType != null">
+                hard_soft_type = #{hardSoftType,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftCode != null">
+                hard_soft_code = #{hardSoftCode,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftName != null">
+                hard_soft_name = #{hardSoftName,jdbcType=VARCHAR},
+            </if>
+            <if test="extend != null">
+                extend = #{extend,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="update" parameterType="com.hx.back.entity.HxProCenterTree">
+  update hx_pro_center_tree
+  set hard_soft_type = #{hardSoftType,jdbcType=INTEGER},
+    hard_soft_code = #{hardSoftCode,jdbcType=INTEGER},
+    hard_soft_name = #{hardSoftName,jdbcType=VARCHAR},
+    extend = #{extend,jdbcType=VARCHAR}
+  where id = #{id,jdbcType=INTEGER}
+</update>
+
+
+    <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_pro_center_tree
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <sql id="findPageWithWhere">
+        <where> 1=1
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="hardSoftType != null and hardSoftType != ''" >
+                and hard_soft_type = #{hardSoftType,jdbcType=INTEGER}
+            </if>
+            <if test="hardSoftCode != null and hardSoftCode != ''" >
+                and hard_soft_code = #{hardSoftCode,jdbcType=INTEGER}
+            </if>
+            <if test="hardSoftName != null and hardSoftName != ''" >
+                and hard_soft_name = #{hardSoftName,jdbcType=VARCHAR}
+            </if>
+            <if test="extend != null and extend != ''" >
+                and extend = #{extend,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="findPageWithResult" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_pro_center_tree
+        <include refid="findPageWithWhere" />
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+
+    <select id="findPageWithCount" resultType="Integer">
+        select count(1)
+        from hx_pro_center_tree
+        <include refid="findPageWithWhere" />
+    </select>
+
+    <select id="getMaxCode" resultType="Integer">
+        select select MAX(`code`)
+        from hx_pro_center_tree
+        <include refid="findPageWithWhere" />
+    </select>
+
+</mapper>
