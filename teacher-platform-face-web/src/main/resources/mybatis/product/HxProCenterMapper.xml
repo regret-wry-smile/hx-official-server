@@ -36,8 +36,8 @@
     </delete>
 
     <delete id="deletes" parameterType="java.lang.Integer">
-      delete from hx_pro_center
-      where id in
+        delete from hx_pro_center
+        where id in
         <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
             #{item}
         </foreach>
@@ -261,7 +261,7 @@
         from  hx_pro_center p1
         right join hx_pro_center_tree p2 on p1.hard_soft_class = p2.hard_soft_code
         and p1.hard_soft_type = p2.hard_soft_type
-        <where> 1=1
+        <where> 1=1 and p1.hard_soft_type is not null
             <if test="proCenterId != null and proCenterId != ''" >
                 and p1.pro_center_id = #{proCenterId,jdbcType=VARCHAR}
             </if>
@@ -272,9 +272,11 @@
                 and p1.hard_soft_class = #{hardSoftClass,jdbcType=INTEGER}
             </if>
             <if test="proName != null and proName != ''" >
-                and p1.pro_name = #{proName,jdbcType=VARCHAR}
+                and p1.pro_name like concat('%',#{proName},'%')
             </if>
-            and p1.hard_soft_type is not null
+            <if test="hardSoftName != null and hardSoftName != ''" >
+                and p2.hard_soft_name like concat('%',#{hardSoftName},'%')
+            </if>
         </where>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}
