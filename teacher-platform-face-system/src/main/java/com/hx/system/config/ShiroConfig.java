@@ -94,7 +94,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/trial/insertTrial","anon");
         filterChainDefinitionMap.put("/External/uploadFile","anon");
         filterChainDefinitionMap.put("/news/**","anon");
-
+        filterChainDefinitionMap.put("/solution/**","anon");
         filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         //自定义过滤器

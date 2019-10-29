@@ -1,10 +1,14 @@
 package com.hx.mapper;
 
+import com.hx.pojo.SolutionCaseVO;
 import com.hx.pojo.SolutionCategory;
 import com.hx.pojo.SolutionCategoryExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface SolutionCategoryMapper {
     int countByExample(SolutionCategoryExample example);
 
@@ -27,4 +31,10 @@ public interface SolutionCategoryMapper {
     int updateByPrimaryKeySelective(SolutionCategory record);
 
     int updateByPrimaryKey(SolutionCategory record);
+
+    List<SolutionCategory> listPage(Map<String, Object> map);
+
+    int deleteByIds(@Param("ids")List<Integer> ids);
+
+    Integer selectCount(Map<String, Object> map);
 }

@@ -272,15 +272,17 @@
       cid = #{cid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="listPage" resultType="com.hx.pojo.SolutionCase">
-    select `id`,`title`,`digest`,`content`,`category`,`pid`,`create_time`,`create_user`,`update_user`,`update_time` from
-    solution_case
+  <select id="listPage" resultType="com.hx.pojo.SolutionCaseVO">
+    select a.*,b.*,c.`name`
+    from (solution_category b LEFT JOIN hx_pro_tree c on b.pid = c.`code` ) left join solution_case a on a.cid = b.id
     <where>
-      <if test="id != null and id != ''"> and id = #{id} </if>
+      and c.condition_id = 2  and a.title is not null
+      <if test="id != null and id != ''"> and a.id = #{id} </if>
       <if test="category != null and category != ''"> and category = #{category} </if>
       <if test="title != null and title != ''"> and title like concat('%',#{title,jdbcType=VARCHAR},'%') </if>
       <if test="digest != null and digest != ''"> and digest like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
-      <if test="lable != null and lable != ''"> and lable like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
+      <if test="content != null and content != ''"> and content like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
+      <if test="pid != null and pid != ''"> and b.pid = #{pid}</if>
     </where>
     <choose>
       <otherwise>
@@ -290,5 +292,23 @@
     <if test="offset != null and limit != null">
       limit #{offset}, #{limit}
     </if>
+  </select>
+  <delete id="deleteByIds" parameterType="java.util.List" >
+    delete from solution_case
+    <where> id in
+      <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
+        #{item}
+      </foreach>
+    </where>
+  </delete>
+  <select id="selectCount" resultType="Integer">
+    select count(1) from solution_case
+    <where>
+      <if test="id != null and id != ''"> and id = #{id} </if>
+      <if test="category != null and category != ''"> and category = #{category} </if>
+      <if test="title != null and title != ''"> and title like concat('%',#{title,jdbcType=VARCHAR},'%') </if>
+      <if test="digest != null and digest != ''"> and digest like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
+      <if test="lable != null and lable != ''"> and content like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
+    </where>
   </select>
 </mapper>

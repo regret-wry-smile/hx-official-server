@@ -11,6 +11,7 @@
 
     <groupId>com.hx</groupId>
     <artifactId>teacher-platform-face-solution</artifactId>
+    <version>1.0.0</version>
     <dependencies>
         <dependency>
             <groupId>com.hx</groupId>

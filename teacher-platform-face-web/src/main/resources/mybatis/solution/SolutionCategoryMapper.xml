@@ -178,4 +178,32 @@
       pid = #{pid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="listPage" resultType="com.hx.pojo.SolutionCategory">
+    select a.*,b.`name` from solution_category a LEFT JOIN hx_pro_tree b on a.pid = b.`code`
+    <where>
+      and b.condition_id = 2
+      <if test="id != null and id != ''"> and id = #{id} </if>
+      <if test="category != null and category != ''"> and category like concat('%',#{category,jdbcType=VARCHAR},'%') </if>
+      <if test="pid != null and pid != ''"> and a.pid = #{pid} </if>
+    </where>
+
+    <if test="offset != null and limit != null">
+      limit #{offset}, #{limit}
+    </if>
+  </select>
+  <delete id="deleteByIds" parameterType="java.util.List" >
+    delete from solution_category
+    <where> id in
+      <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
+        #{item}
+      </foreach>
+    </where>
+  </delete>
+  <select id="selectCount" resultType="Integer">
+    select count(1) from solution_category
+    <where>
+      <if test="id != null and id != ''"> and id = #{id} </if>
+      <if test="category != null and category != ''"> and category like concat('%',#{title,jdbcType=VARCHAR},'%') </if>
+    </where>
+  </select>
 </mapper>

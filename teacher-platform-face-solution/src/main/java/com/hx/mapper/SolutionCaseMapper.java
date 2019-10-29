@@ -5,8 +5,10 @@ import com.hx.pojo.SolutionCaseExample;
 import java.util.List;
 import java.util.Map;
 
+import com.hx.pojo.SolutionCaseVO;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-
+@Mapper
 public interface SolutionCaseMapper {
     int countByExample(SolutionCaseExample example);
 
@@ -28,5 +30,9 @@ public interface SolutionCaseMapper {
 
     int updateByPrimaryKeySelective(SolutionCase record);
 
-    List<SolutionCase> listPage(Map<String, Object> map);
+    List<SolutionCaseVO> listPage(Map<String, Object> map);
+
+    int deleteByIds(@Param("ids")List<Integer> ids);
+
+    Integer selectCount(Map<String, Object> map);
 }
