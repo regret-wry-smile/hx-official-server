@@ -10,9 +10,10 @@
         <result column="pro_img" jdbcType="VARCHAR" property="proImg" />
         <result column="hard_soft_intro" jdbcType="VARCHAR" property="hardSoftIntro" />
         <result column="pro_name" jdbcType="VARCHAR" property="proName" />
+        <result column="pro_name_eng" jdbcType="VARCHAR" property="proNameEng" />
         <result column="pro_detil" jdbcType="VARCHAR" property="proDetil" />
-        <result column="pro_detil_imgs" jdbcType="VARCHAR" property="proDetilImgs" />
-        <result column="clink_num" jdbcType="VARCHAR" property="clinkNum" />
+        <result column="pro_detil_img" jdbcType="VARCHAR" property="proDetilImg" />
+        <result column="clink_link" jdbcType="VARCHAR" property="clinkLink" />
         <result column="hard_soft_name" jdbcType="VARCHAR" property="hardSoftName" />
         <result column="create_user" jdbcType="VARCHAR" property="createUser" />
         <result column="create_time" jdbcType="VARCHAR" property="createTime" />
@@ -25,8 +26,8 @@
 
 
     <sql id="Base_Column_List">
-      id, pro_center_id, hard_soft_type, hard_soft_class, hard_soft_intro, pro_img, pro_name, pro_detil,pro_detil_imgs,clink_num,
-      create_user, create_time, update_user, update_time, remark, extend_1, extend_2
+      id, pro_center_id, hard_soft_type, hard_soft_class, hard_soft_intro, pro_img, pro_name,pro_name_eng, pro_detil,pro_detil_img,
+      clink_link, create_user, create_time, update_user, update_time, remark, extend_1, extend_2
     </sql>
 
 
@@ -36,9 +37,9 @@
     </delete>
 
     <delete id="deletes" parameterType="java.lang.Integer">
-      delete from hx_pro_center
-      where id in
-        <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
+        delete from hx_pro_center
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
             #{item}
         </foreach>
     </delete>
@@ -67,14 +68,17 @@
             <if test="proName != null">
                 pro_name,
             </if>
+            <if test="proNameEng != null">
+                pro_name_eng,
+            </if>
             <if test="proDetil != null">
                 pro_detil,
             </if>
-            <if test="proDetilImgs != null">
-                pro_detil_imgs,
+            <if test="proDetilImg != null">
+                pro_detil_img,
             </if>
-            <if test="clinkNum != null">
-                clink_num,
+            <if test="clinkLink != null">
+                clink_link,
             </if>
             <if test="createUser != null">
                 create_user,
@@ -120,14 +124,17 @@
             <if test="proName != null">
                 #{proName,jdbcType=VARCHAR},
             </if>
+            <if test="proNameEng != null">
+                #{proNameEng,jdbcType=VARCHAR},
+            </if>
             <if test="proDetil != null">
                 #{proDetil,jdbcType=VARCHAR},
             </if>
-            <if test="proDetilImgs != null">
-                #{proDetilImgs,jdbcType=VARCHAR},
+            <if test="proDetilImg != null">
+                #{proDetilImg,jdbcType=VARCHAR},
             </if>
-            <if test="clinkNum != null">
-                #{clinkNum,jdbcType=VARCHAR},
+            <if test="clinkLink != null">
+                #{clinkLink,jdbcType=VARCHAR},
             </if>
             <if test="createUser != null">
                 #{createUser,jdbcType=VARCHAR},
@@ -175,14 +182,17 @@
             <if test="proName != null">
                 pro_name = #{proName,jdbcType=VARCHAR},
             </if>
+            <if test="proNameEng != null">
+                pro_name_eng = #{proNameEng,jdbcType=VARCHAR},
+            </if>
             <if test="proDetil != null">
                 pro_detil = #{proDetil,jdbcType=VARCHAR},
             </if>
-            <if test="proDetilImgs != null">
-                pro_detil_imgs = #{proDetilImgs,jdbcType=VARCHAR},
+            <if test="proDetilImg != null">
+                pro_detil_img = #{proDetilImg,jdbcType=VARCHAR},
             </if>
-            <if test="clinkNum != null">
-                clink_num = #{clinkNum,jdbcType=VARCHAR},
+            <if test="clinkLink != null">
+                clink_link = #{clinkLink,jdbcType=VARCHAR},
             </if>
             <if test="createUser != null">
                 create_user = #{createUser,jdbcType=VARCHAR},
@@ -261,7 +271,7 @@
         from  hx_pro_center p1
         right join hx_pro_center_tree p2 on p1.hard_soft_class = p2.hard_soft_code
         and p1.hard_soft_type = p2.hard_soft_type
-        <where> 1=1
+        <where> 1=1 and p1.hard_soft_type is not null
             <if test="proCenterId != null and proCenterId != ''" >
                 and p1.pro_center_id = #{proCenterId,jdbcType=VARCHAR}
             </if>
@@ -272,9 +282,11 @@
                 and p1.hard_soft_class = #{hardSoftClass,jdbcType=INTEGER}
             </if>
             <if test="proName != null and proName != ''" >
-                and p1.pro_name = #{proName,jdbcType=VARCHAR}
+                and p1.pro_name like concat('%',#{proName},'%')
             </if>
-            and p1.hard_soft_type is not null
+            <if test="hardSoftName != null and hardSoftName != ''" >
+                and p2.hard_soft_name like concat('%',#{hardSoftName},'%')
+            </if>
         </where>
         <if test="offset != null and limit != null">
             limit #{offset}, #{limit}

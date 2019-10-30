@@ -86,9 +86,11 @@ public class BackProductService {
             fastfdsClient.deleteFile(hxProduct.getProLogoAddr());
         }
         if (!StringUtils.isEmpty(hxProduct.getProDetilImg())){
-            String[] imgs = hxProduct.getProDetilImg().split("#");
+            String[] imgs = hxProduct.getProDetilImg().split(",");
             for (String img : imgs){
-                 fastfdsClient.deleteFile(img);
+                if (!StringUtils.isEmpty(img)){
+                    fastfdsClient.deleteFile(img);
+                }
             }
         }
 
