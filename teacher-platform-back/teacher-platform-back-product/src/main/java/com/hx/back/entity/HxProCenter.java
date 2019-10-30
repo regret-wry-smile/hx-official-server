@@ -44,12 +44,12 @@ public class HxProCenter {
     /**
      * 产品页面图片地址
      */
-    private String proDetilImgs;
+    private String proDetilImg;
 
     /**
      * 点点击量
      */
-    private String clinkNum;
+    private String clinkLink;
 
     /**
      * 创建人员
@@ -150,20 +150,20 @@ public class HxProCenter {
         this.proDetil = proDetil;
     }
 
-    public String getProDetilImgs() {
-        return proDetilImgs;
+    public String getProDetilImg() {
+        return proDetilImg;
     }
 
-    public void setProDetilImgs(String proDetilImgs) {
-        this.proDetilImgs = proDetilImgs;
+    public void setProDetilImg(String proDetilImg) {
+        this.proDetilImg = proDetilImg;
     }
 
-    public String getClinkNum() {
-        return clinkNum;
+    public String getClinkLink() {
+        return clinkLink;
     }
 
-    public void setClinkNum(String clinkNum) {
-        this.clinkNum = clinkNum;
+    public void setClinkLink(String clinkLink) {
+        this.clinkLink = clinkLink;
     }
 
     public String getCreateUser() {

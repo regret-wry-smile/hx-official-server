@@ -54,13 +54,8 @@ public class BackProCenterService {
         if (!StringUtils.isEmpty(hxPro.getProImg())){
             fastfdsClient.deleteFile(hxPro.getProImg());
         }
-        if (!StringUtils.isEmpty(hxPro.getProDetilImgs())){
-            String[] imgs = hxPro.getProDetilImgs().split(",");
-            for (String img : imgs){
-                if (!StringUtils.isEmpty(img)){
-                    fastfdsClient.deleteFile(img);
-                }
-            }
+        if (!StringUtils.isEmpty(hxPro.getProDetilImg())){
+            fastfdsClient.deleteFile(hxPro.getProDetilImg());
         }
         int i = hxProCenterMapper.delete(hxProCenter.getId());
         if (i != 1){
@@ -74,12 +69,8 @@ public class BackProCenterService {
             if (!StringUtils.isEmpty(hxProCenter.getProImg())){
                 fastfdsClient.deleteFile(hxProCenter.getProImg());
             }
-            if (!StringUtils.isEmpty(hxProCenter.getProDetilImgs())){
-                String[] imgs = hxProCenter.getProDetilImgs().split(",");
-                for (String img : imgs){
-                    if (!StringUtils.isEmpty(img))
-                    fastfdsClient.deleteFile(img);
-                }
+            if (!StringUtils.isEmpty(hxProCenter.getProDetilImg())){
+                fastfdsClient.deleteFile(hxProCenter.getProDetilImg());
             }
         }
         int i = hxProCenterMapper.deletes(ids);
