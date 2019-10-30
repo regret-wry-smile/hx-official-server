@@ -10,6 +10,7 @@
         <result column="pro_img" jdbcType="VARCHAR" property="proImg" />
         <result column="hard_soft_intro" jdbcType="VARCHAR" property="hardSoftIntro" />
         <result column="pro_name" jdbcType="VARCHAR" property="proName" />
+        <result column="pro_name_eng" jdbcType="VARCHAR" property="proNameEng" />
         <result column="pro_detil" jdbcType="VARCHAR" property="proDetil" />
         <result column="pro_detil_img" jdbcType="VARCHAR" property="proDetilImg" />
         <result column="clink_link" jdbcType="VARCHAR" property="clinkLink" />
@@ -25,8 +26,8 @@
 
 
     <sql id="Base_Column_List">
-      id, pro_center_id, hard_soft_type, hard_soft_class, hard_soft_intro, pro_img, pro_name, pro_detil,pro_detil_img,clink_link,
-      create_user, create_time, update_user, update_time, remark, extend_1, extend_2
+      id, pro_center_id, hard_soft_type, hard_soft_class, hard_soft_intro, pro_img, pro_name,pro_name_eng, pro_detil,pro_detil_img,
+      clink_link, create_user, create_time, update_user, update_time, remark, extend_1, extend_2
     </sql>
 
 
@@ -66,6 +67,9 @@
             </if>
             <if test="proName != null">
                 pro_name,
+            </if>
+            <if test="proNameEng != null">
+                pro_name_eng,
             </if>
             <if test="proDetil != null">
                 pro_detil,
@@ -119,6 +123,9 @@
             </if>
             <if test="proName != null">
                 #{proName,jdbcType=VARCHAR},
+            </if>
+            <if test="proNameEng != null">
+                #{proNameEng,jdbcType=VARCHAR},
             </if>
             <if test="proDetil != null">
                 #{proDetil,jdbcType=VARCHAR},
@@ -174,6 +181,9 @@
             </if>
             <if test="proName != null">
                 pro_name = #{proName,jdbcType=VARCHAR},
+            </if>
+            <if test="proNameEng != null">
+                pro_name_eng = #{proNameEng,jdbcType=VARCHAR},
             </if>
             <if test="proDetil != null">
                 pro_detil = #{proDetil,jdbcType=VARCHAR},

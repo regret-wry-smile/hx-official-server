@@ -37,6 +37,11 @@ public class HxProCenter {
     private String proName;
 
     /**
+     * 产品英文名称
+     */
+    private String proNameEng;
+
+    /**
      * 产品对应的页面
      */
     private String proDetil;
@@ -140,6 +145,14 @@ public class HxProCenter {
 
     public void setProName(String proName) {
         this.proName = proName;
+    }
+
+    public String getProNameEng() {
+        return proNameEng;
+    }
+
+    public void setProNameEng(String proNameEng) {
+        this.proNameEng = proNameEng;
     }
 
     public String getProDetil() {
