@@ -11,7 +11,7 @@ public interface HxProCenterMapper {
 
     int delete(Integer id);
 
-    int deletes(int[] ids);
+    int deletes(int[] array);
 
     int insertDynamic(HxProCenter hxProCenter);
 
