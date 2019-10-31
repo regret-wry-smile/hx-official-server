@@ -4,5 +4,5 @@ import com.hx.external.domain.TrialUsers;
 
 public interface UtilService {
 
-    String sendSMS(TrialUsers trialUsers);
+    Integer sendSMS(TrialUsers trialUsers);
 }

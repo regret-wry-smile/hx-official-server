@@ -18,7 +18,7 @@ public class UtilController {
     //官网发邮件
     @RequestMapping("sendSMS")
     public R sendSMS(@RequestBody TrialUsers trialUsers){
-        String code = utilService.sendSMS(trialUsers);
+        Integer code = utilService.sendSMS(trialUsers);
         return R.ok(code);
     }
 }

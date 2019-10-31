@@ -15,12 +15,12 @@ public class UtilServiceImp implements UtilService {
 
 
     @Override
-    public String sendSMS(TrialUsers TrialUsers){
+    public Integer sendSMS(TrialUsers TrialUsers){
         String host = "https://ali-sms.showapi.com";
         String path = "/sendSms";
         String method = "GET";
         String appcode = "1ea706520a9c43698bfbab84827b6463";
-        String codes = String.valueOf((Math.random()*9+1)*10000);
+        Integer codes = (int)(Math.random()*9+1)*10000;
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
