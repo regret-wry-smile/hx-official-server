@@ -28,8 +28,8 @@ public class BackProCenterTreeController {
     }
 
     @RequestMapping("/deleteProCenterTree")
-    public R deleteProCenterTree(@RequestBody int id){
-        backProCenterTreeService.deleteProCenterTree(id);
+    public R deleteProCenterTree(@RequestBody HxProCenterTree hxProCenterTree){
+        backProCenterTreeService.deleteProCenterTree(hxProCenterTree.getId());
         return R.ok();
     }
 
