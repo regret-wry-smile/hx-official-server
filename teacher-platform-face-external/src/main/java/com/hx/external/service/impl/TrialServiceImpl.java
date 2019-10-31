@@ -2,18 +2,22 @@ package com.hx.external.service.impl;
 
 import com.hx.common.exception.BDException;
 import com.hx.common.utils.ListUtils;
+import com.hx.external.api.HttpUtils;
 import com.hx.external.domain.TrialUsersDTO;
 import com.hx.external.mapper.TrialMapper;
 import com.hx.external.domain.TrialUsers;
 import com.hx.external.service.TrialService;
 
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TrialServiceImpl implements TrialService {
@@ -74,4 +78,5 @@ public class TrialServiceImpl implements TrialService {
             throw new BDException("删除失败");
         }
     }
+
 }

@@ -19,4 +19,5 @@ public interface TrialService {
     void deleteTrial(TrialUsers trialUsers);
 
     void deleteTrials(int[] ids);
+
 }

@@ -6,6 +6,11 @@ logging:
     root: info
     com.hx: debug
 spring:
+  mail:
+    host: smtp.huixiangtech.cn
+    username: xuyuanjie@huixiangtech.cn
+    password: 0.1.2.3.yuan
+    default-encoding: utf-8
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
@@ -51,7 +56,9 @@ spring:
         max-active: 100
         # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1
-
+mail:
+  fromMail:
+    addr: xuyuanjie@huixiangtech.cn
 #分布式事务 -- manager地址
 #tx-lcn:
 #  client:
