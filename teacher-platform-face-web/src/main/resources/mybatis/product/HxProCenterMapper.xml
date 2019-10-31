@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hx.back.mapper.HxProCenterMapper">
+
+    <resultMap id="BaseResultMap" type="com.hx.back.entity.HxProCenterDTO">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="pro_center_id" jdbcType="VARCHAR" property="proCenterId" />
+        <result column="hard_soft_type" jdbcType="INTEGER" property="hardSoftType" />
+        <result column="hard_soft_class" jdbcType="INTEGER" property="hardSoftClass" />
+        <result column="pro_img" jdbcType="VARCHAR" property="proImg" />
+        <result column="hard_soft_intro" jdbcType="VARCHAR" property="hardSoftIntro" />
+        <result column="pro_name" jdbcType="VARCHAR" property="proName" />
+        <result column="pro_name_eng" jdbcType="VARCHAR" property="proNameEng" />
+        <result column="pro_detil" jdbcType="VARCHAR" property="proDetil" />
+        <result column="pro_detil_img" jdbcType="VARCHAR" property="proDetilImg" />
+        <result column="clink_link" jdbcType="VARCHAR" property="clinkLink" />
+        <result column="hard_soft_name" jdbcType="VARCHAR" property="hardSoftName" />
+        <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+        <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+        <result column="update_user" jdbcType="VARCHAR" property="updateUser" />
+        <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="extend_1" jdbcType="VARCHAR" property="extend1" />
+        <result column="extend_2" jdbcType="VARCHAR" property="extend2" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+      id, pro_center_id, hard_soft_type, hard_soft_class, hard_soft_intro, pro_img, pro_name,pro_name_eng, pro_detil,pro_detil_img,
+      clink_link, create_user, create_time, update_user, update_time, remark, extend_1, extend_2
+    </sql>
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+      delete from hx_pro_center
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deletes" parameterType="java.lang.Integer">
+        delete from hx_pro_center
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insertDynamic" parameterType="com.hx.back.entity.HxProCenter">
+        insert into hx_pro_center
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="proCenterId != null">
+                pro_center_id,
+            </if>
+            <if test="hardSoftType != null">
+                hard_soft_type,
+            </if>
+            <if test="hardSoftClass != null">
+                hard_soft_class,
+            </if>
+            <if test="hardSoftIntro != null">
+                hard_soft_intro,
+            </if>
+            <if test="proImg != null">
+                pro_img,
+            </if>
+            <if test="proName != null">
+                pro_name,
+            </if>
+            <if test="proNameEng != null">
+                pro_name_eng,
+            </if>
+            <if test="proDetil != null">
+                pro_detil,
+            </if>
+            <if test="proDetilImg != null">
+                pro_detil_img,
+            </if>
+            <if test="clinkLink != null">
+                clink_link,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="extend1 != null">
+                extend_1,
+            </if>
+            <if test="extend2 != null">
+                extend_2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="proCenterId != null">
+                #{proCenterId,jdbcType=VARCHAR},
+            </if>
+            <if test="hardSoftType != null">
+                #{hardSoftType,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftClass != null">
+                #{hardSoftClass,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftIntro != null">
+                #{hardSoftIntro,jdbcType=VARCHAR},
+            </if>
+            <if test="proImg != null">
+                #{proImg,jdbcType=VARCHAR},
+            </if>
+            <if test="proName != null">
+                #{proName,jdbcType=VARCHAR},
+            </if>
+            <if test="proNameEng != null">
+                #{proNameEng,jdbcType=VARCHAR},
+            </if>
+            <if test="proDetil != null">
+                #{proDetil,jdbcType=VARCHAR},
+            </if>
+            <if test="proDetilImg != null">
+                #{proDetilImg,jdbcType=VARCHAR},
+            </if>
+            <if test="clinkLink != null">
+                #{clinkLink,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="extend1 != null">
+                #{extend1,jdbcType=VARCHAR},
+            </if>
+            <if test="extend2 != null">
+                #{extend2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateDynamic" parameterType="com.hx.back.entity.HxProCenter">
+        update hx_pro_center
+        <set>
+            <if test="proCenterId != null">
+                pro_center_id = #{proCenterId,jdbcType=VARCHAR},
+            </if>
+            <if test="hardSoftType != null">
+                hard_soft_type = #{hardSoftType,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftClass != null">
+                hard_soft_class = #{hardSoftClass,jdbcType=INTEGER},
+            </if>
+            <if test="hardSoftIntro != null">
+                hard_soft_intro = #{hardSoftIntro,jdbcType=VARCHAR},
+            </if>
+            <if test="proImg != null">
+                pro_img = #{proImg,jdbcType=VARCHAR},
+            </if>
+            <if test="proName != null">
+                pro_name = #{proName,jdbcType=VARCHAR},
+            </if>
+            <if test="proNameEng != null">
+                pro_name_eng = #{proNameEng,jdbcType=VARCHAR},
+            </if>
+            <if test="proDetil != null">
+                pro_detil = #{proDetil,jdbcType=VARCHAR},
+            </if>
+            <if test="proDetilImg != null">
+                pro_detil_img = #{proDetilImg,jdbcType=VARCHAR},
+            </if>
+            <if test="clinkLink != null">
+                clink_link = #{clinkLink,jdbcType=VARCHAR},
+            </if>
+            <if test="createUser != null">
+                create_user = #{createUser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUser != null">
+                update_user = #{updateUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="extend1 != null">
+                extend_1 = #{extend1,jdbcType=VARCHAR},
+            </if>
+            <if test="extend2 != null">
+                extend_2 = #{extend2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_pro_center
+        where 1=1
+        <if test="id != null" >
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="proCenterId != null and proCenterId != ''" >
+            and pro_center_id = #{proCenterId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
+    <select id="selectByIds" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  hx_pro_center
+        where id in
+        <foreach collection="array"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </select>
+
+    <sql id="findPageWithWhere">
+        <where> 1=1
+            <if test="id != null" >
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="proCenterId != null and proCenterId != ''" >
+                and pro_center_id = #{proCenterId,jdbcType=VARCHAR}
+            </if>
+            <if test="hardSoftType != null" >
+                and hard_soft_type = #{hardSoftType,jdbcType=INTEGER}
+            </if>
+            <if test="hardSoftClass != null" >
+                and hard_soft_class = #{hardSoftClass,jdbcType=INTEGER}
+            </if>
+            <if test="proName != null and proName != ''" >
+                and pro_name = #{proName,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="findPageWithResult" resultMap="BaseResultMap">
+        select
+        p1.*,p2.hard_soft_name
+        from  hx_pro_center p1
+        right join hx_pro_center_tree p2 on p1.hard_soft_class = p2.hard_soft_code
+        and p1.hard_soft_type = p2.hard_soft_type
+        <where> 1=1 and p1.hard_soft_type is not null
+            <if test="proCenterId != null and proCenterId != ''" >
+                and p1.pro_center_id = #{proCenterId,jdbcType=VARCHAR}
+            </if>
+            <if test="hardSoftType != null" >
+                and p1.hard_soft_type = #{hardSoftType,jdbcType=INTEGER}
+            </if>
+            <if test="hardSoftClass != null" >
+                and p1.hard_soft_class = #{hardSoftClass,jdbcType=INTEGER}
+            </if>
+            <if test="proName != null and proName != ''" >
+                and p1.pro_name like concat('%',#{proName},'%')
+            </if>
+            <if test="hardSoftName != null and hardSoftName != ''" >
+                and p2.hard_soft_name like concat('%',#{hardSoftName},'%')
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+
+    <select id="findPageWithCount" parameterType="com.hx.back.entity.HxProCenterDTO" resultType="Integer">
+        select count(1)
+        from hx_pro_center
+        <include refid="findPageWithWhere" />
+    </select>
+
+</mapper>

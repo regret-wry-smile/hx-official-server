@@ -6,6 +6,7 @@ import com.hx.common.config.BootdoConfig;
 import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
 import com.hx.common.fastdfs.FastfdsClient;
+import com.hx.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +20,7 @@ public class UploadImgService {
 
     @Autowired
     private FastfdsClient fastfdsClient;
+
     public HxPictrue uplaodImg(MultipartFile file) throws Exception {
 
         HxPictrue hxPictrue = new HxPictrue();
@@ -64,5 +66,10 @@ public class UploadImgService {
         return "";
     }
 
-
+    /*删除文件*/
+    public void deleteFileAddr(String imgAddr) {
+        if (!StringUtils.isEmpty(imgAddr)){
+            fastfdsClient.deleteFile(imgAddr);
+        }
+    }
 }

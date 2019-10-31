@@ -26,10 +26,16 @@ public class CORSAuthenticationFilter extends FormAuthenticationFilter {
 
     @Override
     protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+
+        HttpServletRequest req = (HttpServletRequest)request;
         HttpServletResponse res = (HttpServletResponse)response;
         res.setStatus(HttpServletResponse.SC_OK);
         res.setHeader("Content-Type", "application/json;charset=UTF-8");
         res.setCharacterEncoding("UTF-8");
+        res.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+        res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type,token");
+        res.setHeader("Access-Control-Allow-Methods", "GET, HEAD, POST, PUT, DELETE, TRACE, OPTIONS, PATCH");
+        res.setHeader("Access-Control-Allow-Credentials", "true");
         PrintWriter writer = res.getWriter();
         writer.write(JSON.toJSONString(R.error(R.NOT_LOGIN_CODE, "未登陆")));
         writer.close();

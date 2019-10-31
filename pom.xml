@@ -21,6 +21,7 @@
         <module>teacher-platform-face-external</module>
         <module>teacher-platform-face-news</module>
         <module>teacher-platform-back</module>
+        <module>teacher-platform-face-solution</module>
     </modules>
 
     <parent>

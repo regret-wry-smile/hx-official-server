@@ -86,6 +86,7 @@ public class ShiroConfig {
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         filterChainDefinitionMap.put("/user/**","anon");
         filterChainDefinitionMap.put("/pro/**","anon");
+        filterChainDefinitionMap.put("/proCenter/**","anon");
         filterChainDefinitionMap.put("/uploadImg","anon");
         filterChainDefinitionMap.put("/files/**","anon");
         filterChainDefinitionMap.put("/news/**","anon");
@@ -94,7 +95,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/SMS/sendSMS","anon");
         filterChainDefinitionMap.put("/External/uploadFile","anon");
         filterChainDefinitionMap.put("/news/**","anon");
-
+        filterChainDefinitionMap.put("/solution/**","anon");
         filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         //自定义过滤器
