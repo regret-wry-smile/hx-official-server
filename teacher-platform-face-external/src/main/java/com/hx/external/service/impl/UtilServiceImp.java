@@ -20,12 +20,12 @@ public class UtilServiceImp implements UtilService {
         String path = "/sendSms";
         String method = "GET";
         String appcode = "1ea706520a9c43698bfbab84827b6463";
-        Integer codes = (int)(Math.random()*9+1)*10000;
+        Integer codes = (int)((Math.random()*9+1)*100000);
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
         Map<String, String> querys = new HashMap<String, String>();
-        querys.put("content", "{\"name\":"+TrialUsers.getName()+",\"code\":"+codes+",\"minute\":\"5\"}");
+        querys.put("content", "{\"name\":\""+TrialUsers.getName()+"\",\"code\":\""+codes+"\",\"minute\":\"5\"}");
         querys.put("mobile", TrialUsers.getPhone());
         querys.put("tNum", "T170317005347");
 
