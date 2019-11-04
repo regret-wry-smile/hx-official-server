@@ -5,17 +5,24 @@ import com.hx.external.api.HttpUtils;
 import com.hx.external.domain.TrialUsers;
 import com.hx.external.service.UtilService;
 import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
+import org.apache.velocity.runtime.directive.Break;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class UtilServiceImp implements UtilService {
 
+    //手机号发送次数
+    private static Map<String,Integer> phoneMap = Collections.synchronizedMap(new HashMap<String, Integer>());
 
     @Override
-    public Integer sendSMS(TrialUsers TrialUsers){
+    public Integer sendSMS(TrialUsers trialUsers){
         String host = "https://ali-sms.showapi.com";
         String path = "/sendSms";
         String method = "GET";
@@ -25,8 +32,8 @@ public class UtilServiceImp implements UtilService {
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
         Map<String, String> querys = new HashMap<String, String>();
-        querys.put("content", "{\"name\":\""+TrialUsers.getName()+"\",\"code\":\""+codes+"\",\"minute\":\"5\"}");
-        querys.put("mobile", TrialUsers.getPhone());
+        querys.put("content", "{\"name\":\""+trialUsers.getName()+"\",\"code\":\""+codes+"\",\"minute\":\"5\"}");
+        querys.put("mobile", trialUsers.getPhone());
         querys.put("tNum", "T170317005347");
 
         try {
@@ -42,10 +49,35 @@ public class UtilServiceImp implements UtilService {
             HttpResponse response = HttpUtils.doGet(host, path, method, headers, querys);
             System.out.println(response.toString());
             //获取response的body
-            //System.out.println(EntityUtils.toString(response.getEntity()));
+            System.out.println(EntityUtils.toString(response.getEntity()));
+            Integer i = phoneMap.get(trialUsers.getPhone());
+            phoneMap.put(trialUsers.getPhone(),i++);
             return codes;
         } catch (Exception e) {
             throw new BDException("发送失败");
+        }
+    }
+
+    @Override
+    public boolean phoneVerify(TrialUsers trialUsers){
+        /*如果phoneMap里没有该手机号,表示手机未存*/
+        if (phoneMap.containsKey(trialUsers.getPhone())){
+            phoneMap.put(trialUsers.getPhone(),1);
+            return true;
+        }else {
+            if (phoneMap.get(trialUsers.getPhone())>3){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    }
+
+    @Component
+    public class SchedulerTask{
+        @Scheduled(fixedRate = 24*60*60*1000)
+        public void phoneClear(){
+            phoneMap.clear();
         }
     }
 

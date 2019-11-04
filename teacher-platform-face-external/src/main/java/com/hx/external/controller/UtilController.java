@@ -15,10 +15,14 @@ public class UtilController {
     @Autowired
     private UtilService utilService;
 
-    //官网发邮件
+    //官网短信验证
     @RequestMapping("sendSMS")
     public R sendSMS(@RequestBody TrialUsers trialUsers){
-        Integer code = utilService.sendSMS(trialUsers);
-        return R.ok(code);
+        if (utilService.phoneVerify(trialUsers)){
+            Integer code = utilService.sendSMS(trialUsers);
+            return R.ok(code);
+        }else {
+            return R.ok();
+        }
     }
 }

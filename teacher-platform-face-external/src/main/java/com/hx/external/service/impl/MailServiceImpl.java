@@ -2,6 +2,7 @@ package com.hx.external.service.impl;
 
 
 import com.hx.common.exception.BDException;
+import com.hx.external.domain.TrialUsers;
 import com.hx.external.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -136,5 +137,12 @@ public class MailServiceImpl implements MailService {
         } catch (MessagingException e) {
             logger.error("发送嵌入静态资源的邮件时发生异常！", e);
         }
+    }
+
+    @Override
+    public String testMail(TrialUsers trialUsers){
+        String test = "试用项目名称："+trialUsers.getProjectName()+",客户姓名："+trialUsers.getName()+",客户邮箱："+trialUsers.getEmail()
+                +",客户手机号："+trialUsers.getPhone();
+        return test;
     }
 }
