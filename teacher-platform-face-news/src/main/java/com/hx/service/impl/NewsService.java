@@ -30,12 +30,12 @@ public class NewsService {
         String s = sf.format(new Date());
         Date date = sf.parse(s);
         news.setCreateTime(date);
-        if(news.getCategory().equals(0)){
+        if(news.getCategory().equals("0")){
             news.setCategory("行业新闻");
-        }else if(news.getCategory().equals(1)){
+        }else if(news.getCategory().equals("1")){
             news.setCategory("公司新闻");
         }else{
-            news.setCategory("公司通知");
+            news.setCategory("公司活动");
         }
         if(!StringUtils.isEmpty(news.getLable())){
             String lable = news.getLable();
@@ -65,12 +65,12 @@ public class NewsService {
         Date date = sf.parse(s);
         news.setUpdateTime(date);
 
-        if(news.getCategory().equals(0)){
+        if(news.getCategory().equals("0")){
             news.setCategory("行业新闻");
-        }else if(news.getCategory().equals(1)){
+        }else if(news.getCategory().equals("1")){
             news.setCategory("公司新闻");
         }else{
-            news.setCategory("公司通知");
+            news.setCategory("公司活动");
         }
         if(!StringUtils.isEmpty(news.getLable())){
             String lable = news.getLable();
@@ -93,7 +93,7 @@ public class NewsService {
             }else if(category.equals("2")){
                 map.put("category","公司活动");
             }else {
-                map.put("category",null);
+                map.put("category","");
             }
             return newsMapper.listPage(map);
         }
@@ -110,6 +110,19 @@ public class NewsService {
     }
 
     public Integer selectCount(Map<String, Object> map){
+        if(map.containsKey("category")){
+            String category = map.get("category").toString();
+            if(category.equals("0")){
+                map.put("category","行业新闻");
+            }else if(category.equals("1")){
+                map.put("category","公司新闻");
+            }else if(category.equals("2")){
+                map.put("category","公司活动");
+            }else {
+                map.put("category","");
+            }
+            return newsMapper.selectCount(map);
+        }
         return newsMapper.selectCount(map);
     }
 
