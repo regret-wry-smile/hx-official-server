@@ -92,6 +92,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/news/**","anon");
         filterChainDefinitionMap.put("/module/selectModule","anon");
         filterChainDefinitionMap.put("/trial/insertTrial","anon");
+        filterChainDefinitionMap.put("/SMS/sendSMS","anon");
         filterChainDefinitionMap.put("/External/uploadFile","anon");
         filterChainDefinitionMap.put("/news/**","anon");
         filterChainDefinitionMap.put("/solution/**","anon");

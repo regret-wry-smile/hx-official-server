@@ -7,6 +7,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
 })
 @EnableCaching
+@EnableScheduling
 //@EnableEurekaClient
 //@EnableFeignClients
 public class TeacherPlatformFaceApplication extends SpringBootServletInitializer {//设置tomcat启动配置：继承SpringBootServletInitializer，重写configure方法，将springboot的启动类设置进去。
