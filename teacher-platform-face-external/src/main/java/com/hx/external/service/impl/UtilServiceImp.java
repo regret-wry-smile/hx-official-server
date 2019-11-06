@@ -66,7 +66,7 @@ public class UtilServiceImp implements UtilService {
             return true;
         }else {
             if (phoneMap.get(trialUsers.getPhone())>3){
-                return false;
+                throw new BDException("申请次数已达上限");
             }else{
                 return true;
             }

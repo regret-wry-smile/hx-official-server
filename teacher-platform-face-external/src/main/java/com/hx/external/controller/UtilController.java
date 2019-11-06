@@ -1,5 +1,6 @@
 package com.hx.external.controller;
 
+import com.hx.common.exception.BDException;
 import com.hx.domain.R;
 import com.hx.external.domain.TrialUsers;
 import com.hx.external.service.UtilService;
