@@ -25,7 +25,7 @@ public class TrialController {
     public R insertTrial(@RequestBody TrialUsers trialUsers){
         trialService.insterTrial(trialUsers);
         String content = mailService.testMail(trialUsers);
-        mailService.sendSimpleMail("yangkang@huixiangtech.cn","申请试用客户信息",content);
+        mailService.sendSimpleMail("zhangtao@huixiangtech.cn","申请试用客户信息",content);
         return R.ok();
     }
 

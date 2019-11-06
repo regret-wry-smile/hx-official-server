@@ -7,10 +7,13 @@ import com.hx.external.service.UtilService;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 import org.apache.velocity.runtime.directive.Break;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.annotation.Resources;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,8 +21,8 @@ import java.util.Map;
 @Service
 public class UtilServiceImp implements UtilService {
 
-    //手机号发送次数
-    private static Map<String,Integer> phoneMap = Collections.synchronizedMap(new HashMap<String, Integer>());
+    @Resource(name = "phoneNumMap")
+    private Map<String,Integer> phoneNumMap;
 
     @Override
     public Integer sendSMS(TrialUsers trialUsers){
@@ -50,8 +53,9 @@ public class UtilServiceImp implements UtilService {
             System.out.println(response.toString());
             //获取response的body
             System.out.println(EntityUtils.toString(response.getEntity()));
-            Integer i = phoneMap.get(trialUsers.getPhone());
-            phoneMap.put(trialUsers.getPhone(),i++);
+            Integer i = phoneNumMap.get(trialUsers.getPhone());
+            Integer sum= i+1;
+            phoneNumMap.put(trialUsers.getPhone(),sum);
             return codes;
         } catch (Exception e) {
             throw new BDException("发送失败");
@@ -61,11 +65,11 @@ public class UtilServiceImp implements UtilService {
     @Override
     public boolean phoneVerify(TrialUsers trialUsers){
         /*如果phoneMap里没有该手机号,表示手机未存*/
-        if (phoneMap.containsKey(trialUsers.getPhone())){
-            phoneMap.put(trialUsers.getPhone(),1);
+        if (!phoneNumMap.containsKey(trialUsers.getPhone())){
+            phoneNumMap.put(trialUsers.getPhone(),1);
             return true;
         }else {
-            if (phoneMap.get(trialUsers.getPhone())>3){
+            if (phoneNumMap.get(trialUsers.getPhone())>3){
                 throw new BDException("申请次数已达上限");
             }else{
                 return true;
@@ -77,7 +81,7 @@ public class UtilServiceImp implements UtilService {
     public class SchedulerTask{
         @Scheduled(fixedRate = 24*60*60*1000)
         public void phoneClear(){
-            phoneMap.clear();
+            phoneNumMap.clear();
         }
     }
 
