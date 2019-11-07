@@ -1,5 +1,6 @@
 package com.hx.external.conf;
 
+import com.hx.external.domain.SMS;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BeanConfig {
 
     @Bean
-    public Map<String,Integer> phoneNumMap(){
+    public Map<String, SMS> phoneNumMap(){
         return new ConcurrentHashMap<>();
     }
 
