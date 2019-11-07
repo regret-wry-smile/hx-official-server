@@ -31,27 +31,11 @@ public class UploadImgService {
             throw new BDException("请上传图片类型...");
         }else if (fileName!=null && !"".equalsIgnoreCase(fileName.trim())){
             fileName = System.currentTimeMillis() + getFileType(fileName);
-
             StorePath upload = fastfdsClient.upload(file);
             hxPictrue.setPicName(fileName);
             hxPictrue.setPicAddr(upload.getFullPath());
         }
         return hxPictrue;
-    }
-
-
-    private Boolean isImageFile(String fileName) {
-        String[] img_type = new String[]{".jpg", ".jpeg", ".png", ".gif", ".bmp"};
-        if (fileName == null) {
-            return false;
-        }
-        fileName = fileName.toLowerCase();
-        for (String type : img_type) {
-            if (fileName.endsWith(type)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

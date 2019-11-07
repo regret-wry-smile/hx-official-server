@@ -22,6 +22,12 @@ public class HxProductService {
     private HxProTreeMapper HxProTreeMapper;
 
     public R selectAllByPage(HxProductDTO hxProductDTO) {
+        if (hxProductDTO.getProTypes()==null||hxProductDTO.getProTypes().isEmpty()){
+            hxProductDTO.setProTypes(null);
+        }
+        if (hxProductDTO.getProUseTypes()==null||hxProductDTO.getProUseTypes().isEmpty()){
+            hxProductDTO.setProUseTypes(null);
+        }
         List<HxProductDTO> productList = hxProductMapper.selectAllByPage(hxProductDTO);
         if (ListUtils.isEmpty(productList)) {
             throw new BDException("查询失败");

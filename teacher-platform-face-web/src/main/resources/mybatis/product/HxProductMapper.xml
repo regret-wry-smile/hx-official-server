@@ -395,25 +395,38 @@
         <include refid="findPageWithWhere" />
     </select>
 
-    <select id="selectAllByPage"  resultType="com.hx.back.entity.HxProductDTO">
+    <select id="selectAllByPage" resultType="com.hx.back.entity.HxProductDTO" parameterType="com.hx.back.entity.HxProductDTO">
         select
         <include refid="Base_Column_List" />
         from  hx_product
-        where 1=1
-        <if test="proTitle != null and proTitle != ''" >
-            and pro_title like concat('%',#{proTitle,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="proName != null and proName != ''" >
-            and pro_name like concat('%',#{proName,jdbcType=VARCHAR},'%')
-        </if>
-        <if test="proType != null" >
-            and pro_type = #{proType}
-        </if>
-        <if test="proUseType != null" >
-            and pro_use_type = #{proUseType}
-        </if>
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
+        <where>
+            <if test="hxProductDTO.proTitle != null and hxProductDTO.proTitle != ''" >
+                and pro_title like concat('%',#{hxProductDTO.proTitle,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="hxProductDTO.proName != null and hxProductDTO.proName != ''" >
+                and pro_name like concat('%',#{hxProductDTO.proName,jdbcType=VARCHAR},'%')
+            </if>
+            <if test="hxProductDTO.proType != null" >
+                and pro_type = #{hxProductDTO.proType}
+            </if>
+            <if test="hxProductDTO.proTypes != null" >
+                or pro_type in
+                <foreach collection="hxProductDTO.proTypes"  item="pt" open="(" separator="," close=")"  >
+                    #{pt}
+                </foreach>
+            </if>
+            <if test="hxProductDTO.proUseType != null" >
+                and pro_use_type = #{hxProductDTO.proUseType}
+            </if>
+            <if test="hxProductDTO.proUseTypes != null" >
+                or pro_use_type in
+                <foreach collection="hxProductDTO.proUseTypes"  item="put" open="(" separator="," close=")"  >
+                    #{put}
+                </foreach>
+            </if>
+        </where>
+        <if test="hxProductDTO.offset != null and hxProductDTO.limit != null">
+            limit #{hxProductDTO.offset}, #{hxProductDTO.limit}
         </if>
     </select>
 
