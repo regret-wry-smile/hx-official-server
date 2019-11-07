@@ -5,6 +5,7 @@ import com.hx.common.config.BootdoConfig;
 import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
 import com.hx.common.fastdfs.FastfdsClient;
+import com.hx.common.utils.FileType;
 import com.hx.common.utils.StringUtils;
 import com.hx.external.domain.ExternalDTO;
 import com.hx.external.domain.Item;
@@ -43,6 +44,9 @@ public class ExternalServiceImpl implements ExternalService {
             }
             StorePath storePath = fastfdsClient.upload(file);
             String interfaceName = file.getOriginalFilename();
+            if (FileType.fileType(interfaceName)!=1){
+                throw new BDException("请上传文档文件");
+            }
             String string = interfaceName.substring(0,interfaceName.lastIndexOf("."));
             external.setInterfaceName(string);
             external.setInterfaceAddress(storePath.getFullPath());
