@@ -18,8 +18,7 @@ public class SolutionController {
     SolutionService solutionService;
     @RequestMapping("/query_by_page")
     public R querySolution(@RequestBody(required = false) Map<String, Object> params){
-        Integer count = solutionService.selectCount(params);
-        return R.ok(solutionService.listPage(params),count);
+        return R.ok(solutionService.listPage(params),solutionService.selectCount(params));
     }
     @RequestMapping("/query")
     public R queryOneSolution( @RequestBody SolutionCase solution){

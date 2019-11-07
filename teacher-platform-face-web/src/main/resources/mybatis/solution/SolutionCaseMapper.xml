@@ -278,7 +278,7 @@
     <where>
       and c.condition_id = 2  and a.title is not null
       <if test="id != null and id != ''"> and a.id = #{id} </if>
-      <if test="category != null and category != ''"> and category = #{category} </if>
+      <if test="category != null and category != ''"> and a.cid = #{category} </if>
       <if test="title != null and title != ''"> and title like concat('%',#{title,jdbcType=VARCHAR},'%') </if>
       <if test="digest != null and digest != ''"> and digest like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
       <if test="content != null and content != ''"> and content like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
@@ -305,7 +305,7 @@
     select count(1) from solution_case
     <where>
       <if test="id != null and id != ''"> and id = #{id} </if>
-      <if test="category != null and category != ''"> and category = #{category} </if>
+      <if test="category != null and category != ''"> and cid = #{category} </if>
       <if test="title != null and title != ''"> and title like concat('%',#{title,jdbcType=VARCHAR},'%') </if>
       <if test="digest != null and digest != ''"> and digest like concat('%',#{digest,jdbcType=VARCHAR},'%') </if>
       <if test="lable != null and lable != ''"> and content like concat('%',#{lable,jdbcType=VARCHAR},'%')</if>
