@@ -84,20 +84,6 @@ public class NewsService {
     }
 
     public List<News> listPage(Map<String, Object> map){
-        if(map.containsKey("category")){
-            String category = map.get("category").toString();
-            if(category.equals("0")){
-                map.put("category","行业新闻");
-            }else if(category.equals("1")){
-                map.put("category","公司新闻");
-            }else if(category.equals("2")){
-                map.put("category","公司活动");
-            }else {
-                map.put("category","");
-            }
-            return newsMapper.listPage(map);
-        }
-
         return newsMapper.listPage(map);
     }
 
@@ -110,19 +96,6 @@ public class NewsService {
     }
 
     public Integer selectCount(Map<String, Object> map){
-        if(map.containsKey("category")){
-            String category = map.get("category").toString();
-            if(category.equals("0")){
-                map.put("category","行业新闻");
-            }else if(category.equals("1")){
-                map.put("category","公司新闻");
-            }else if(category.equals("2")){
-                map.put("category","公司活动");
-            }else {
-                map.put("category","");
-            }
-            return newsMapper.selectCount(map);
-        }
         return newsMapper.selectCount(map);
     }
 

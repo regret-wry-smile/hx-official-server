@@ -1,9 +1,9 @@
 //package com.hx.common.config;
 //
 //import org.springframework.context.annotation.Configuration;
-//import org.springframework.web.context.request.RequestAttributes;
-//import org.springframework.web.context.request.RequestContextHolder;
-//import org.springframework.web.context.request.ServletRequestAttributes;
+//import org.springframework.productweb.context.request.RequestAttributes;
+//import org.springframework.productweb.context.request.RequestContextHolder;
+//import org.springframework.productweb.context.request.ServletRequestAttributes;
 //
 //import javax.servlet.http.HttpServletRequest;
 //import java.util.Enumeration;
