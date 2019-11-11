@@ -1,5 +1,6 @@
 package com.hx.external.domain;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 public class External {
@@ -14,6 +15,7 @@ public class External {
         private String interfaceName;
 
         //文件地址
+        @NotBlank(message = "请上传文件!")
         private String interfaceAddress;
 
         //创建时间

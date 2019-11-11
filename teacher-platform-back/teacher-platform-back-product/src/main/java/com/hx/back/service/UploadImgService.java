@@ -6,6 +6,7 @@ import com.hx.common.config.BootdoConfig;
 import com.hx.common.config.Constant;
 import com.hx.common.exception.BDException;
 import com.hx.common.fastdfs.FastfdsClient;
+import com.hx.common.utils.FileType;
 import com.hx.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,31 +27,15 @@ public class UploadImgService {
         HxPictrue hxPictrue = new HxPictrue();
         String fileName =file.getOriginalFilename();
         //判断是否有文件且是否为图片文件
-        if (!isImageFile(fileName)){
+        if (FileType.fileType(fileName)!=0){
             throw new BDException("请上传图片类型...");
         }else if (fileName!=null && !"".equalsIgnoreCase(fileName.trim())){
             fileName = System.currentTimeMillis() + getFileType(fileName);
-
             StorePath upload = fastfdsClient.upload(file);
             hxPictrue.setPicName(fileName);
             hxPictrue.setPicAddr(upload.getFullPath());
         }
         return hxPictrue;
-    }
-
-
-    private Boolean isImageFile(String fileName) {
-        String[] img_type = new String[]{".jpg", ".jpeg", ".png", ".gif", ".bmp"};
-        if (fileName == null) {
-            return false;
-        }
-        fileName = fileName.toLowerCase();
-        for (String type : img_type) {
-            if (fileName.endsWith(type)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.hx.external.controller;
 
+import com.hx.common.exception.BDException;
 import com.hx.domain.R;
 import com.hx.external.domain.TrialUsers;
 import com.hx.external.domain.TrialUsersDTO;
@@ -7,8 +8,11 @@ import com.hx.external.service.MailService;
 import com.hx.external.service.TrialService;
 import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,10 +26,18 @@ public class TrialController {
 
     //官网上传客户信息
     @PostMapping("/insertTrial")
-    public R insertTrial(@RequestBody TrialUsers trialUsers){
-        trialService.insterTrial(trialUsers);
-        String content = mailService.testMail(trialUsers);
-        mailService.sendSimpleMail("zhangtao@huixiangtech.cn","申请试用客户信息",content);
+    public R insertTrial(@Valid @RequestBody TrialUsersDTO trialUsers, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            List<ObjectError> errorList =  bindingResult.getAllErrors();
+            for (ObjectError objectError : errorList){
+                throw new BDException(objectError.getDefaultMessage());
+            }
+        }
+        if (trialService.checkCode(trialUsers)){
+            trialService.insterTrial(trialUsers);
+            String content = mailService.testMail(trialUsers);
+            mailService.sendSimpleMail("zhangtao@huixiangtech.cn","申请试用客户信息",content);
+        }
         return R.ok();
     }
 

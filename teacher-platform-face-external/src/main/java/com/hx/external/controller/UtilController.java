@@ -29,7 +29,6 @@ public class UtilController {
             for (ObjectError objectError : errorList){
                 throw new BDException(objectError.getDefaultMessage());
             }
-
         }
         if (utilService.phoneVerify(trialUsers)){
             Integer code = utilService.sendSMS(trialUsers);

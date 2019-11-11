@@ -2,7 +2,9 @@ package com.hx.external.service.impl;
 
 import com.hx.common.exception.BDException;
 import com.hx.common.utils.ListUtils;
+import com.hx.common.utils.StringUtils;
 import com.hx.external.api.HttpUtils;
+import com.hx.external.domain.SMS;
 import com.hx.external.domain.TrialUsersDTO;
 import com.hx.external.mapper.TrialMapper;
 import com.hx.external.domain.TrialUsers;
@@ -12,6 +14,7 @@ import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +27,19 @@ public class TrialServiceImpl implements TrialService {
 
     @Autowired
     private TrialMapper trialMapper;
+
+    @Resource(name = "phoneNumMap")
+    private Map<String, SMS> phoneNumMap;
+
+    @Override
+    public boolean checkCode(TrialUsersDTO trialUsersDTO){
+        SMS sms = phoneNumMap.get(trialUsersDTO.getPhone());
+        if (!sms.getCode().equals(trialUsersDTO.getCode())){
+            throw new BDException("验证码错误，请重新输入");
+        }else {
+            return true;
+        }
+    }
 
     @Override
     public void insterTrial(TrialUsers trialUsers){

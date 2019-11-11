@@ -1,5 +1,7 @@
 package com.hx.back.entity;
 
+import java.util.List;
+
 /**
  * 产品扩展类
  */
@@ -9,6 +11,9 @@ public class HxProductDTO extends HxProduct{
      * id数组
      */
     private int[] ids;
+
+    private List<Integer> proUseTypes;
+    private List<Integer> proTypes;
 
     /**
      * 页码
@@ -36,6 +41,21 @@ public class HxProductDTO extends HxProduct{
         this.ids = ids;
     }
 
+    public List<Integer> getProUseTypes() {
+        return proUseTypes;
+    }
+
+    public void setProUseTypes(List<Integer> proUseTypes) {
+        this.proUseTypes = proUseTypes;
+    }
+
+    public List<Integer> getProTypes() {
+        return proTypes;
+    }
+
+    public void setProTypes(List<Integer> proTypes) {
+        this.proTypes = proTypes;
+    }
 
     public String getProWithName() {
         return proWithName;

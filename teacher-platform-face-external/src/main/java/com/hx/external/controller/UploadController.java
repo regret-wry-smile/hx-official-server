@@ -1,13 +1,17 @@
 package com.hx.external.controller;
 
+import com.hx.common.exception.BDException;
 import com.hx.domain.R;
 import com.hx.external.domain.External;
 import com.hx.external.domain.ExternalDTO;
 import com.hx.external.service.ExternalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +30,13 @@ public class UploadController {
 
     //后台添加API文档信息
     @RequestMapping("/insertExternal")
-    public R insertExternal(@RequestBody External external){
+    public R insertExternal(@Valid @RequestBody External external, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            List<ObjectError> errorList =  bindingResult.getAllErrors();
+            for (ObjectError objectError : errorList){
+                throw new BDException(objectError.getDefaultMessage());
+            }
+        }
         externalService.insertExternal(external);
         return R.ok();
     }

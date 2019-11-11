@@ -8,7 +8,9 @@ import java.util.List;
 
 public interface TrialService {
 
-     void insterTrial(TrialUsers trialUsers);
+    boolean checkCode(TrialUsersDTO trialUsersDTO);
+
+    void insterTrial(TrialUsers trialUsers);
 
     List<TrialUsers> selectTrial(TrialUsers trialUsers);
 
