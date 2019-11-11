@@ -60,15 +60,15 @@ public class ShiroConfig {
 
     /**
      * @Shiro内置过滤器
-     * anon         org.apache.shiro.web.filter.authc.AnonymousFilter
-     * authc        org.apache.shiro.web.filter.authc.FormAuthenticationFilter
-     * authcBasic   org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter
-     * perms        org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter
-     * port         org.apache.shiro.web.filter.authz.PortFilter
-     * rest         org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter
-     * roles        org.apache.shiro.web.filter.authz.RolesAuthorizationFilter
-     * ssl          org.apache.shiro.web.filter.authz.SslFilter
-     * user         org.apache.shiro.web.filter.authc.UserFilter
+     * anon         org.apache.shiro.productweb.filter.authc.AnonymousFilter
+     * authc        org.apache.shiro.productweb.filter.authc.FormAuthenticationFilter
+     * authcBasic   org.apache.shiro.productweb.filter.authc.BasicHttpAuthenticationFilter
+     * perms        org.apache.shiro.productweb.filter.authz.PermissionsAuthorizationFilter
+     * port         org.apache.shiro.productweb.filter.authz.PortFilter
+     * rest         org.apache.shiro.productweb.filter.authz.HttpMethodPermissionFilter
+     * roles        org.apache.shiro.productweb.filter.authz.RolesAuthorizationFilter
+     * ssl          org.apache.shiro.productweb.filter.authz.SslFilter
+     * user         org.apache.shiro.productweb.filter.authc.UserFilter
      *
      */
     //配置shiroFilter  （shiro的过滤器）
@@ -96,6 +96,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/External/uploadFile","anon");
         filterChainDefinitionMap.put("/news/**","anon");
         filterChainDefinitionMap.put("/solution/**","anon");
+        filterChainDefinitionMap.put("/productweb/**","anon");
         filterChainDefinitionMap.put("/**", "corsAuthenticationFilter");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         //自定义过滤器

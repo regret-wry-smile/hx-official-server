@@ -22,6 +22,7 @@
         <module>teacher-platform-face-news</module>
         <module>teacher-platform-back</module>
         <module>teacher-platform-face-solution</module>
+        <module>teacher-platform-face-productweb</module>
     </modules>
 
     <parent>
@@ -93,13 +94,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!--不部署到tomcat时 web -->
+        <!--不部署到tomcat时 productweb -->
         <!--<dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-productweb</artifactId>
         </dependency>-->
 
-        <!-- 部署到tomcat时 web -->
+        <!-- 部署到tomcat时 productweb -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

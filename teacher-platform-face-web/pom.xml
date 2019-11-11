@@ -82,6 +82,11 @@
             <artifactId>teacher-platform-face-solution</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.hx</groupId>
+            <artifactId>teacher-platform-face-productweb</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <!--<build>-->

@@ -8,12 +8,12 @@ import org.jasig.cas.client.util.AssertionThreadLocalFilter;
 import org.jasig.cas.client.util.HttpServletRequestWrapperFilter;
 import org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.boot.productweb.servlet.FilterRegistrationBean;
+import org.springframework.boot.productweb.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.productweb.authentication.logout.LogoutFilter;
+import org.springframework.security.productweb.authentication.logout.SecurityContextLogoutHandler;
 
 
 */
