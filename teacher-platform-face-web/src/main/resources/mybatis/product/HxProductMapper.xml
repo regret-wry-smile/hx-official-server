@@ -410,7 +410,7 @@
                 and pro_type = #{hxProductDTO.proType}
             </if>
             <if test="hxProductDTO.proTypes != null" >
-                or pro_type in
+                and pro_type in
                 <foreach collection="hxProductDTO.proTypes"  item="pt" open="(" separator="," close=")"  >
                     #{pt}
                 </foreach>
@@ -419,7 +419,7 @@
                 and pro_use_type = #{hxProductDTO.proUseType}
             </if>
             <if test="hxProductDTO.proUseTypes != null" >
-                or pro_use_type in
+                and pro_use_type in
                 <foreach collection="hxProductDTO.proUseTypes"  item="put" open="(" separator="," close=")"  >
                     #{put}
                 </foreach>

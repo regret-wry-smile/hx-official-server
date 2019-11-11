@@ -3,21 +3,21 @@ package com.hx.back.entity;
 public class HxPictrue {
 
     /**
-     * 图片名称
+     * 旧图片地址
      */
-    private String picName;
+    private String oldPicAddr;
 
     /**
      * 图片地址
      */
     private String picAddr;
 
-    public String getPicName() {
-        return picName;
+    public String getOldPicAddr() {
+        return oldPicAddr;
     }
 
-    public void setPicName(String picName) {
-        this.picName = picName;
+    public void setOldPicAddr(String oldPicAddr) {
+        this.oldPicAddr = oldPicAddr;
     }
 
     public String getPicAddr() {

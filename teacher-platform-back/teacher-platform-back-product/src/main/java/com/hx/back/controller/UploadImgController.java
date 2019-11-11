@@ -1,5 +1,6 @@
 package com.hx.back.controller;
 
+import com.hx.back.entity.HxPictrue;
 import com.hx.back.service.UploadImgService;
 import com.hx.domain.R;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,17 @@ public class UploadImgController {
     @RequestMapping("/uploadImg")
     public R uplaodImg(@RequestParam("imgFile") MultipartFile imgFile) throws Exception {
         return R.ok(uploadImgService.uplaodImg(imgFile));
+    }
+
+    /**
+     * base64上传接口
+     * @param hxPictrue
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/uploadImgBase64")
+    public R uploadImgBase64(@RequestBody HxPictrue hxPictrue) throws Exception {
+        return R.ok(uploadImgService.updatePersonalImg(hxPictrue));
     }
 
     /**
