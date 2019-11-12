@@ -5,6 +5,7 @@ import com.hx.pojo.ProductWebExample;
 import java.util.List;
 import java.util.Map;
 
+import com.hx.pojo.ProductWebVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 @Mapper
@@ -31,7 +32,7 @@ public interface ProductWebMapper {
 
     int updateByPrimaryKey(ProductWeb record);
 
-    List<ProductWeb> listPage(Map<String, Object> params);
+    List<ProductWebVo> listPage(Map<String, Object> params);
 
     Integer selectCount(Map<String, Object> params);
 

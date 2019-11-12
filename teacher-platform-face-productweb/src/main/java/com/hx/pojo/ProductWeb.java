@@ -9,7 +9,7 @@ public class ProductWeb {
 
     private String website;
 
-    private String webCategory;
+    private Integer webCategory;
 
     private String webPicture;
 
@@ -51,12 +51,12 @@ public class ProductWeb {
         this.website = website == null ? null : website.trim();
     }
 
-    public String getWebCategory() {
+    public Integer getWebCategory() {
         return webCategory;
     }
 
-    public void setWebCategory(String webCategory) {
-        this.webCategory = webCategory == null ? null : webCategory.trim();
+    public void setWebCategory(Integer webCategory) {
+        this.webCategory = webCategory;
     }
 
     public String getWebPicture() {

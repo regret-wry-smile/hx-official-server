@@ -6,7 +6,7 @@
     <result column="web_name" property="webName" jdbcType="VARCHAR" />
     <result column="web_brief" property="webBrief" jdbcType="VARCHAR" />
     <result column="website" property="website" jdbcType="VARCHAR" />
-    <result column="web_category" property="webCategory" jdbcType="VARCHAR" />
+    <result column="web_category" property="webCategory" jdbcType="INTEGER" />
     <result column="web_picture" property="webPicture" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="extend_1" property="extend1" jdbcType="VARCHAR" />
@@ -88,7 +88,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from product_web
     where id = #{id,jdbcType=INTEGER}
@@ -104,12 +104,12 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.hx.pojo.ProductWeb" >
-    insert into product_web (id, web_name, web_brief, 
-      website, web_category, web_picture, 
+    insert into product_web (id, web_name, web_brief,
+      website, web_category, web_picture,
       remark, extend_1, extend_2
       )
-    values (#{id,jdbcType=INTEGER}, #{webName,jdbcType=VARCHAR}, #{webBrief,jdbcType=VARCHAR}, 
-      #{website,jdbcType=VARCHAR}, #{webCategory,jdbcType=VARCHAR}, #{webPicture,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{webName,jdbcType=VARCHAR}, #{webBrief,jdbcType=VARCHAR},
+      #{website,jdbcType=VARCHAR}, #{webCategory,jdbcType=INTEGER}, #{webPicture,jdbcType=VARCHAR},
       #{remark,jdbcType=VARCHAR}, #{extend1,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}
       )
   </insert>
@@ -158,7 +158,7 @@
         #{website,jdbcType=VARCHAR},
       </if>
       <if test="webCategory != null" >
-        #{webCategory,jdbcType=VARCHAR},
+        #{webCategory,jdbcType=INTEGER},
       </if>
       <if test="webPicture != null" >
         #{webPicture,jdbcType=VARCHAR},
@@ -196,7 +196,7 @@
         website = #{record.website,jdbcType=VARCHAR},
       </if>
       <if test="record.webCategory != null" >
-        web_category = #{record.webCategory,jdbcType=VARCHAR},
+        web_category = #{record.webCategory,jdbcType=INTEGER},
       </if>
       <if test="record.webPicture != null" >
         web_picture = #{record.webPicture,jdbcType=VARCHAR},
@@ -218,14 +218,14 @@
   <update id="updateByExample" parameterType="map" >
     update product_web
     set id = #{record.id,jdbcType=INTEGER},
-      web_name = #{record.webName,jdbcType=VARCHAR},
-      web_brief = #{record.webBrief,jdbcType=VARCHAR},
-      website = #{record.website,jdbcType=VARCHAR},
-      web_category = #{record.webCategory,jdbcType=VARCHAR},
-      web_picture = #{record.webPicture,jdbcType=VARCHAR},
-      remark = #{record.remark,jdbcType=VARCHAR},
-      extend_1 = #{record.extend1,jdbcType=VARCHAR},
-      extend_2 = #{record.extend2,jdbcType=VARCHAR}
+    web_name = #{record.webName,jdbcType=VARCHAR},
+    web_brief = #{record.webBrief,jdbcType=VARCHAR},
+    website = #{record.website,jdbcType=VARCHAR},
+    web_category = #{record.webCategory,jdbcType=INTEGER},
+    web_picture = #{record.webPicture,jdbcType=VARCHAR},
+    remark = #{record.remark,jdbcType=VARCHAR},
+    extend_1 = #{record.extend1,jdbcType=VARCHAR},
+    extend_2 = #{record.extend2,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -243,7 +243,7 @@
         website = #{website,jdbcType=VARCHAR},
       </if>
       <if test="webCategory != null" >
-        web_category = #{webCategory,jdbcType=VARCHAR},
+        web_category = #{webCategory,jdbcType=INTEGER},
       </if>
       <if test="webPicture != null" >
         web_picture = #{webPicture,jdbcType=VARCHAR},
@@ -265,7 +265,7 @@
     set web_name = #{webName,jdbcType=VARCHAR},
       web_brief = #{webBrief,jdbcType=VARCHAR},
       website = #{website,jdbcType=VARCHAR},
-      web_category = #{webCategory,jdbcType=VARCHAR},
+      web_category = #{webCategory,jdbcType=INTEGER},
       web_picture = #{webPicture,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       extend_1 = #{extend1,jdbcType=VARCHAR},
@@ -282,12 +282,12 @@
 
     </where>
   </select>
-  <select id="listPage" resultType="com.hx.pojo.ProductWeb">
-    select * from product_web
+  <select id="listPage" resultType="com.hx.pojo.ProductWebVo">
+    select pw.*,pc.`code`,pc.`name` from product_web pw  LEFT JOIN productweb_category pc on pw.web_category = pc.`code`
     <where>
       <if test="id != null and id != ''"> and id = #{id} </if>
       <if test="webName != null and webName != ''"> and web_name like concat('%',#{webName,jdbcType=VARCHAR},'%') </if>
-      <if test="webCategory != null and webCategory != ''"> and web_category like concat('%',#{webCategory,jdbcType=VARCHAR},'%') </if>
+      <if test="webCategory != null and webCategory != ''"> and web_category =#{webCategory} </if>
       <if test="webBrief != null and webBrief != ''"> and web_brief like concat('%',#{webBrief,jdbcType=VARCHAR},'%') </if>
 
     </where>

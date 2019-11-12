@@ -384,62 +384,52 @@ public class ProductWebExample {
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryEqualTo(String value) {
+        public Criteria andWebCategoryEqualTo(Integer value) {
             addCriterion("web_category =", value, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryNotEqualTo(String value) {
+        public Criteria andWebCategoryNotEqualTo(Integer value) {
             addCriterion("web_category <>", value, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryGreaterThan(String value) {
+        public Criteria andWebCategoryGreaterThan(Integer value) {
             addCriterion("web_category >", value, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryGreaterThanOrEqualTo(String value) {
+        public Criteria andWebCategoryGreaterThanOrEqualTo(Integer value) {
             addCriterion("web_category >=", value, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryLessThan(String value) {
+        public Criteria andWebCategoryLessThan(Integer value) {
             addCriterion("web_category <", value, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryLessThanOrEqualTo(String value) {
+        public Criteria andWebCategoryLessThanOrEqualTo(Integer value) {
             addCriterion("web_category <=", value, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryLike(String value) {
-            addCriterion("web_category like", value, "webCategory");
-            return (Criteria) this;
-        }
-
-        public Criteria andWebCategoryNotLike(String value) {
-            addCriterion("web_category not like", value, "webCategory");
-            return (Criteria) this;
-        }
-
-        public Criteria andWebCategoryIn(List<String> values) {
+        public Criteria andWebCategoryIn(List<Integer> values) {
             addCriterion("web_category in", values, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryNotIn(List<String> values) {
+        public Criteria andWebCategoryNotIn(List<Integer> values) {
             addCriterion("web_category not in", values, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryBetween(String value1, String value2) {
+        public Criteria andWebCategoryBetween(Integer value1, Integer value2) {
             addCriterion("web_category between", value1, value2, "webCategory");
             return (Criteria) this;
         }
 
-        public Criteria andWebCategoryNotBetween(String value1, String value2) {
+        public Criteria andWebCategoryNotBetween(Integer value1, Integer value2) {
             addCriterion("web_category not between", value1, value2, "webCategory");
             return (Criteria) this;
         }
