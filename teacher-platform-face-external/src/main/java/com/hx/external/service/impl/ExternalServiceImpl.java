@@ -101,7 +101,7 @@ public class ExternalServiceImpl implements ExternalService {
             List<External> externals = externalMapper.selectByType(projectType);
             for (int j = 0; j <externals.size() ; j++) {
                 External external = externals.get(j);
-                String interfaceAddress  = bootConfig.getUploadPath()+ external.getInterfaceAddress();
+                String interfaceAddress  = external.getInterfaceAddress();
                 externals.get(j).setInterfaceAddress(interfaceAddress);
             }
             item.setList(externals);
