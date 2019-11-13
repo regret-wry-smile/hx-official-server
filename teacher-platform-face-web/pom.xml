@@ -8,10 +8,10 @@
         <version>1.0.0</version>
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>teacher-platform-face-web</artifactId>
+    <artifactId>hx-official-server-web</artifactId>
     <version>1.0.0</version>
     <packaging>war</packaging>
-    <name>teacher-platform-face-web</name>
+    <name>hx-official-server-web</name>
     <description>web project for Spring Boot</description>
 
     <properties>
@@ -89,23 +89,23 @@
         </dependency>
     </dependencies>
 
-    <!--<build>-->
-        <!-- 修改打包后war包名称 -->
-        <!--<finalName>teacher-platform-face</finalName>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--&lt;!&ndash; 没有该配置，devtools 不生效 &ndash;&gt;-->
-                    <!--<fork>true</fork>-->
-                    <!--<addResources>true</addResources>-->
-
-                    <!--<executable>true</executable>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.9.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
     <distributionManagement>
         <repository>
             <id>releases</id>
