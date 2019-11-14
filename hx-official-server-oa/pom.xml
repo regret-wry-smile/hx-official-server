@@ -3,27 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>teacher-platform-face</artifactId>
+        <artifactId>hx-official-server</artifactId>
         <groupId>com.hx</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>teacher-platform-face-common</artifactId>
+    <artifactId>hx-official-server-oa</artifactId>
     <dependencies>
-        <!--fstdfs client-->
         <dependency>
-            <groupId>com.github.tobato</groupId>
-            <artifactId>fastdfs-client</artifactId>
-        </dependency>
-        <!-- 线程安全的base64加解密 -->
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
+            <groupId>com.hx</groupId>
+            <artifactId>hx-official-server-common</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-domain</artifactId>
+            <artifactId>hx-official-server-system</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>

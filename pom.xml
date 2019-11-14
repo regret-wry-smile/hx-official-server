@@ -4,25 +4,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hx</groupId>
-    <artifactId>teacher-platform-face</artifactId>
+    <artifactId>hx-official-server</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
-    <name>teacher-platform-face</name>
+    <name>hx-official-server</name>
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>teacher-platform-face-common</module>
-        <module>teacher-platform-face-system</module>
-        <module>teacher-platform-face-oa</module>
-        <module>teacher-platform-face-web</module>
-        <module>teacher-platform-face-domain</module>
-        <module>teacher-platform-face-product</module>
-        <module>teacher-platform-face-external</module>
-        <module>teacher-platform-face-news</module>
-        <module>teacher-platform-back</module>
-        <module>teacher-platform-face-solution</module>
-        <module>teacher-platform-face-productweb</module>
+        <module>hx-official-server-common</module>
+        <module>hx-official-server-system</module>
+        <module>hx-official-server-oa</module>
+        <module>hx-official-server-web</module>
+        <module>hx-official-server-domain</module>
+        <module>hx-official-server-product</module>
+        <module>hx-official-server-external</module>
+        <module>hx-official-server-news</module>
+        <module>hx-official-back</module>
+        <module>hx-official-server-solution</module>
+        <module>hx-official-server-productweb</module>
     </modules>
 
     <parent>

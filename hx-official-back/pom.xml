@@ -3,21 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>teacher-platform-back</artifactId>
+        <artifactId>hx-official-server</artifactId>
         <groupId>com.hx</groupId>
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hx</groupId>
-    <artifactId>teacher-platform-back-product</artifactId>
+    <artifactId>hx-official-back</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>hx-official-back-product</module>
+    </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-    </dependencies>
 
 </project>

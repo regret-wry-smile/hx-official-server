@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>teacher-platform-face</artifactId>
+        <artifactId>hx-official-server</artifactId>
         <groupId>com.hx</groupId>
         <version>1.0.0</version>
     </parent>
@@ -39,52 +39,52 @@
 
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-common</artifactId>
+            <artifactId>hx-official-server-common</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-domain</artifactId>
+            <artifactId>hx-official-server-domain</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-system</artifactId>
+            <artifactId>hx-official-server-system</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-oa</artifactId>
+            <artifactId>hx-official-server-oa</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-product</artifactId>
+            <artifactId>hx-official-server-product</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-news</artifactId>
+            <artifactId>hx-official-server-news</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-external</artifactId>
+            <artifactId>hx-official-server-external</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-back-product</artifactId>
+            <artifactId>hx-official-back-product</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-solution</artifactId>
+            <artifactId>hx-official-server-solution</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.hx</groupId>
-            <artifactId>teacher-platform-face-productweb</artifactId>
+            <artifactId>hx-official-server-productweb</artifactId>
             <version>1.0.0</version>
         </dependency>
     </dependencies>
