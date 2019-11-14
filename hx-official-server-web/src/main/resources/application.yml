@@ -1,6 +1,6 @@
 server:
   session-timeout: 1800
-  port: 8899
+  port: 9991
   servlet:
     context-path: /hx-official-server
 spring:
