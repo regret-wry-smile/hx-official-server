@@ -9,26 +9,12 @@
         </encoder>
     </appender>
 
-    <!--<appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">-->
-        <!--<destination>47.111.169.108:8884</destination>-->
-        <!--&lt;!&ndash; encoder必须配置,有多种可选 &ndash;&gt;-->
-        <!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder">-->
-            <!--&lt;!&ndash;在生成的json中会加这个字段&ndash;&gt;-->
-            <!--<springProfile name="dev">-->
-                <!--<customFields>{"appname":"dev-teacher-platform-face"}</customFields>-->
-            <!--</springProfile>-->
-            <!--<springProfile name="pro,test,zhuoyue">-->
-                <!--<customFields>{"appname":"teacher-platform-face"}</customFields>-->
-            <!--</springProfile>-->
-        <!--</encoder>-->
-    <!--</appender>-->
-
     <!--按天生成日志-->
     <appender name="logFile"  class="ch.qos.logback.core.rolling.RollingFileAppender">
         <Prudent>true</Prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>
-                ../logs/teacher-platform-face/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}[%i].log
+                ../logs/hx-official-server/%d{yyyy-MM-dd}/%d{yyyy-MM-dd}[%i].log
             </FileNamePattern>
             <maxFileSize>10MB</maxFileSize>
             <maxHistory>7</maxHistory>

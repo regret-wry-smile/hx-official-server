@@ -44,7 +44,7 @@ public class TeacherPlatformFaceApplication extends SpringBootServletInitializer
         application.setBannerMode(Banner.Mode.OFF);
         application.run(args);*/
         SpringApplication.run(TeacherPlatformFaceApplication.class, args);
-        System.out.println("------    teacher-platform-face启动成功    ------\n");
+        System.out.println("------    hx-official-server启动成功    ------\n");
     }
 
 }
