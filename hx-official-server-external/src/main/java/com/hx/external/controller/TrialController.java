@@ -1,12 +1,14 @@
 package com.hx.external.controller;
 
 import com.hx.common.exception.BDException;
+import com.hx.common.utils.StringUtils;
 import com.hx.domain.R;
 import com.hx.external.domain.TrialUsers;
 import com.hx.external.domain.TrialUsersDTO;
 import com.hx.external.service.MailService;
 import com.hx.external.service.TrialService;
 import com.sun.org.apache.regexp.internal.RE;
+import io.netty.util.internal.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -26,12 +28,9 @@ public class TrialController {
 
     //官网上传客户信息
     @PostMapping("/insertTrial")
-    public R insertTrial(@Valid @RequestBody TrialUsersDTO trialUsers, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
-            List<ObjectError> errorList =  bindingResult.getAllErrors();
-            for (ObjectError objectError : errorList){
-                throw new BDException(objectError.getDefaultMessage());
-            }
+    public R insertTrial(@RequestBody TrialUsersDTO trialUsers, BindingResult bindingResult){
+        if(StringUtils.isNull(trialUsers.getCode())){
+            throw new BDException("验证码为空");
         }
         if (trialService.checkCode(trialUsers)){
             trialService.insterTrial(trialUsers);

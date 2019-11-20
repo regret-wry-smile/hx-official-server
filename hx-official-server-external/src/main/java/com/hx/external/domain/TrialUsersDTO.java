@@ -1,12 +1,11 @@
 package com.hx.external.domain;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 //TrialUsers的扩展类
 public class TrialUsersDTO extends TrialUsers{
 
     //验证码
-    @NotBlank(message = "验证码不能为空!")
     private Integer code;
 
     //页数
