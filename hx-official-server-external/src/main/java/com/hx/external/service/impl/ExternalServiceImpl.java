@@ -153,7 +153,13 @@ public class ExternalServiceImpl implements ExternalService {
 
     @Override
     public void updateExternal(External external){
-        int i = externalMapper.update(external);
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+        String dateString = dateFormat.format(date);
+        ParsePosition pos = new ParsePosition(0);
+        Date date1 = dateFormat.parse(dateString,pos);
+        external.setUpdateDate(date1);
+        int i = externalMapper.updateDynamic(external);
         if (i !=1 ){
             throw new BDException("编辑失败");
         }
