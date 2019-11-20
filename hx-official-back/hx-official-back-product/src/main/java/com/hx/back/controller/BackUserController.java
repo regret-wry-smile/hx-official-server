@@ -28,6 +28,17 @@ public class BackUserController {
     }
 
     /**
+     * 登出
+     * @return
+     */
+    @RequestMapping("/logout")
+    public R logout(){
+        ShiroUtils.logout();
+        return R.ok();
+    }
+
+
+    /**
      * 注册
      * @param user
      * @return
