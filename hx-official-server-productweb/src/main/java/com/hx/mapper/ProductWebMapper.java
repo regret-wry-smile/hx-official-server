@@ -36,6 +36,6 @@ public interface ProductWebMapper {
 
     Integer selectCount(Map<String, Object> params);
 
-    int deleteByIds(List<Integer> ids);
+    int deleteByIds(@Param("ids")List<Integer> ids);
 
 }
