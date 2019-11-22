@@ -39,18 +39,12 @@ public class ModuleServiceImpl implements ModuleService {
     @Override
     public List<ModuleDTO> selectByPage(ModuleDTO moduleDTO){
         List<ModuleDTO> moduleDTOS = moduleMapper.list(moduleDTO);
-        if (ListUtils.isEmpty(moduleDTOS)) {
-            throw new BDException("查询失败");
-        }
         return moduleDTOS;
     }
 
     @Override
     public int count(ModuleDTO moduleDTO){
         int i = moduleMapper.count(moduleDTO);
-        if (i == 0){
-            throw new BDException("没有一条数据");
-        }
         return i;
     }
 

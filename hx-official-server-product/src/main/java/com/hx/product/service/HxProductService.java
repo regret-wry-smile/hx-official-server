@@ -29,9 +29,6 @@ public class HxProductService {
             hxProductDTO.setProUseTypes(null);
         }
         List<HxProductDTO> productList = hxProductMapper.selectAllByPage(hxProductDTO);
-        if (ListUtils.isEmpty(productList)) {
-            throw new BDException("查询失败");
-        }
         for (HxProductDTO hxPro : productList){
             HxProTree hxProTree = new HxProTree();
             //查询产品

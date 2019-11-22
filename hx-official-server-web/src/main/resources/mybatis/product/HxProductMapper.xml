@@ -331,7 +331,7 @@
                 and pro_logo_addr = #{proLogoAddr,jdbcType=VARCHAR}
             </if>
             <if test="proName != null and proName != ''" >
-                and pro_name = #{proName,jdbcType=VARCHAR}
+                and pro_name  like concat('%',#{proName,jdbcType=VARCHAR},'%')
             </if>
             <if test="proType != null" >
                 and pro_type = #{proType}

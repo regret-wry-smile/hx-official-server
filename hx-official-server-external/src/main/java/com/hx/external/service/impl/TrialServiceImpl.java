@@ -58,18 +58,12 @@ public class TrialServiceImpl implements TrialService {
     @Override
     public List<TrialUsers> selectTrial(TrialUsers trialUsers){
         List<TrialUsers> trialUsersList = trialMapper.selectByTrial(trialUsers);
-        if (ListUtils.isEmpty(trialUsersList)) {
-            throw new BDException("查询失败");
-        }
         return trialUsersList;
     }
 
     @Override
     public List<TrialUsersDTO> selectByPage(TrialUsersDTO trialUsersDTO){
         List<TrialUsersDTO> trialUsersList = trialMapper.list(trialUsersDTO);
-        if (ListUtils.isEmpty(trialUsersList)) {
-            throw new BDException("查询失败");
-        }
         return trialUsersList;
     }
 

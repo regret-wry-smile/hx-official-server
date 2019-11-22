@@ -259,7 +259,7 @@
                 and hard_soft_class = #{hardSoftClass,jdbcType=INTEGER}
             </if>
             <if test="proName != null and proName != ''" >
-                and pro_name = #{proName,jdbcType=VARCHAR}
+                and pro_name  like concat('%',#{proName},'%')
             </if>
         </where>
     </sql>
